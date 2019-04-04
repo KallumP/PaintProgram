@@ -1,0 +1,31 @@
+Install - 
+Double click "PhotoMarket.exe"
+
+
+When drawing squares or circles: 
+Hold shift to make perfect variants of the shape
+
+
+When drawing lines: 
+Hold down shift to snap the line to the 90 degree axis
+Hold down control to snap to the 45 degree axis
+
+When changing brush sizes:
+Hold shift to double or halve current brush size
+
+HotKeys:
+To switch between drawing types use the number keys (number matches order in the selection bar)
+
+Click the multicolor bit to chose a custom color then click chose color
+
+To save an image:
+Click the save icon and click export image
+Chose a file path, and enter a name then click ok
+
+To save a project:
+Click the save icon and click save project
+Chose a file path, and enter a name then click ok
+
+To open a project:
+Click the folder icon
+Chose a file to open
