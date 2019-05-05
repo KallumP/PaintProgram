@@ -1,5 +1,12 @@
 Install - 
-Double click "PhotoMarket.exe"
+	Method 1.
+		Open the "install" folder
+		Double click "setup.exe"
+		Go through the installer
+		Open the new program from the start menu
+	Method 2.
+		Open the "exe file" folder
+		Double click "PhotoMarket.exe"
 
 
 When drawing squares or circles: 
