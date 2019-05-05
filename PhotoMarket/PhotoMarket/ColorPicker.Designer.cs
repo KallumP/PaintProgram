@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorPicker));
             this.label1 = new System.Windows.Forms.Label();
             this.chosenColor_lbl = new System.Windows.Forms.Label();
             this.hexValue_txt = new System.Windows.Forms.TextBox();
@@ -123,6 +124,7 @@
             this.Controls.Add(this.showColor_pic);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.colorPicker_pic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ColorPicker";
             this.Text = "ColorPicker";
             this.Load += new System.EventHandler(this.ColorPicker_Load);

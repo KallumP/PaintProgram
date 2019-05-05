@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.drawArea_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
@@ -45,6 +46,7 @@
             // drawArea_pic
             // 
             this.drawArea_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawArea_pic.Cursor = System.Windows.Forms.Cursors.Cross;
             this.drawArea_pic.Location = new System.Drawing.Point(10, 50);
             this.drawArea_pic.Name = "drawArea_pic";
             this.drawArea_pic.Size = new System.Drawing.Size(1200, 620);
@@ -57,6 +59,7 @@
             // 
             // colorPallet_pic
             // 
+            this.colorPallet_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.colorPallet_pic.Location = new System.Drawing.Point(1215, 50);
             this.colorPallet_pic.Name = "colorPallet_pic";
             this.colorPallet_pic.Size = new System.Drawing.Size(45, 340);
@@ -68,6 +71,7 @@
             // widthDemo_pic
             // 
             this.widthDemo_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.widthDemo_pic.InitialImage = null;
             this.widthDemo_pic.Location = new System.Drawing.Point(1220, 629);
             this.widthDemo_pic.Name = "widthDemo_pic";
             this.widthDemo_pic.Size = new System.Drawing.Size(40, 40);
@@ -77,6 +81,7 @@
             // 
             // options_pic
             // 
+            this.options_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.options_pic.Location = new System.Drawing.Point(10, 2);
             this.options_pic.Name = "options_pic";
             this.options_pic.Size = new System.Drawing.Size(354, 45);
@@ -88,6 +93,7 @@
             // functionBtns_pic
             // 
             this.functionBtns_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.functionBtns_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.functionBtns_pic.Location = new System.Drawing.Point(1120, 2);
             this.functionBtns_pic.Name = "functionBtns_pic";
             this.functionBtns_pic.Size = new System.Drawing.Size(140, 45);
@@ -99,6 +105,7 @@
             // brushSizeChange_pic
             // 
             this.brushSizeChange_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.brushSizeChange_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.brushSizeChange_pic.Location = new System.Drawing.Point(1220, 560);
             this.brushSizeChange_pic.Name = "brushSizeChange_pic";
             this.brushSizeChange_pic.Size = new System.Drawing.Size(40, 55);
@@ -120,6 +127,7 @@
             this.Controls.Add(this.colorPallet_pic);
             this.Controls.Add(this.drawArea_pic);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "PhotoMarket";
             this.Load += new System.EventHandler(this.Form1_Load);

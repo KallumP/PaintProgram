@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveChecker));
             this.label1 = new System.Windows.Forms.Label();
             this.Export_btn = new System.Windows.Forms.Button();
             this.save_btn = new System.Windows.Forms.Button();
@@ -81,6 +82,7 @@
             this.Controls.Add(this.save_btn);
             this.Controls.Add(this.Export_btn);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaveChecker";
             this.Text = "SaveChecker";
             this.ResumeLayout(false);

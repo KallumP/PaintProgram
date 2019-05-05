@@ -23,7 +23,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <TargetCulture>en-GB</TargetCulture>
+    <ProductName>PhotoMarket</ProductName>
+    <PublisherName>Kallum Panditharatna</PublisherName>
+    <DisallowUrlActivation>true</DisallowUrlActivation>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,6 +63,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>_ProgramIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PhotoMarket.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -179,6 +189,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="_photos\Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\_Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\_Paint.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_ProgramIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
