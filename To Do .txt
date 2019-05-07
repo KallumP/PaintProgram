@@ -1,0 +1,7 @@
+Add first point for pen drawing (on click)
+
+make sure that the new ratio coordiates dont divide by zero
+
+When saving, ask the user what size image they want, and pass that into the draw function as the height and width 
+(default option of current window size)
+

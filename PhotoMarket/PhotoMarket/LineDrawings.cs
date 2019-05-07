@@ -5,8 +5,14 @@ using System.Windows.Forms;
 
 namespace PhotoMarket {
     class LineDrawings : DeepCopy {
-        Point start, end;
+        PointF startRatio;
+        PointF endRatio;
         Pen pen;
+
+        PointF startCoord;
+        PointF endCoord;
+
+        Form1 parent;
 
         bool temp = true;
 
@@ -14,21 +20,27 @@ namespace PhotoMarket {
         bool shiftDown;
 
         //constructors
-        public LineDrawings(Point _start, Pen _pen) {
-            start = _start;
+        public LineDrawings(PointF _start, Pen _pen, Form1 _parent) {
+            parent = _parent;
+            startRatio = new PointF(parent.Width / _start.X, parent.Height / _start.Y);
+            startCoord = _start;
             pen = _pen;
             deepCopy(_pen);
         }
-        public LineDrawings() {
-
+        public LineDrawings(Form1 _parent) {
+            parent = _parent;
         }
 
         //sets the final position of the mouse
-        public void setEnd(Point _end, bool _shiftDown, bool _ctrlDown, bool finalPoint) {
-            end = _end;
+        public void setEnd(PointF _end, bool _shiftDown, bool _ctrlDown, bool finalPoint) {
+            endCoord = _end;
             shiftDown = _shiftDown;
             ctrlDown = _ctrlDown;
             angleFix();
+
+            if (endCoord.X > 0 && endCoord.Y > 0)
+                //sets the ratios after the angle fix
+                endRatio = new PointF(parent.Width / endCoord.X, parent.Height / endCoord.Y);
 
             //lets the program know that the final point has been placed
             if (finalPoint == true)
@@ -42,54 +54,50 @@ namespace PhotoMarket {
             if (shiftDown == true) {
 
                 //snaps the line end to 90 degrees
-                if (Math.Abs(start.Y - end.Y) > Math.Abs(start.X - end.X)) {
-                    end.X = start.X;
-                } else {
-                    end.Y = start.Y;
-                }
+                if (Math.Abs(startCoord.Y - endCoord.Y) > Math.Abs(startCoord.X - endCoord.X))
+                    endCoord.X = startCoord.X;
+                else
+                    endCoord.Y = startCoord.Y;
 
                 //a check to see if control was pressed down
             } else if (ctrlDown == true) {
 
                 //snaps the line end to 45 degrees
-                if (start.Y - end.Y > 0 && start.X - end.X > 0) {
-                    end.X = start.X - (start.Y - end.Y);
-                } else if ((start.Y - end.Y) < 0 && (start.X - end.X) < 0) {
-                    end.X = start.X - (start.Y - end.Y);
-                } else if (start.Y - end.Y > 0 && start.X - end.X < 0) {
-                    end.X = start.X + start.Y - end.Y;
-                } else if (start.Y - end.Y < 0 && start.X - end.X > 0) {
-                    end.X = start.X + start.Y - end.Y;
-                }
+                if (startCoord.Y - endCoord.Y > 0 && startCoord.X - endCoord.X > 0)
+                    endCoord.X = startCoord.X - (startCoord.Y - endCoord.Y);
+                else if ((startCoord.Y - endCoord.Y) < 0 && (startCoord.X - endCoord.X) < 0)
+                    endCoord.X = startCoord.X - (startCoord.Y - endCoord.Y);
+                else if (startCoord.Y - endCoord.Y > 0 && startCoord.X - endCoord.X < 0)
+                    endCoord.X = startCoord.X + startCoord.Y - endCoord.Y;
+                else if (startCoord.Y - endCoord.Y < 0 && startCoord.X - endCoord.X > 0)
+                    endCoord.X = startCoord.X + startCoord.Y - endCoord.Y;
             }
         }
 
         //draws out the line
         public void drawLine(PaintEventArgs g) {
-            if (temp == true) {
-                g.Graphics.DrawLine(tempPen, start, end);
-
-            } else
-                g.Graphics.DrawLine(pen, start, end);
+            if (temp == true)
+                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            else
+                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
         }
 
         //draws the line to the bitmap out the line
         public void exportLine(Graphics g) {
-            if (temp == true) {
-                g.DrawLine(tempPen, start, end);
-
-            } else
-                g.DrawLine(pen, start, end);
+            if (temp == true)
+                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            else
+                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
         }
 
         //saves the data abou this object
         public void saveData(StreamWriter sw) {
 
             //saves the start and end points of the line
-            sw.WriteLine(start.X);
-            sw.WriteLine(start.Y);
-            sw.WriteLine(end.X);
-            sw.WriteLine(end.Y);
+            sw.WriteLine(startRatio.X);
+            sw.WriteLine(startRatio.Y);
+            sw.WriteLine(endRatio.X);
+            sw.WriteLine(endRatio.Y);
 
             //saves the different argb values of the pen
             sw.WriteLine(pen.Color.A);
@@ -105,10 +113,10 @@ namespace PhotoMarket {
         public void loadData(StreamReader sr) {
 
             //sets the start and end points of the line
-            start.X = Convert.ToInt16(sr.ReadLine());
-            start.Y = Convert.ToInt16(sr.ReadLine());
-            end.X = Convert.ToInt16(sr.ReadLine());
-            end.Y = Convert.ToInt16(sr.ReadLine());
+            startRatio.X = Convert.ToSingle(sr.ReadLine());
+            startRatio.Y = Convert.ToSingle(sr.ReadLine());
+            endRatio.X = Convert.ToSingle(sr.ReadLine());
+            endRatio.Y = Convert.ToSingle(sr.ReadLine());
 
             //sets the pen's color
             pen = new Pen(

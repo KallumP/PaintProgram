@@ -7,22 +7,25 @@ using System.Windows.Forms;
 
 namespace PhotoMarket {
     class PenDrawing {
-        List<Point> coords = new List<Point>();
+        List<PointF> coords = new List<PointF>();
         Pen pen;
+
+        Form1 parent;
 
         string finishedIndicator = "END";
 
         //constructors
-        public PenDrawing(Pen color) {
+        public PenDrawing(Pen color, Form1 _parent) {
             pen = color;
+            parent = _parent;
         }
-        public PenDrawing() {
-
+        public PenDrawing(Form1 _parent) {
+            parent = _parent;
         }
 
         //adds a new item to the list of coordinates
-        public void addNewCoordinate(Point newCoords) {
-            coords.Add(newCoords);
+        public void addNewCoordinate(PointF newCoords) {
+            coords.Add(new PointF(parent.Width/newCoords.X, parent.Height/newCoords.Y));
         }
 
         //shows the drawing
@@ -34,10 +37,10 @@ namespace PhotoMarket {
                 //draws out a line between each of the coordinates in the list
                 g.Graphics.DrawLine(
                     pen,
-                    coords[i].X,
-                    coords[i].Y,
-                    coords[i + 1].X,
-                    coords[i + 1].Y);
+                    parent.Width/coords[i].X,
+                    parent.Height/coords[i].Y,
+                    parent.Width/coords[i + 1].X,
+                    parent.Height/coords[i + 1].Y);
             }
         }
 
@@ -50,10 +53,10 @@ namespace PhotoMarket {
                 //draws out a line between each of the coordinates in the list
                 g.DrawLine(
                     pen,
-                    coords[i].X,
-                    coords[i].Y,
-                    coords[i + 1].X,
-                    coords[i + 1].Y);
+                    parent.Width / coords[i].X,
+                    parent.Height / coords[i].Y,
+                    parent.Width / coords[i + 1].X,
+                    parent.Height / coords[i + 1].Y);
             }
         }
 
@@ -61,7 +64,7 @@ namespace PhotoMarket {
         public void saveData(StreamWriter sw) {
 
             //saves the all of the drawing points
-            foreach (Point p in coords) {
+            foreach (PointF p in coords) {
                 sw.WriteLine(p.X);
                 sw.WriteLine(p.Y);
             }
@@ -94,11 +97,10 @@ namespace PhotoMarket {
 
                 //checks to see if the next line was the end, or just another point
                 if (checkForEnd != finishedIndicator)
-                    coords.Add(new Point(Convert.ToInt16(checkForEnd), Convert.ToInt16(sr.ReadLine())));
+                    coords.Add(new PointF(Convert.ToSingle(checkForEnd), Convert.ToSingle(sr.ReadLine())));
                 else
                     finished = true;
             }
-
 
             //sets the pen's color
             pen = new Pen(

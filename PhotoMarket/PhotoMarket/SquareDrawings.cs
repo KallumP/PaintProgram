@@ -5,34 +5,37 @@ using System.Windows.Forms;
 
 namespace PhotoMarket {
     class SquareDrawings : DeepCopy {
-        Point startPoint;
-        Point endPoint;
+        PointF startRatio;
+        PointF endRatio;
+
+        Form1 parent;
 
         Pen pen;
 
         bool temp = true;
 
         //constructors
-        public SquareDrawings(Point _startCoord, Pen _pen) {
-            startPoint = _startCoord;
+        public SquareDrawings(PointF _startCoord, Pen _pen, Form1 _parent) {
+            parent = _parent;
+            startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
             deepCopy(_pen);
         }
-        public SquareDrawings() {
-
+        public SquareDrawings(Form1 _parent) {
+            parent = _parent;
         }
 
         //gets the end point for the rectangle
-        public void setEndPoint(Point _endPoint, bool shiftDown, bool lastPoint) {
+        public void setEndPoint(PointF _endPoint, bool shiftDown, bool lastPoint) {
 
             //gets the final position of the mouse
             if (shiftDown == false)
-                endPoint = _endPoint;
+                endRatio = new PointF(parent.Width / _endPoint.X, parent.Height / _endPoint.Y);
             else {
 
                 //if shift was pressed, then the end point distance from the start is equal in x and y
-                endPoint.X = _endPoint.X;
-                endPoint.Y = startPoint.Y + (endPoint.X - startPoint.X);
+                endRatio.X = parent.Width / _endPoint.X;
+                endRatio.Y = parent.Height / (startRatio.Y + (endRatio.X - startRatio.X));
             }
 
             //lets the program know that the final point has been placed
@@ -43,41 +46,41 @@ namespace PhotoMarket {
         //draws out the rectangle using lines
         public void drawSquare(PaintEventArgs g) {
             if (temp == true) {
-                g.Graphics.DrawLine(tempPen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                g.Graphics.DrawLine(tempPen, startPoint.X, startPoint.Y, endPoint.X, startPoint.Y);
-                g.Graphics.DrawLine(tempPen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
-                g.Graphics.DrawLine(tempPen, endPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                g.Graphics.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
             } else {
-                g.Graphics.DrawLine(pen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                g.Graphics.DrawLine(pen, startPoint.X, startPoint.Y, endPoint.X, startPoint.Y);
-                g.Graphics.DrawLine(pen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
-                g.Graphics.DrawLine(pen, endPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                g.Graphics.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
             }
         }
 
         //draws out the rectangle using lines
         public void exportSquare(Graphics g) {
             if (temp == true) {
-                g.DrawLine(tempPen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                g.DrawLine(tempPen, startPoint.X, startPoint.Y, endPoint.X, startPoint.Y);
-                g.DrawLine(tempPen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
-                g.DrawLine(tempPen, endPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
-            } else {
-                g.DrawLine(pen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                g.DrawLine(pen, startPoint.X, startPoint.Y, endPoint.X, startPoint.Y);
-                g.DrawLine(pen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
-                g.DrawLine(pen, endPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
-            }
+                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                g.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            } else
+                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+            g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+            g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            g.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
         }
+
 
         //saves the data about this object
         public void saveData(StreamWriter sw) {
 
             //saves the start and end points (x then y)
-            sw.WriteLine(startPoint.X);
-            sw.WriteLine(startPoint.Y);
-            sw.WriteLine(endPoint.X);
-            sw.WriteLine(endPoint.Y);
+            sw.WriteLine(startRatio.X);
+            sw.WriteLine(startRatio.Y);
+            sw.WriteLine(endRatio.X);
+            sw.WriteLine(endRatio.Y);
 
             //saves the different argb values of the pen
             sw.WriteLine(pen.Color.A);
@@ -93,10 +96,10 @@ namespace PhotoMarket {
         public void loadData(StreamReader sr) {
 
             //sets the start and end points
-            startPoint.X = Convert.ToInt16(sr.ReadLine());
-            startPoint.Y = Convert.ToInt16(sr.ReadLine());
-            endPoint.X = Convert.ToInt16(sr.ReadLine());
-            endPoint.Y = Convert.ToInt16(sr.ReadLine());
+            startRatio.X = Convert.ToSingle(sr.ReadLine());
+            startRatio.Y = Convert.ToSingle(sr.ReadLine());
+            endRatio.X = Convert.ToSingle(sr.ReadLine());
+            endRatio.Y = Convert.ToSingle(sr.ReadLine());
 
             //sets the pen's color
             pen = new Pen(

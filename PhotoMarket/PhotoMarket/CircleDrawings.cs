@@ -5,8 +5,10 @@ using System.Windows.Forms;
 
 namespace PhotoMarket {
     class CircleDrawings : DeepCopy {
-        Point startPoint;
-        Point endPoint;
+        PointF startRatio;
+        PointF endRatio;
+
+        Form1 parent;
 
         RectangleF toDraw;
 
@@ -15,31 +17,28 @@ namespace PhotoMarket {
         bool temp = true;
 
         //constructors
-        public CircleDrawings(Point _startCoord, Pen _pen) {
-            startPoint = _startCoord;
+        public CircleDrawings(PointF _startCoord, Pen _pen, Form1 _parent) {
+            parent = _parent;
+            startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
             deepCopy(_pen);
         }
-        public CircleDrawings() {
-
+        public CircleDrawings(Form1 _parent) {
+            parent = _parent;
         }
 
         //gets the end point for the rectangle
-        public void setEndPoint(Point _endPoint, bool shiftDown, bool finalPoint) {
+        public void setEndPoint(PointF _endPoint, bool shiftDown, bool finalPoint) {
 
             //gets the final position of the mouse
             if (shiftDown == false)
-                endPoint = _endPoint;
+                endRatio = new PointF(parent.Width / _endPoint.X, parent.Height / _endPoint.Y);
             else {
 
                 //if shift was pressed, then the end point distance from the start is equal in x and y
-                endPoint.X = _endPoint.X;
-                endPoint.Y = startPoint.Y + (endPoint.X - startPoint.X);
-
+                endRatio.X = parent.Width / _endPoint.X;
+                endRatio.Y = parent.Height / (startRatio.Y + (endRatio.X - startRatio.X));
             }
-
-            //creates the rectangle to draw
-            createRectangle();
 
             if (finalPoint == true)
                 temp = false;
@@ -50,11 +49,15 @@ namespace PhotoMarket {
         public void createRectangle() {
 
             //creates a rectangle to be used to draw the circle out
-            toDraw = RectangleF.FromLTRB(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+            toDraw = RectangleF.FromLTRB(parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
         }
 
         //draws out the circle using the rectangle made in the set end point
         public void drawCircle(PaintEventArgs g) {
+
+            //sets up the rectangle each time, incase there was a change in window size
+            createRectangle();
+
             if (temp == true)
                 g.Graphics.DrawEllipse(tempPen, toDraw);
             else
@@ -63,6 +66,10 @@ namespace PhotoMarket {
 
         //draws out the circle using the rectangle made in the set end point to the bitmap
         public void exportCircle(Graphics g) {
+
+            //sets up the rectangle each time, incase there was a change in window size
+            createRectangle();
+
             if (temp == true)
                 g.DrawEllipse(tempPen, toDraw);
             else
@@ -73,10 +80,10 @@ namespace PhotoMarket {
         public void saveData(StreamWriter sw) {
 
             //saves the rectangle used to draw the circle
-            sw.WriteLine(startPoint.X);
-            sw.WriteLine(startPoint.Y);
-            sw.WriteLine(endPoint.X);
-            sw.WriteLine(endPoint.Y);
+            sw.WriteLine(startRatio.X);
+            sw.WriteLine(startRatio.Y);
+            sw.WriteLine(endRatio.X);
+            sw.WriteLine(endRatio.Y);
 
             //saves the different argb values of the pen
             sw.WriteLine(pen.Color.A);
@@ -93,12 +100,10 @@ namespace PhotoMarket {
 
             //sets the rectangle used to draw the circle
 
-            startPoint.X = Convert.ToInt16(sr.ReadLine());
-            startPoint.Y = Convert.ToInt16(sr.ReadLine());
-            endPoint.X = Convert.ToInt16(sr.ReadLine());
-            endPoint.Y = Convert.ToInt16(sr.ReadLine());
-
-            createRectangle();
+            startRatio.X = Convert.ToSingle(sr.ReadLine());
+            startRatio.Y = Convert.ToSingle(sr.ReadLine());
+            endRatio.X = Convert.ToSingle(sr.ReadLine());
+            endRatio.Y = Convert.ToSingle(sr.ReadLine());
 
             //sets the pen's color
             pen = new Pen(

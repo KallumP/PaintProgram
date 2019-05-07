@@ -74,6 +74,7 @@ namespace PhotoMarket {
             brushSizeChange_pic.Location = new Point(Width - 60, Height - 160);
             widthDemo_pic.Location = new Point(Width - 60, Height - 91);
             functionBtns_pic.Location = new Point(Width - 160, 2);
+            invalidateAll();
         }
 
         //updates the user on what drawing mode they are using
@@ -141,7 +142,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new object of penDrawings to store all the coordinates of the new line
-            penDrawings.Add(new PenDrawing(globalPen));
+            penDrawings.Add(new PenDrawing(globalPen, this));
 
             //adds the first line
             penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
@@ -170,7 +171,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            squareDrawings.Add(new SquareDrawings(new Point(e.X, e.Y), globalPen));
+            squareDrawings.Add(new SquareDrawings(new Point(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a square drawing next
             drawOrder.Add(DrawingMode.Square);
@@ -182,9 +183,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), true, true);
+                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), false, true);
+                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -193,9 +194,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), true, false);
+                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), false, false);
+                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -208,7 +209,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            circleDrawings.Add(new CircleDrawings(new Point(e.X, e.Y), globalPen));
+            circleDrawings.Add(new CircleDrawings(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a circle drawing next
             drawOrder.Add(DrawingMode.Circle);
@@ -220,9 +221,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), true, true);
+                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), false, true);
+                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -231,9 +232,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), true, false);
+                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new Point(e.X, e.Y), false, false);
+                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -246,7 +247,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //lets the program know that the mouse is held down
-            lineDrawings.Add(new LineDrawings(new Point(e.X, e.Y), globalPen));
+            lineDrawings.Add(new LineDrawings(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a line drawing next
             drawOrder.Add(DrawingMode.Line);
@@ -258,11 +259,11 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), true, false, true);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), true, false, true);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), false, true, true);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, true, true);
             else
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), false, false, true);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -271,11 +272,11 @@ namespace PhotoMarket {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), true, false, false);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), true, false, false);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), false, true, false);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, true, false);
             else
-                lineDrawings[lineDrawings.Count - 1].setEnd(new Point(e.X, e.Y), false, false, false);
+                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -412,6 +413,9 @@ namespace PhotoMarket {
 
         //draws the screen
         private void drawArea_pic_Paint(object sender, PaintEventArgs e) {
+
+            //makes the background white
+            e.Graphics.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
 
             //an if statement to make sure that there are drawing to draw before trying to draw
             if (drawOrder.Count() != 0) {
@@ -568,6 +572,10 @@ namespace PhotoMarket {
 
             //uses a graphics library to draw to the file
             using (Graphics g = Graphics.FromImage(toSave)) {
+
+                //makes the background white
+                g.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
+
                 if (drawOrder.Count() != 0) {
 
                     //numbers used to store which order each drawing list is at 
@@ -718,25 +726,25 @@ namespace PhotoMarket {
 
                         //adds the next pen drawing
                         if (drawOrder[i] == DrawingMode.Pen) {
-                            penDrawings.Add(new PenDrawing());
+                            penDrawings.Add(new PenDrawing(this));
                             penDrawings[penOrder].loadData(sr);
                             penOrder++;
 
                             //adds the next square drawing                           
                         } else if (drawOrder[i] == DrawingMode.Square) {
-                            squareDrawings.Add(new SquareDrawings());
+                            squareDrawings.Add(new SquareDrawings(this));
                             squareDrawings[squareOrder].loadData(sr);
                             squareOrder++;
 
                             //adds the next circle drawing
                         } else if (drawOrder[i] == DrawingMode.Circle) {
-                            circleDrawings.Add(new CircleDrawings());
+                            circleDrawings.Add(new CircleDrawings(this));
                             circleDrawings[circleOrder].loadData(sr);
                             circleOrder++;
 
                             //adds the next line drawing
                         } else if (drawOrder[i] == DrawingMode.Line) {
-                            lineDrawings.Add(new LineDrawings());
+                            lineDrawings.Add(new LineDrawings(this));
                             lineDrawings[lineOrder].loadData(sr);
                             lineOrder++;
 
