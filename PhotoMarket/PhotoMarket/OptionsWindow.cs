@@ -19,7 +19,7 @@ namespace PhotoMarket {
             parent = _parent;
         }
 
-        private void cancel_btn_Click(object sender, EventArgs e) {
+        private void Cancel_btn_Click(object sender, EventArgs e) {
             Close();
         }
 
@@ -28,22 +28,22 @@ namespace PhotoMarket {
             Close();
         }
 
-        private void save_btn_Click(object sender, EventArgs e) {
+        private void Save_btn_Click(object sender, EventArgs e) {
             parent.SaveProject();
             Close();
         }
 
-        private void load_btn_Click(object sender, EventArgs e) {
+        private void Load_btn_Click(object sender, EventArgs e) {
             parent.LoadProject();
             Close();
         }
 
-        private void changeBackImg_btn_Click(object sender, EventArgs e) {
+        private void ChangeBackImg_btn_Click(object sender, EventArgs e) {
             parent.ChangeBackground();
             Close();
         }
 
-        private void removeBackground_btn_Click(object sender, EventArgs e) {
+        private void RemoveBackground_btn_Click(object sender, EventArgs e) {
             parent.RemoveBackground();
             Close();
         }

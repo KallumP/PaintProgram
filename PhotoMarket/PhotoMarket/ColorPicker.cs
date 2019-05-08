@@ -42,53 +42,53 @@ namespace PhotoMarket {
         }
 
         //deals with mouse movement in the over the color picker picture box
-        private void colorPicker_pic_MouseDown(object sender, MouseEventArgs e) {
+        private void ColorPicker_pic_MouseDown(object sender, MouseEventArgs e) {
 
             //lets the form know that mouse is held down
             clicked = true;
 
             //gets the mouse coordinates of the click
-            setMouseCoord(e.X, e.Y);
+            SetMouseCoord(e.X, e.Y);
 
             //updates the "chosenColor"
-            updateColor(true);
+            UpdateColor(true);
         }
-        private void colorPicker_pic_MouseMove(object sender, MouseEventArgs e) {
+        private void ColorPicker_pic_MouseMove(object sender, MouseEventArgs e) {
 
             //only gets the color if mouse was held down
             if (clicked == true) {
 
                 //gets the mouse location of the mouse
-                setMouseCoord(e.X, e.Y);
+                SetMouseCoord(e.X, e.Y);
 
                 //updates the "chosenColor"
-                updateColor(true);
+                UpdateColor(true);
             }
         }
-        private void colorPicker_pic_MouseUp(object sender, MouseEventArgs e) {
+        private void ColorPicker_pic_MouseUp(object sender, MouseEventArgs e) {
 
             //gets the mouse coordinates of the click
-            setMouseCoord(e.X, e.Y);
+            SetMouseCoord(e.X, e.Y);
 
             //updates the "chosenColor"
-            updateColor(true);
+            UpdateColor(true);
 
             //lets the form know that mouse is not being held down anymore
             clicked = false;
         }
 
         //lets the user enter a hex value for their chosen color
-        private void checkHex_btn_Click(object sender, EventArgs e) {
+        private void CheckHex_btn_Click(object sender, EventArgs e) {
 
             //gets the input hex value
             inputHexValue = "#" + hexValue_txt.Text;
 
             //updates the chosenColor
-            updateColor(false);
+            UpdateColor(false);
         }
 
         //sets the chosen color and shows the user what color was chosen
-        void updateColor(bool mouse) {
+        void UpdateColor(bool mouse) {
             if (mouse == true) {
 
                 //gets the color of the pixel of the mouse location
@@ -112,7 +112,7 @@ namespace PhotoMarket {
         }
 
         //sends the new color back to the old form
-        void updateMainFormColor() {
+        void UpdateMainFormColor() {
             ((Form1)mainForm).penColor = chosenColor;
             ((Form1)mainForm).UpdateGlobalPen(chosenColor, ((Form1)mainForm).penWidth);
             ((Form1)mainForm).InvalidateAll();
@@ -120,7 +120,7 @@ namespace PhotoMarket {
         }
 
         //gets the mouse coordinates
-        void setMouseCoord(int X, int Y) {
+        void SetMouseCoord(int X, int Y) {
 
             //sets the mouse coordinates
             mouseCoord.X = X;
@@ -138,8 +138,8 @@ namespace PhotoMarket {
         }
 
         //lets the user set the color that they chose
-        private void chooseColor_btn_Click(object sender, EventArgs e) {
-            updateMainFormColor();
+        private void ChooseColor_btn_Click(object sender, EventArgs e) {
+            UpdateMainFormColor();
         }
     }
 }

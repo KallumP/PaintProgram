@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class SquareDrawings : DeepCopy {
+    class SquareDrawings : DeepCopier {
         PointF startRatio;
         PointF endRatio;
 
@@ -19,14 +19,14 @@ namespace PhotoMarket.DrawingClasses {
             parent = _parent;
             startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
-            deepCopy(_pen);
+            DeepCopy(_pen);
         }
         public SquareDrawings(Form1 _parent) {
             parent = _parent;
         }
 
         //gets the end point for the rectangle
-        public void setEndPoint(PointF _endPoint, bool shiftDown, bool lastPoint) {
+        public void SetEndPoint(PointF _endPoint, bool shiftDown, bool lastPoint) {
 
             //gets the final position of the mouse
             if (shiftDown == false)
@@ -77,7 +77,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //saves the data about this object
-        public void saveData(StreamWriter sw) {
+        public void SaveData(StreamWriter sw) {
 
             //saves the start and end points (x then y)
             sw.WriteLine(startRatio.X);
@@ -96,7 +96,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //loads in each value for the object from a file
-        public void loadData(StreamReader sr) {
+        public void LoadData(StreamReader sr) {
 
             //sets the start and end points
             startRatio.X = Convert.ToSingle(sr.ReadLine());

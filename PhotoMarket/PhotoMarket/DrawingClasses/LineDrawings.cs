@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class LineDrawings : DeepCopy {
+    class LineDrawings : DeepCopier {
         PointF startRatio;
         PointF endRatio;
         Pen pen;
@@ -25,18 +25,18 @@ namespace PhotoMarket.DrawingClasses {
             startRatio = new PointF(parent.Width / _start.X, parent.Height / _start.Y);
             startCoord = _start;
             pen = _pen;
-            deepCopy(_pen);
+            DeepCopy(_pen);
         }
         public LineDrawings(Form1 _parent) {
             parent = _parent;
         }
 
         //sets the final position of the mouse
-        public void setEnd(PointF _end, bool _shiftDown, bool _ctrlDown, bool finalPoint) {
+        public void SetEnd(PointF _end, bool _shiftDown, bool _ctrlDown, bool finalPoint) {
             endCoord = _end;
             shiftDown = _shiftDown;
             ctrlDown = _ctrlDown;
-            angleFix();
+            AngleFix();
 
             if (endCoord.X > 0 && endCoord.Y > 0)
                 //sets the ratios after the angle fix
@@ -48,7 +48,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //fixes the end point if shift is held down
-        public void angleFix() {
+        public void AngleFix() {
 
             //a check to see if shift was pressed down
             if (shiftDown == true) {
@@ -76,10 +76,13 @@ namespace PhotoMarket.DrawingClasses {
 
         //draws out the line
         public void Draw(PaintEventArgs g) {
-            if (temp == true)
-                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            else
-                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+
+            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
+                if (temp == true)
+                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                else
+                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            }
         }
 
         //draws the line to the bitmap out the line
@@ -91,7 +94,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //saves the data abou this object
-        public void saveData(StreamWriter sw) {
+        public void SaveData(StreamWriter sw) {
 
             //saves the start and end points of the line
             sw.WriteLine(startRatio.X);
@@ -110,7 +113,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //loads in each value for the object from a file
-        public void loadData(StreamReader sr) {
+        public void LoadData(StreamReader sr) {
 
             //sets the start and end points of the line
             startRatio.X = Convert.ToSingle(sr.ReadLine());

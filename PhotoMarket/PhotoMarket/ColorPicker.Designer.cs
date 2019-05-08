@@ -78,7 +78,7 @@
             this.checkHex_btn.TabIndex = 6;
             this.checkHex_btn.Text = "Check";
             this.checkHex_btn.UseVisualStyleBackColor = true;
-            this.checkHex_btn.Click += new System.EventHandler(this.checkHex_btn_Click);
+            this.checkHex_btn.Click += new System.EventHandler(this.CheckHex_btn_Click);
             // 
             // showColor_pic
             // 
@@ -97,9 +97,9 @@
             this.colorPicker_pic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.colorPicker_pic.TabIndex = 0;
             this.colorPicker_pic.TabStop = false;
-            this.colorPicker_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colorPicker_pic_MouseDown);
-            this.colorPicker_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.colorPicker_pic_MouseMove);
-            this.colorPicker_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorPicker_pic_MouseUp);
+            this.colorPicker_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ColorPicker_pic_MouseDown);
+            this.colorPicker_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ColorPicker_pic_MouseMove);
+            this.colorPicker_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ColorPicker_pic_MouseUp);
             // 
             // chooseColor_btn
             // 
@@ -109,7 +109,7 @@
             this.chooseColor_btn.TabIndex = 7;
             this.chooseColor_btn.Text = "Choose Color";
             this.chooseColor_btn.UseVisualStyleBackColor = true;
-            this.chooseColor_btn.Click += new System.EventHandler(this.chooseColor_btn_Click);
+            this.chooseColor_btn.Click += new System.EventHandler(this.ChooseColor_btn_Click);
             // 
             // ColorPicker
             // 

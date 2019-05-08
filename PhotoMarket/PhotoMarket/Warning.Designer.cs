@@ -50,7 +50,7 @@
             this.clear_btn.TabIndex = 1;
             this.clear_btn.Text = "Clear Drawings";
             this.clear_btn.UseVisualStyleBackColor = false;
-            this.clear_btn.Click += new System.EventHandler(this.clear_btn_Click);
+            this.clear_btn.Click += new System.EventHandler(this.Clear_btn_Click);
             // 
             // cancel_btn
             // 
@@ -61,7 +61,7 @@
             this.cancel_btn.TabIndex = 2;
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
-            this.cancel_btn.Click += new System.EventHandler(this.clear_btn_Click);
+            this.cancel_btn.Click += new System.EventHandler(this.Clear_btn_Click);
             // 
             // Warning
             // 

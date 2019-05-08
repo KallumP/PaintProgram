@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class CircleDrawings : DeepCopy {
+    class CircleDrawings : DeepCopier {
         PointF startRatio;
         PointF endRatio;
 
@@ -21,14 +21,14 @@ namespace PhotoMarket.DrawingClasses {
             parent = _parent;
             startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
-            deepCopy(_pen);
+            DeepCopy(_pen);
         }
         public CircleDrawings(Form1 _parent) {
             parent = _parent;
         }
 
         //gets the end point for the rectangle
-        public void setEndPoint(PointF _endPoint, bool shiftDown, bool finalPoint) {
+        public void SetEndPoint(PointF _endPoint, bool shiftDown, bool finalPoint) {
 
             //gets the final position of the mouse
             if (shiftDown == false)
@@ -46,7 +46,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //creates the rectangle used to draw the circle
-        public void createRectangle() {
+        public void CreateRectangle() {
 
             //creates a rectangle to be used to draw the circle out
             toDraw = RectangleF.FromLTRB(parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
@@ -56,7 +56,7 @@ namespace PhotoMarket.DrawingClasses {
         public void Draw(PaintEventArgs g) {
 
             //sets up the rectangle each time, incase there was a change in window size
-            createRectangle();
+            CreateRectangle();
 
             if (temp == true)
                 g.Graphics.DrawEllipse(tempPen, toDraw);
@@ -68,7 +68,7 @@ namespace PhotoMarket.DrawingClasses {
         public void Export(Graphics g) {
 
             //sets up the rectangle each time, incase there was a change in window size
-            createRectangle();
+            CreateRectangle();
 
             if (temp == true)
                 g.DrawEllipse(tempPen, toDraw);
@@ -77,7 +77,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //saves the data abou this object
-        public void saveData(StreamWriter sw) {
+        public void SaveData(StreamWriter sw) {
 
             //saves the rectangle used to draw the circle
             sw.WriteLine(startRatio.X);
@@ -96,7 +96,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //loads in each value for the object from a file
-        public void loadData(StreamReader sr) {
+        public void LoadData(StreamReader sr) {
 
             //sets the rectangle used to draw the circle
 

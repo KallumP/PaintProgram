@@ -20,12 +20,12 @@ namespace PhotoMarket {
         }
 
         //closes the warning window without doing anything
-        private void cancel_btn_Click(object sender, EventArgs e) {
+        private void Cancel_btn_Click(object sender, EventArgs e) {
             Close();
         }
 
         //clears the drawings, then closes the warning window
-        private void clear_btn_Click(object sender, EventArgs e) {
+        private void Clear_btn_Click(object sender, EventArgs e) {
 
             parent.ClearDrawings();
             Close();

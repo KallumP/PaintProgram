@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 namespace PhotoMarket {
-    class DeepCopy {
+    class DeepCopier {
         public Pen tempPen;
 
         //creates a deep copy of the pen, instead of by reference (lets the change of variable without changing other variables)
-        protected void deepCopy(Pen toClone) {
+        protected void DeepCopy(Pen toClone) {
             tempPen = new Pen(toClone.Color);
             tempPen.Width = 2;
 

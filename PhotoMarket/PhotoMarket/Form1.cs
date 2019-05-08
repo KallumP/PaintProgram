@@ -88,6 +88,7 @@ namespace PhotoMarket {
             drawArea_pic.Invalidate();
             colorPallet_pic.Invalidate();
             widthDemo_pic.Invalidate();
+            options_pic.Invalidate();
         }
 
 
@@ -162,7 +163,7 @@ namespace PhotoMarket {
             penDrawings.Add(new PenDrawing(globalPen, this));
 
             //adds the first line
-            penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
+            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
 
 
             //lets the program know to draw a pen drawing next
@@ -171,7 +172,7 @@ namespace PhotoMarket {
         void PenClickUp(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
-            penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
+            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
 
             //lets the program know that click is no longer being held down
             mouseClickedDown = false;
@@ -179,7 +180,7 @@ namespace PhotoMarket {
         void PenClickMove(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
-            penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
+            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
         }
 
         //deals with inputs for the square drawing mode
@@ -201,9 +202,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, true);
+                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, true);
+                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -212,9 +213,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, false);
+                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                squareDrawings[squareDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, false);
+                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -239,9 +240,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, true);
+                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, true);
+                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -250,9 +251,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), true, false);
+                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                circleDrawings[circleDrawings.Count - 1].setEndPoint(new PointF(e.X, e.Y), false, false);
+                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -277,11 +278,11 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), true, false, true);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, true);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, true, true);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, true);
             else
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, false, true);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, true);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -290,11 +291,11 @@ namespace PhotoMarket {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), true, false, false);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, false);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, true, false);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, false);
             else
-                lineDrawings[lineDrawings.Count - 1].setEnd(new PointF(e.X, e.Y), false, false, false);
+                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, false);
 
             //makes the screen redraw
             drawArea_pic.Invalidate();
@@ -308,6 +309,7 @@ namespace PhotoMarket {
 
             //sets the draw mode back to mouse
             drawType = DrawingMode.Mouse;
+            InvalidateAll();
         }
         void ImageMouseMove(MouseEventArgs e) {
             //lets the program know that the mouse is held down
@@ -385,26 +387,8 @@ namespace PhotoMarket {
             } else if (e.X < 225) {
                 drawType = DrawingMode.Line;
             } else if (e.X < 270) {
-
-                //makes the user open a project
-                OpenFileDialog opener = new OpenFileDialog();
-                if (opener.ShowDialog() == DialogResult.OK) {
-
-                    //makes sure that the right type of file was entered
-                    if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg")) {
-
-                        //sets up an image with the chosen path
-                        imageDrawings.Add(new ImageDrawing(opener.FileName, this));
-
-                        drawOrder.Add(DrawingMode.Image);
-
-                        drawType = DrawingMode.Image;
-                    }
-                }
+                createImageDrawing();
             }
-
-            options_pic.Invalidate();
-            InvalidateAll();
         }
 
         //updates the global pen
@@ -609,6 +593,29 @@ namespace PhotoMarket {
 
         //Functions----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        //lets the user choose an image to add to the drawing
+        void createImageDrawing() {
+            //makes the user open a project
+            OpenFileDialog opener = new OpenFileDialog();
+            if (opener.ShowDialog() == DialogResult.OK) {
+
+                //makes sure that the right type of file was entered
+                if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg")) {
+
+                    //sets up an image with the chosen path
+                    imageDrawings.Add(new ImageDrawing(opener.FileName, this));
+
+                    drawOrder.Add(DrawingMode.Image);
+
+                    drawType = DrawingMode.Image;
+                }
+
+            }
+
+            options_pic.Invalidate();
+            InvalidateAll();
+        }
+
         //finds out what save option the user wants
         private void OpenOptions() {
             OptionsWindow s = new OptionsWindow(this);
@@ -708,6 +715,7 @@ namespace PhotoMarket {
                     int squareOrder = 0;
                     int circleOrder = 0;
                     int lineOrder = 0;
+                    int imageOrder = 0;
 
                     for (int i = 0; i < drawOrder.Count; i++) {
                         if (i == drawOrder.Count - 1)
@@ -719,26 +727,30 @@ namespace PhotoMarket {
                     //goes through the order to draw
                     for (int i = 0; i < drawOrder.Count(); i++) {
 
-                        //draws the next pen drawing
+                        //saves the next pen drawing
                         if (drawOrder[i] == DrawingMode.Pen) {
-                            penDrawings[penOrder].saveData(sw);
+                            penDrawings[penOrder].SaveData(sw);
                             penOrder++;
 
-                            //draws the next square drawing                           
+                            //saves the next square drawing                           
                         } else if (drawOrder[i] == DrawingMode.Square) {
-                            squareDrawings[squareOrder].saveData(sw);
+                            squareDrawings[squareOrder].SaveData(sw);
                             squareOrder++;
 
-                            //draws the next circle drawing
+                            //saves the next circle drawing
                         } else if (drawOrder[i] == DrawingMode.Circle) {
-                            circleDrawings[circleOrder].saveData(sw);
+                            circleDrawings[circleOrder].SaveData(sw);
                             circleOrder++;
 
-                            //draws the next line drawing
+                            //saves the next line drawing
                         } else if (drawOrder[i] == DrawingMode.Line) {
-                            lineDrawings[lineOrder].saveData(sw);
+                            lineDrawings[lineOrder].SaveData(sw);
                             lineOrder++;
 
+                            //saves the next image drawing
+                        } else if (drawOrder[i] == DrawingMode.Image) {
+                            imageDrawings[imageOrder].SaveData(sw);
+                            imageOrder++;
                         }
                     }
 
@@ -779,6 +791,8 @@ namespace PhotoMarket {
                             drawOrder.Add(DrawingMode.Line);
                         else if (s == "Pen")
                             drawOrder.Add(DrawingMode.Pen);
+                        else if (s == "Image")
+                            drawOrder.Add(DrawingMode.Image);
                     }
 
                     //makes sure that the drawOrder has atleast one value in it
@@ -789,6 +803,7 @@ namespace PhotoMarket {
                         int squareOrder = 0;
                         int circleOrder = 0;
                         int lineOrder = 0;
+                        int imageOrder = 0;
 
                         //goes through the order to add drawings
                         for (int i = 0; i < drawOrder.Count(); i++) {
@@ -796,27 +811,31 @@ namespace PhotoMarket {
                             //adds the next pen drawing
                             if (drawOrder[i] == DrawingMode.Pen) {
                                 penDrawings.Add(new PenDrawing(this));
-                                penDrawings[penOrder].loadData(sr);
+                                penDrawings[penOrder].LoadData(sr);
                                 penOrder++;
 
                                 //adds the next square drawing                           
                             } else if (drawOrder[i] == DrawingMode.Square) {
                                 squareDrawings.Add(new SquareDrawings(this));
-                                squareDrawings[squareOrder].loadData(sr);
+                                squareDrawings[squareOrder].LoadData(sr);
                                 squareOrder++;
 
                                 //adds the next circle drawing
                             } else if (drawOrder[i] == DrawingMode.Circle) {
                                 circleDrawings.Add(new CircleDrawings(this));
-                                circleDrawings[circleOrder].loadData(sr);
+                                circleDrawings[circleOrder].LoadData(sr);
                                 circleOrder++;
 
                                 //adds the next line drawing
                             } else if (drawOrder[i] == DrawingMode.Line) {
                                 lineDrawings.Add(new LineDrawings(this));
-                                lineDrawings[lineOrder].loadData(sr);
+                                lineDrawings[lineOrder].LoadData(sr);
                                 lineOrder++;
 
+                            } else if (drawOrder[i] == DrawingMode.Image) {
+                                imageDrawings.Add(new ImageDrawing(this));
+                                imageDrawings[imageOrder].LoadData(sr);
+                                imageOrder++;
                             }
                         }
                     }
@@ -825,7 +844,6 @@ namespace PhotoMarket {
 
                     //redraws the picture
                     drawArea_pic.Invalidate();
-
                 }
             }
         }
@@ -898,6 +916,8 @@ namespace PhotoMarket {
                     drawType = DrawingMode.Circle;
                 else if (e.KeyCode == Keys.D5)
                     drawType = DrawingMode.Line;
+                else if (e.KeyCode == Keys.D6)
+                    createImageDrawing();
                 else if (e.KeyCode == Keys.Add)
                     IncreasePenWidth();
                 else if (e.KeyCode == Keys.Oemplus)

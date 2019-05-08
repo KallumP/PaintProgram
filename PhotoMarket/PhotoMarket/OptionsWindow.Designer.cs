@@ -63,7 +63,7 @@
             this.save_btn.TabIndex = 2;
             this.save_btn.Text = "Save Project";
             this.save_btn.UseVisualStyleBackColor = true;
-            this.save_btn.Click += new System.EventHandler(this.save_btn_Click);
+            this.save_btn.Click += new System.EventHandler(this.Save_btn_Click);
             // 
             // cancel_btn
             // 
@@ -74,7 +74,7 @@
             this.cancel_btn.TabIndex = 3;
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
-            this.cancel_btn.Click += new System.EventHandler(this.cancel_btn_Click);
+            this.cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
             // 
             // changeBackImg_btn
             // 
@@ -85,7 +85,7 @@
             this.changeBackImg_btn.TabIndex = 4;
             this.changeBackImg_btn.Text = "Change Background Image";
             this.changeBackImg_btn.UseVisualStyleBackColor = true;
-            this.changeBackImg_btn.Click += new System.EventHandler(this.changeBackImg_btn_Click);
+            this.changeBackImg_btn.Click += new System.EventHandler(this.ChangeBackImg_btn_Click);
             // 
             // load_btn
             // 
@@ -96,7 +96,7 @@
             this.load_btn.TabIndex = 5;
             this.load_btn.Text = "Load Project";
             this.load_btn.UseVisualStyleBackColor = true;
-            this.load_btn.Click += new System.EventHandler(this.load_btn_Click);
+            this.load_btn.Click += new System.EventHandler(this.Load_btn_Click);
             // 
             // removeBackground_btn
             // 
@@ -107,7 +107,7 @@
             this.removeBackground_btn.TabIndex = 6;
             this.removeBackground_btn.Text = "Remove Background Image";
             this.removeBackground_btn.UseVisualStyleBackColor = true;
-            this.removeBackground_btn.Click += new System.EventHandler(this.removeBackground_btn_Click);
+            this.removeBackground_btn.Click += new System.EventHandler(this.RemoveBackground_btn_Click);
             // 
             // OptionsWindow
             // 

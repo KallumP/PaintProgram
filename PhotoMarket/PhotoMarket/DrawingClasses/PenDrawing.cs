@@ -24,7 +24,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //adds a new item to the list of coordinates
-        public void addNewCoordinate(PointF newCoords) {
+        public void AddNewCoordinate(PointF newCoords) {
             coords.Add(new PointF(parent.Width/newCoords.X, parent.Height/newCoords.Y));
         }
 
@@ -61,7 +61,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //saves the data about this object
-        public void saveData(StreamWriter sw) {
+        public void SaveData(StreamWriter sw) {
 
             //saves the all of the drawing points
             foreach (PointF p in coords) {
@@ -83,7 +83,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //loads in each value for the object from a file
-        public void loadData(StreamReader sr) {
+        public void LoadData(StreamReader sr) {
 
             string checkForEnd;
 

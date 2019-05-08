@@ -14,15 +14,11 @@ namespace PhotoMarket.DrawingClasses {
 
         string imagePath;
         PointF startRatio;
-        PointF endRatio;
-
-        bool temp;
 
         //Constructors
         //used for setting up a background image
         public ImageDrawing(PointF _startPoint, string _path, Form1 _parent) {
             parent = _parent;
-            temp = true;
             startRatio = new PointF(parent.Width / _startPoint.X, parent.Height / _startPoint.Y);
             imagePath = _path;
 
@@ -30,7 +26,6 @@ namespace PhotoMarket.DrawingClasses {
         //used for creating an image (before the location is made)
         public ImageDrawing(string _path, Form1 _parent) {
             parent = _parent;
-            temp = false;
             startRatio = new PointF(0f, 0f);
             imagePath = _path;
 
@@ -48,7 +43,7 @@ namespace PhotoMarket.DrawingClasses {
 
         //Draws out the image
         public void Draw(PaintEventArgs g) {
-            if (startRatio.X != 0 || startRatio.Y != 0) {
+            if (startRatio.X != 0 && startRatio.Y != 0) {
                 Image todraw = Image.FromFile(imagePath);
 
                 g.Graphics.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
@@ -65,19 +60,23 @@ namespace PhotoMarket.DrawingClasses {
 
         //writes out the data to a text file
         public void SaveData(StreamWriter sw) {
-
             sw.WriteLine(imagePath);
             sw.WriteLine(startRatio.X);
             sw.WriteLine(startRatio.Y);
-
         }
 
         //loads up data from a text file
         public void LoadData(StreamReader sr) {
 
             imagePath = sr.ReadLine();
-            startRatio = new PointF(parent.Width / Convert.ToSingle(sr.ReadLine()), parent.Height / Convert.ToSingle(sr.ReadLine()));
+            startRatio = new PointF(Convert.ToSingle(sr.ReadLine()), Convert.ToSingle(sr.ReadLine()));
 
         }
+
+        //public static Image resizeImage(Image imgToResize, Size size) {
+        //    return (Image)(new Bitmap(imgToResize, size));
+        //}
+
+        //yourImage = resizeImage(yourImage, new Size(50,50));
     }
 }
