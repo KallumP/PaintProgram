@@ -114,8 +114,8 @@ namespace PhotoMarket {
         //sends the new color back to the old form
         void updateMainFormColor() {
             ((Form1)mainForm).penColor = chosenColor;
-            ((Form1)mainForm).updateGlobalPen(chosenColor, ((Form1)mainForm).penWidth);
-            ((Form1)mainForm).invalidateAll();
+            ((Form1)mainForm).UpdateGlobalPen(chosenColor, ((Form1)mainForm).penWidth);
+            ((Form1)mainForm).InvalidateAll();
             this.Close();
         }
 

@@ -4,10 +4,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using PhotoMarket.DrawingClasses;
+
 
 namespace PhotoMarket {
     public partial class Form1 : Form {
-        enum DrawingMode { Mouse, Pen, Square, Circle, Line };
+        enum DrawingMode { Mouse, Pen, Square, Circle, Line, Image };
         DrawingMode drawType;
 
         public int penWidth;
@@ -19,12 +21,16 @@ namespace PhotoMarket {
         List<SquareDrawings> squareDrawings = new List<SquareDrawings>();
         List<CircleDrawings> circleDrawings = new List<CircleDrawings>();
         List<LineDrawings> lineDrawings = new List<LineDrawings>();
+        List<ImageDrawing> imageDrawings = new List<ImageDrawing>();
+        ImageDrawing background;
 
         //creates a list of drawing modes to be used to order each drawing
         List<DrawingMode> drawOrder = new List<DrawingMode>();
 
         //a variable that lets the program know that mouse has been held down
         bool mouseClickedDown = false;
+
+        string projectExtension = ".txt";
 
         //constructor
         public Form1() {
@@ -47,11 +53,11 @@ namespace PhotoMarket {
             penWidth = 1;
 
             //creates a global pen with the chosen color and width
-            updateGlobalPen(penColor, penWidth);
+            UpdateGlobalPen(penColor, penWidth);
 
             //updates the location of objects and updates labels
-            invalidateAll();
-            updateObjectLocations();
+            InvalidateAll();
+            UpdateObjectLocations();
         }
 
         //normalizes the resize function
@@ -64,21 +70,21 @@ namespace PhotoMarket {
             if (Width < 600) {
                 Width = 600;
             }
-            updateObjectLocations();
+            UpdateObjectLocations();
         }
 
         //updates the location of all the objects in the program. used for scalability
-        void updateObjectLocations() {
+        void UpdateObjectLocations() {
             drawArea_pic.Size = new Size(Width - 80, Height - 100);
             colorPallet_pic.Location = new Point(Width - 65, 50);
             brushSizeChange_pic.Location = new Point(Width - 60, Height - 160);
             widthDemo_pic.Location = new Point(Width - 60, Height - 91);
-            functionBtns_pic.Location = new Point(Width - 160, 2);
-            invalidateAll();
+            functionBtns_pic.Location = new Point(Width - 110, 2);
+            InvalidateAll();
         }
 
         //updates the user on what drawing mode they are using
-        public void invalidateAll() {
+        public void InvalidateAll() {
             drawArea_pic.Invalidate();
             colorPallet_pic.Invalidate();
             widthDemo_pic.Invalidate();
@@ -89,54 +95,65 @@ namespace PhotoMarket {
         //Paint Inputs----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //deals with mouse inputs
-        private void drawArea_pic_MouseDown(object sender, MouseEventArgs e) {
+        private void DrawArea_pic_MouseDown(object sender, MouseEventArgs e) {
 
             //deals with clicking down
             if (mouseClickedDown == false) {
                 if (drawType == DrawingMode.Pen) {
-                    penClickDown(e);
+                    PenClickDown(e);
                 } else if (drawType == DrawingMode.Square) {
-                    squareClickDown(e);
+                    SquareClickDown(e);
                 } else if (drawType == DrawingMode.Circle) {
-                    circleClickDown(e);
+                    CircleClickDown(e);
                 } else if (drawType == DrawingMode.Line) {
-                    lineClickDown(e);
+                    LineClickDown(e);
                 }
             }
+
+            if (drawType == DrawingMode.Image)
+                ImageClickDown(e);
+
+            drawArea_pic.Invalidate();
         }
-        private void drawArea_pic_MouseUp(object sender, MouseEventArgs e) {
+        private void DrawArea_pic_MouseUp(object sender, MouseEventArgs e) {
 
             //deals with letting go of click
             if (mouseClickedDown == true) {
                 if (drawType == DrawingMode.Pen) {
-                    penClickUp();
+                    PenClickUp(e);
                 } else if (drawType == DrawingMode.Square) {
-                    squareClickUp(e);
+                    SquareClickUp(e);
                 } else if (drawType == DrawingMode.Circle) {
-                    circleClickUp(e);
+                    CircleClickUp(e);
                 } else if (drawType == DrawingMode.Line) {
-                    lineClickUp(e);
+                    LineClickUp(e);
                 }
             }
+
+            drawArea_pic.Invalidate();
         }
-        private void drawArea_pic_MouseMove(object sender, MouseEventArgs e) {
+        private void DrawArea_pic_MouseMove(object sender, MouseEventArgs e) {
 
             //deals with mouse movements while the mouse is held down
             if (mouseClickedDown == true) {
-                if (drawType == DrawingMode.Pen) {
-                    penClickMove(e);
-                } else if (drawType == DrawingMode.Square) {
-                    squareClickMove(e);
-                } else if (drawType == DrawingMode.Circle) {
-                    circleClickMove(e);
-                } else if (drawType == DrawingMode.Line) {
-                    lineClickMove(e);
-                }
+                if (drawType == DrawingMode.Pen)
+                    PenClickMove(e);
+                else if (drawType == DrawingMode.Square)
+                    SquareClickMove(e);
+                else if (drawType == DrawingMode.Circle)
+                    CircleClickMove(e);
+                else if (drawType == DrawingMode.Line)
+                    LineClickMove(e);
             }
+
+            if (drawType == DrawingMode.Image)
+                ImageMouseMove(e);
+
+            drawArea_pic.Invalidate();
         }
 
         //deals with inputs for the pen drawing mode
-        void penClickDown(MouseEventArgs e) {
+        void PenClickDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is being held down
             mouseClickedDown = true;
@@ -147,25 +164,26 @@ namespace PhotoMarket {
             //adds the first line
             penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
 
+
             //lets the program know to draw a pen drawing next
             drawOrder.Add(DrawingMode.Pen);
         }
-        void penClickUp() {
-
-            //lets the program know that click is no longer being held down
-            mouseClickedDown = false;
-        }
-        void penClickMove(MouseEventArgs e) {
+        void PenClickUp(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
             penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
 
-            //causes the draw area to redraw (showing the newly drawn line)
-            drawArea_pic.Invalidate();
+            //lets the program know that click is no longer being held down
+            mouseClickedDown = false;
+        }
+        void PenClickMove(MouseEventArgs e) {
+
+            //adds a new coordinate to the coordinate list of the current index of the pen drawing list
+            penDrawings[penDrawings.Count() - 1].addNewCoordinate(new Point(e.X, e.Y));
         }
 
         //deals with inputs for the square drawing mode
-        void squareClickDown(MouseEventArgs e) {
+        void SquareClickDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -176,7 +194,7 @@ namespace PhotoMarket {
             //lets the program know to draw a square drawing next
             drawOrder.Add(DrawingMode.Square);
         }
-        void squareClickUp(MouseEventArgs e) {
+        void SquareClickUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -190,7 +208,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void squareClickMove(MouseEventArgs e) {
+        void SquareClickMove(MouseEventArgs e) {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -203,7 +221,7 @@ namespace PhotoMarket {
         }
 
         //deals with inputs for the circle drawing mode
-        void circleClickDown(MouseEventArgs e) {
+        void CircleClickDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -214,7 +232,7 @@ namespace PhotoMarket {
             //lets the program know to draw a circle drawing next
             drawOrder.Add(DrawingMode.Circle);
         }
-        void circleClickUp(MouseEventArgs e) {
+        void CircleClickUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -228,7 +246,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void circleClickMove(MouseEventArgs e) {
+        void CircleClickMove(MouseEventArgs e) {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -241,7 +259,7 @@ namespace PhotoMarket {
         }
 
         //deals with inputs for the line drawing mode
-        void lineClickDown(MouseEventArgs e) {
+        void LineClickDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -252,7 +270,7 @@ namespace PhotoMarket {
             //lets the program know to draw a line drawing next
             drawOrder.Add(DrawingMode.Line);
         }
-        void lineClickUp(MouseEventArgs e) {
+        void LineClickUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -268,7 +286,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void lineClickMove(MouseEventArgs e) {
+        void LineClickMove(MouseEventArgs e) {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -282,25 +300,37 @@ namespace PhotoMarket {
             drawArea_pic.Invalidate();
         }
 
+        //lets the user choose where to put an image
+        void ImageClickDown(MouseEventArgs e) {
 
+            //lets the program know that the mouse is held down
+            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+
+            //sets the draw mode back to mouse
+            drawType = DrawingMode.Mouse;
+        }
+        void ImageMouseMove(MouseEventArgs e) {
+            //lets the program know that the mouse is held down
+            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+        }
 
 
         //Brushes----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //changes the sizes of the pen
-        private void brushSizeChange_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void BrushSizeChange_pic_MouseClick(object sender, MouseEventArgs e) {
             if (e.Y < 25)
-                increasePenWidth();
+                IncreasePenWidth();
             else if (e.Y > 30 && e.Y < 55)
-                decreasePenWidth();
+                DecreasePenWidth();
         }
-        private void brushSizeChange_pic_MouseDoubleClick(object sender, MouseEventArgs e) {
+        private void BrushSizeChange_pic_MouseDoubleClick(object sender, MouseEventArgs e) {
             if (e.Y < 27)
-                increasePenWidth();
+                IncreasePenWidth();
             else if (e.Y >= 27)
-                decreasePenWidth();
+                DecreasePenWidth();
         }
-        private void decreasePenWidth() {
+        private void DecreasePenWidth() {
             if (ModifierKeys == Keys.Shift) {
 
                 //decreases the width of the pen for normal click
@@ -316,11 +346,11 @@ namespace PhotoMarket {
                 penWidth = 1;
 
             //updates the brush and the labels
-            updateGlobalPen(penColor, penWidth);
-            invalidateAll();
+            UpdateGlobalPen(penColor, penWidth);
+            InvalidateAll();
             widthDemo_pic.Invalidate();
         }
-        private void increasePenWidth() {
+        private void IncreasePenWidth() {
             if (ModifierKeys == Keys.Shift) {
 
                 //increase the width of the pen for normal click
@@ -337,13 +367,13 @@ namespace PhotoMarket {
                 penWidth = 38;
 
             //updates the brush and the labels
-            updateGlobalPen(penColor, penWidth);
-            invalidateAll();
+            UpdateGlobalPen(penColor, penWidth);
+            InvalidateAll();
             widthDemo_pic.Invalidate();
         }
 
         //finds out where on the options was clicked, and sets the draw type accordingly
-        private void options_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void Options_pic_MouseClick(object sender, MouseEventArgs e) {
             if (e.X < 45) {
                 drawType = DrawingMode.Mouse;
             } else if (e.X < 90) {
@@ -354,14 +384,31 @@ namespace PhotoMarket {
                 drawType = DrawingMode.Circle;
             } else if (e.X < 225) {
                 drawType = DrawingMode.Line;
+            } else if (e.X < 270) {
+
+                //makes the user open a project
+                OpenFileDialog opener = new OpenFileDialog();
+                if (opener.ShowDialog() == DialogResult.OK) {
+
+                    //makes sure that the right type of file was entered
+                    if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg")) {
+
+                        //sets up an image with the chosen path
+                        imageDrawings.Add(new ImageDrawing(opener.FileName, this));
+
+                        drawOrder.Add(DrawingMode.Image);
+
+                        drawType = DrawingMode.Image;
+                    }
+                }
             }
 
             options_pic.Invalidate();
-            invalidateAll();
+            InvalidateAll();
         }
 
         //updates the global pen
-        public void updateGlobalPen(Color newColor, float newWidth) {
+        public void UpdateGlobalPen(Color newColor, float newWidth) {
 
             //sets the color and width of the pen
             globalPen = new Pen(newColor, newWidth);
@@ -374,7 +421,7 @@ namespace PhotoMarket {
         }
 
         //checks to see what color was chosen when clicking on the color pallet
-        private void colorPallet_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void ColorPallet_pic_MouseClick(object sender, MouseEventArgs e) {
 
             //sets the color of the pen
             if (e.Y < 40)
@@ -399,8 +446,8 @@ namespace PhotoMarket {
             }
 
             //updates the global pen
-            updateGlobalPen(penColor, penWidth);
-            invalidateAll();
+            UpdateGlobalPen(penColor, penWidth);
+            InvalidateAll();
 
             //updates the brush picture (showing the size and color of the brush)
             widthDemo_pic.Invalidate();
@@ -412,10 +459,13 @@ namespace PhotoMarket {
         //Invalidates----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //draws the screen
-        private void drawArea_pic_Paint(object sender, PaintEventArgs e) {
+        private void DrawArea_pic_Paint(object sender, PaintEventArgs e) {
 
             //makes the background white
             e.Graphics.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
+
+            if (background != null)
+                background.Draw(e);
 
             //an if statement to make sure that there are drawing to draw before trying to draw
             if (drawOrder.Count() != 0) {
@@ -425,36 +475,42 @@ namespace PhotoMarket {
                 int squareOrder = 0;
                 int circleOrder = 0;
                 int lineOrder = 0;
+                int imageOrder = 0;
 
                 //goes through the order to draw
                 for (int i = 0; i < drawOrder.Count(); i++) {
 
                     //draws the next pen drawing
                     if (drawOrder[i] == DrawingMode.Pen) {
-                        penDrawings[penOrder].showDrawings(e);
+                        penDrawings[penOrder].Draw(e);
                         penOrder++;
 
                         //draws the next square drawing
                     } else if (drawOrder[i] == DrawingMode.Square) {
-                        squareDrawings[squareOrder].drawSquare(e);
+                        squareDrawings[squareOrder].Draw(e);
                         squareOrder++;
 
                         //draws the next circle drawing
                     } else if (drawOrder[i] == DrawingMode.Circle) {
-                        circleDrawings[circleOrder].drawCircle(e);
+                        circleDrawings[circleOrder].Draw(e);
                         circleOrder++;
 
-                        //draws the next circle drawing
+                        //draws the next line drawing
                     } else if (drawOrder[i] == DrawingMode.Line) {
-                        lineDrawings[lineOrder].drawLine(e);
+                        lineDrawings[lineOrder].Draw(e);
                         lineOrder++;
+
+                        //draws the next image drawing
+                    } else if (drawOrder[i] == DrawingMode.Image) {
+                        imageDrawings[imageOrder].Draw(e);
+                        imageOrder++;
                     }
                 }
             }
         }
 
         //draws color pallet
-        private void colorPallet_pic_Paint(object sender, PaintEventArgs e) {
+        private void ColorPallet_pic_Paint(object sender, PaintEventArgs e) {
 
             //draws a small indicator for the color being used
             if (globalPen.Color == Color.Black)
@@ -501,14 +557,14 @@ namespace PhotoMarket {
         }
 
         //draws out the increase and decrease buttons
-        private void brushSizeChange_pic_Paint(object sender, PaintEventArgs e) {
+        private void BrushSizeChange_pic_Paint(object sender, PaintEventArgs e) {
             e.Graphics.DrawLine(Pens.Black, 0, brushSizeChange_pic.Height / 2, brushSizeChange_pic.Width, brushSizeChange_pic.Height / 2);
             e.Graphics.DrawString("+", DefaultFont, Brushes.Black, -7 + brushSizeChange_pic.Width / 2, -6 + brushSizeChange_pic.Height / 4);
             e.Graphics.DrawString("-", DefaultFont, Brushes.Black, -6 + brushSizeChange_pic.Width / 2, -6 + brushSizeChange_pic.Height * 3 / 4);
         }
 
         //draws out the different options that can be used
-        private void options_pic_Paint(object sender, PaintEventArgs e) {
+        private void Options_pic_Paint(object sender, PaintEventArgs e) {
 
             //shows what option has been selected
             if (drawType == DrawingMode.Mouse)
@@ -521,9 +577,11 @@ namespace PhotoMarket {
                 e.Graphics.FillRectangle(Brushes.PaleVioletRed, 145, 40, 20, 4);
             else if (drawType == DrawingMode.Line)
                 e.Graphics.FillRectangle(Brushes.PaleVioletRed, 190, 40, 20, 4);
+            else if (drawType == DrawingMode.Image)
+                e.Graphics.FillRectangle(Brushes.PaleVioletRed, 235, 40, 20, 4);
 
             //draws a box around each option
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
                 e.Graphics.DrawRectangle(Pens.Black, i * 45, 0, 40, 40);
 
             //draws each option
@@ -532,19 +590,19 @@ namespace PhotoMarket {
             e.Graphics.DrawImage(Properties.Resources._Square, 90, 0, 40, 40);
             e.Graphics.DrawImage(Properties.Resources._Circle, 135, 0, 40, 40);
             e.Graphics.DrawImage(Properties.Resources._Line, 180, 0, 40, 40);
+            e.Graphics.DrawImage(Properties.Resources._Image, 225, 0, 40, 40);
         }
 
         //shows the thickness of the brush
-        private void widthDemo_pic_Paint(object sender, PaintEventArgs e) {
+        private void WidthDemo_pic_Paint(object sender, PaintEventArgs e) {
             SolidBrush brush = new SolidBrush(penColor);
             e.Graphics.FillEllipse(brush, 19 - (penWidth / 2), 19 - (penWidth / 2), penWidth, penWidth);
         }
 
         //draws in the function images
-        private void functionBtns_pic_Paint(object sender, PaintEventArgs e) {
+        private void FunctionBtns_pic_Paint(object sender, PaintEventArgs e) {
             e.Graphics.DrawImage(Properties.Resources._Delete, 0, 0, 40, 40);
-            e.Graphics.DrawImage(Properties.Resources._Save, 50, 0, 40, 40);
-            e.Graphics.DrawImage(Properties.Resources._Folder, 100, 0, 40, 40);
+            e.Graphics.DrawImage(Properties.Resources._Options, 50, 0, 40, 40);
         }
 
 
@@ -552,73 +610,84 @@ namespace PhotoMarket {
         //Functions----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //finds out what save option the user wants
-        private void ensureSave() {
-            SaveChecker s = new SaveChecker(this);
+        private void OpenOptions() {
+            OptionsWindow s = new OptionsWindow(this);
 
             s.Show();
         }
 
         //exports the data as an image
-        public void exportImage() {
+        public void ExportImage() {
 
             //creates a save file dialog
             SaveFileDialog saver = new SaveFileDialog();
 
             //makes it so that the user can only save as png
-            saver.Filter = "PNG(*.PNG)|*.png";
+            saver.Filter = "PNG(*.PNG)|*.png|JPG(*.JPG)|*.jpg";
 
-            //creates a bitmap which will be drawn to
-            Bitmap toSave = new Bitmap(drawArea_pic.Width, drawArea_pic.Height);
+            //makes the user choose where to save the file
+            if (saver.ShowDialog() == DialogResult.OK) {
 
-            //uses a graphics library to draw to the file
-            using (Graphics g = Graphics.FromImage(toSave)) {
+                //creates a bitmap which will be drawn to
+                Bitmap toSave = new Bitmap(drawArea_pic.Width, drawArea_pic.Height);
 
-                //makes the background white
-                g.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
+                //uses a graphics library to draw to the file
+                using (Graphics g = Graphics.FromImage(toSave)) {
 
-                if (drawOrder.Count() != 0) {
+                    //makes the background white
+                    g.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
 
-                    //numbers used to store which order each drawing list is at 
-                    int penOrder = 0;
-                    int squareOrder = 0;
-                    int circleOrder = 0;
-                    int lineOrder = 0;
+                    if (background != null)
+                        background.Export(g);
 
-                    //goes through the order to draw
-                    for (int i = 0; i < drawOrder.Count(); i++) {
+                    if (drawOrder.Count() != 0) {
 
-                        //draws the next pen drawing
-                        if (drawOrder[i] == DrawingMode.Pen) {
-                            penDrawings[penOrder].exportDrawings(g);
-                            penOrder++;
+                        //numbers used to store which order each drawing list is at 
+                        int penOrder = 0;
+                        int squareOrder = 0;
+                        int circleOrder = 0;
+                        int lineOrder = 0;
+                        int imageOrder = 0;
 
-                            //draws the next square drawing                           
-                        } else if (drawOrder[i] == DrawingMode.Square) {
-                            squareDrawings[squareOrder].exportSquare(g);
-                            squareOrder++;
+                        //goes through the order to draw
+                        for (int i = 0; i < drawOrder.Count(); i++) {
 
-                            //draws the next circle drawing
-                        } else if (drawOrder[i] == DrawingMode.Circle) {
-                            circleDrawings[circleOrder].exportCircle(g);
-                            circleOrder++;
+                            //draws the next pen drawing
+                            if (drawOrder[i] == DrawingMode.Pen) {
+                                penDrawings[penOrder].Export(g);
+                                penOrder++;
 
-                            //draws the next circle drawing
-                        } else if (drawOrder[i] == DrawingMode.Line) {
-                            lineDrawings[lineOrder].exportLine(g);
-                            lineOrder++;
+                                //draws the next square drawing                           
+                            } else if (drawOrder[i] == DrawingMode.Square) {
+                                squareDrawings[squareOrder].Export(g);
+                                squareOrder++;
 
+                                //draws the next circle drawing
+                            } else if (drawOrder[i] == DrawingMode.Circle) {
+                                circleDrawings[circleOrder].Export(g);
+                                circleOrder++;
+
+                                //draws the next line drawing
+                            } else if (drawOrder[i] == DrawingMode.Line) {
+                                lineDrawings[lineOrder].Export(g);
+                                lineOrder++;
+
+                                //draws the next image
+                            } else if (drawOrder[i] == DrawingMode.Image) {
+                                imageDrawings[imageOrder].Export(g);
+                                imageOrder++;
+                            }
                         }
                     }
                 }
-            }
 
-            //saves the image
-            if (saver.ShowDialog() == DialogResult.OK)
+                //saves the image
                 toSave.Save(saver.FileName);
+            }
         }
 
         //saves the data as a project file
-        public void saveProject() {
+        public void SaveProject() {
 
             SaveFileDialog saver = new SaveFileDialog();
 
@@ -630,9 +699,6 @@ namespace PhotoMarket {
 
                 //opens up the text file
                 StreamWriter sw = new StreamWriter(saver.FileName);
-
-                //starts adding data to the file
-                //sw.WriteLine("meme");
 
                 //starts to go through the different drawings in the project
                 if (drawOrder.Count != 0) {
@@ -683,97 +749,126 @@ namespace PhotoMarket {
         }
 
         //loads up a project
-        public void loadProject() {
+        public void LoadProject() {
 
             OpenFileDialog opener = new OpenFileDialog();
 
             //makes the user open a project
             if (opener.ShowDialog() == DialogResult.OK) {
 
-                //clears the drawings ready for the new project
-                clearDrawings();
+                //makes sure that the right type of file was entered
+                if (opener.FileName.Contains(projectExtension)) {
 
-                //opens the file in the program
-                StreamReader sr = new StreamReader(opener.FileName);
+                    //clears the drawings ready for the new project
+                    ClearDrawings();
 
-                //gets the first line from the file and splits it into an array (ready to make the draw orders)
-                string rawOrder = sr.ReadLine();
-                string[] orderArray = rawOrder.Split(',');
+                    //opens the file in the program
+                    StreamReader sr = new StreamReader(opener.FileName);
 
-                //goes through the array, and adds the correct drawing mode to the drawOrder list
-                foreach (string s in orderArray) {
-                    if (s == "Square")
-                        drawOrder.Add(DrawingMode.Square);
-                    else if (s == "Circle")
-                        drawOrder.Add(DrawingMode.Circle);
-                    else if (s == "Line")
-                        drawOrder.Add(DrawingMode.Line);
-                    else if (s == "Pen")
-                        drawOrder.Add(DrawingMode.Pen);
-                }
+                    //gets the first line from the file and splits it into an array (ready to make the draw orders)
+                    string rawOrder = sr.ReadLine();
+                    string[] orderArray = rawOrder.Split(',');
 
-                //makes sure that the drawOrder has atleast one value in it
-                if (drawOrder.Count != 0) {
+                    //goes through the array, and adds the correct drawing mode to the drawOrder list
+                    foreach (string s in orderArray) {
+                        if (s == "Square")
+                            drawOrder.Add(DrawingMode.Square);
+                        else if (s == "Circle")
+                            drawOrder.Add(DrawingMode.Circle);
+                        else if (s == "Line")
+                            drawOrder.Add(DrawingMode.Line);
+                        else if (s == "Pen")
+                            drawOrder.Add(DrawingMode.Pen);
+                    }
 
-                    //numbers used to store which order each drawing list is at 
-                    int penOrder = 0;
-                    int squareOrder = 0;
-                    int circleOrder = 0;
-                    int lineOrder = 0;
+                    //makes sure that the drawOrder has atleast one value in it
+                    if (drawOrder.Count != 0) {
 
-                    //goes through the order to add drawings
-                    for (int i = 0; i < drawOrder.Count(); i++) {
+                        //numbers used to store which order each drawing list is at 
+                        int penOrder = 0;
+                        int squareOrder = 0;
+                        int circleOrder = 0;
+                        int lineOrder = 0;
 
-                        //adds the next pen drawing
-                        if (drawOrder[i] == DrawingMode.Pen) {
-                            penDrawings.Add(new PenDrawing(this));
-                            penDrawings[penOrder].loadData(sr);
-                            penOrder++;
+                        //goes through the order to add drawings
+                        for (int i = 0; i < drawOrder.Count(); i++) {
 
-                            //adds the next square drawing                           
-                        } else if (drawOrder[i] == DrawingMode.Square) {
-                            squareDrawings.Add(new SquareDrawings(this));
-                            squareDrawings[squareOrder].loadData(sr);
-                            squareOrder++;
+                            //adds the next pen drawing
+                            if (drawOrder[i] == DrawingMode.Pen) {
+                                penDrawings.Add(new PenDrawing(this));
+                                penDrawings[penOrder].loadData(sr);
+                                penOrder++;
 
-                            //adds the next circle drawing
-                        } else if (drawOrder[i] == DrawingMode.Circle) {
-                            circleDrawings.Add(new CircleDrawings(this));
-                            circleDrawings[circleOrder].loadData(sr);
-                            circleOrder++;
+                                //adds the next square drawing                           
+                            } else if (drawOrder[i] == DrawingMode.Square) {
+                                squareDrawings.Add(new SquareDrawings(this));
+                                squareDrawings[squareOrder].loadData(sr);
+                                squareOrder++;
 
-                            //adds the next line drawing
-                        } else if (drawOrder[i] == DrawingMode.Line) {
-                            lineDrawings.Add(new LineDrawings(this));
-                            lineDrawings[lineOrder].loadData(sr);
-                            lineOrder++;
+                                //adds the next circle drawing
+                            } else if (drawOrder[i] == DrawingMode.Circle) {
+                                circleDrawings.Add(new CircleDrawings(this));
+                                circleDrawings[circleOrder].loadData(sr);
+                                circleOrder++;
 
+                                //adds the next line drawing
+                            } else if (drawOrder[i] == DrawingMode.Line) {
+                                lineDrawings.Add(new LineDrawings(this));
+                                lineDrawings[lineOrder].loadData(sr);
+                                lineOrder++;
+
+                            }
                         }
                     }
-                }
-                //closes the file
-                sr.Close();
+                    //closes the file
+                    sr.Close();
 
-                //redraws the picture
-                drawArea_pic.Invalidate();
+                    //redraws the picture
+                    drawArea_pic.Invalidate();
+
+                }
             }
         }
 
+        //changes the background image
+        public void ChangeBackground() {
+
+            string path = "";
+
+            OpenFileDialog opener = new OpenFileDialog();
+
+            //makes the user open a project
+            if (opener.ShowDialog() == DialogResult.OK) {
+                if (opener.FileName.ToLower().Contains(".jpg") || opener.FileName.ToLower().Contains(".png")) {
+
+                    path = opener.FileName;
+                    background = new ImageDrawing(new PointF(0f, 0f), path, this);
+                }
+            }
+
+        }
+
+        //removes the background image
+        public void RemoveBackground() {
+            background = null;
+        }
+
         //ensures that the user wants to clear the drawing
-        private void ensureClearDrawing() {
+        private void EnsureClearDrawing() {
             Warning w = new Warning(this);
 
             w.Show();
         }
 
         //clears out the paint area
-        public void clearDrawings() {
+        public void ClearDrawings() {
 
             //removes all elements from the list
             penDrawings.Clear();
             squareDrawings.Clear();
             circleDrawings.Clear();
             lineDrawings.Clear();
+            imageDrawings.Clear();
             drawOrder.Clear();
 
             //makes the screen redraw (now as a blank screen)
@@ -781,13 +876,11 @@ namespace PhotoMarket {
         }
 
         //deals with the function buttons
-        private void functionBtns_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void FunctionBtns_pic_MouseClick(object sender, MouseEventArgs e) {
             if (e.X < 40)
-                ensureClearDrawing();
+                EnsureClearDrawing();
             else if (e.X > 50 && e.X < 90)
-                ensureSave();
-            else if (e.X > 100 && e.X < 140)
-                loadProject();
+                OpenOptions();
         }
 
         //lets the user use number inputs to change the draw type
@@ -806,17 +899,17 @@ namespace PhotoMarket {
                 else if (e.KeyCode == Keys.D5)
                     drawType = DrawingMode.Line;
                 else if (e.KeyCode == Keys.Add)
-                    increasePenWidth();
+                    IncreasePenWidth();
                 else if (e.KeyCode == Keys.Oemplus)
-                    increasePenWidth();
+                    IncreasePenWidth();
                 else if (e.KeyCode == Keys.Subtract)
-                    decreasePenWidth();
+                    DecreasePenWidth();
                 else if (e.KeyCode == Keys.OemMinus)
-                    decreasePenWidth();
+                    DecreasePenWidth();
             }
 
             options_pic.Invalidate();
-            invalidateAll();
+            InvalidateAll();
         }
     }
 }

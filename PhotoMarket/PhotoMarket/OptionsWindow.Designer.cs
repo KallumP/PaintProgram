@@ -1,5 +1,5 @@
 ﻿namespace PhotoMarket {
-    partial class SaveChecker {
+    partial class OptionsWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,11 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveChecker));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.Export_btn = new System.Windows.Forms.Button();
             this.save_btn = new System.Windows.Forms.Button();
             this.cancel_btn = new System.Windows.Forms.Button();
+            this.changeBackImg_btn = new System.Windows.Forms.Button();
+            this.load_btn = new System.Windows.Forms.Button();
+            this.removeBackground_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,26 +68,62 @@
             // cancel_btn
             // 
             this.cancel_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancel_btn.Location = new System.Drawing.Point(279, 89);
+            this.cancel_btn.Location = new System.Drawing.Point(277, 148);
             this.cancel_btn.Name = "cancel_btn";
-            this.cancel_btn.Size = new System.Drawing.Size(119, 53);
+            this.cancel_btn.Size = new System.Drawing.Size(119, 79);
             this.cancel_btn.TabIndex = 3;
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
             this.cancel_btn.Click += new System.EventHandler(this.cancel_btn_Click);
             // 
-            // SaveChecker
+            // changeBackImg_btn
+            // 
+            this.changeBackImg_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeBackImg_btn.Location = new System.Drawing.Point(12, 148);
+            this.changeBackImg_btn.Name = "changeBackImg_btn";
+            this.changeBackImg_btn.Size = new System.Drawing.Size(119, 79);
+            this.changeBackImg_btn.TabIndex = 4;
+            this.changeBackImg_btn.Text = "Change Background Image";
+            this.changeBackImg_btn.UseVisualStyleBackColor = true;
+            this.changeBackImg_btn.Click += new System.EventHandler(this.changeBackImg_btn_Click);
+            // 
+            // load_btn
+            // 
+            this.load_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.load_btn.Location = new System.Drawing.Point(277, 89);
+            this.load_btn.Name = "load_btn";
+            this.load_btn.Size = new System.Drawing.Size(119, 53);
+            this.load_btn.TabIndex = 5;
+            this.load_btn.Text = "Load Project";
+            this.load_btn.UseVisualStyleBackColor = true;
+            this.load_btn.Click += new System.EventHandler(this.load_btn_Click);
+            // 
+            // removeBackground_btn
+            // 
+            this.removeBackground_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeBackground_btn.Location = new System.Drawing.Point(146, 148);
+            this.removeBackground_btn.Name = "removeBackground_btn";
+            this.removeBackground_btn.Size = new System.Drawing.Size(119, 79);
+            this.removeBackground_btn.TabIndex = 6;
+            this.removeBackground_btn.Text = "Remove Background Image";
+            this.removeBackground_btn.UseVisualStyleBackColor = true;
+            this.removeBackground_btn.Click += new System.EventHandler(this.removeBackground_btn_Click);
+            // 
+            // OptionsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 152);
+            this.ClientSize = new System.Drawing.Size(408, 238);
+            this.Controls.Add(this.removeBackground_btn);
+            this.Controls.Add(this.load_btn);
+            this.Controls.Add(this.changeBackImg_btn);
             this.Controls.Add(this.cancel_btn);
             this.Controls.Add(this.save_btn);
             this.Controls.Add(this.Export_btn);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SaveChecker";
-            this.Text = "SaveChecker";
+            this.Name = "OptionsWindow";
+            this.Text = "Options";
             this.ResumeLayout(false);
 
         }
@@ -95,5 +134,8 @@
         private System.Windows.Forms.Button Export_btn;
         private System.Windows.Forms.Button save_btn;
         private System.Windows.Forms.Button cancel_btn;
+        private System.Windows.Forms.Button changeBackImg_btn;
+        private System.Windows.Forms.Button load_btn;
+        private System.Windows.Forms.Button removeBackground_btn;
     }
 }

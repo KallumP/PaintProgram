@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace PhotoMarket {
+namespace PhotoMarket.DrawingClasses {
     class SquareDrawings : DeepCopy {
         PointF startRatio;
         PointF endRatio;
@@ -44,34 +44,37 @@ namespace PhotoMarket {
         }
 
         //draws out the rectangle using lines
-        public void drawSquare(PaintEventArgs g) {
-            if (temp == true) {
-                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                g.Graphics.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            } else {
-                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                g.Graphics.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+        public void Draw(PaintEventArgs g) {
+            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
+                if (temp == true) {
+                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.Graphics.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                } else {
+                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.Graphics.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                }
             }
         }
 
         //draws out the rectangle using lines
-        public void exportSquare(Graphics g) {
-            if (temp == true) {
-                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                g.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            } else
-                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-            g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-            g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            g.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+        public void Export(Graphics g) {
+            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
+                if (temp == true) {
+                    g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                    g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                } else
+                    g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
+                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                g.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            }
         }
-
 
         //saves the data about this object
         public void saveData(StreamWriter sw) {

@@ -85,7 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircleDrawings.cs" />
+    <Compile Include="DrawingClasses\CircleDrawings.cs" />
     <Compile Include="ColorPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,23 +93,24 @@
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="DeepCopy.cs" />
+    <Compile Include="DrawingClasses\ImageDrawing.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineDrawings.cs" />
-    <Compile Include="PenDrawing.cs" />
+    <Compile Include="DrawingClasses\LineDrawings.cs" />
+    <Compile Include="DrawingClasses\PenDrawing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveChecker.cs">
+    <Compile Include="OptionsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SaveChecker.Designer.cs">
-      <DependentUpon>SaveChecker.cs</DependentUpon>
+    <Compile Include="OptionsWindow.Designer.cs">
+      <DependentUpon>OptionsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="SquareDrawings.cs" />
+    <Compile Include="DrawingClasses\SquareDrawings.cs" />
     <Compile Include="Warning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,8 +133,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SaveChecker.resx">
-      <DependentUpon>SaveChecker.cs</DependentUpon>
+    <EmbeddedResource Include="OptionsWindow.resx">
+      <DependentUpon>OptionsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warning.resx">
       <DependentUpon>Warning.cs</DependentUpon>
@@ -198,6 +199,8 @@
     <None Include="Properties\_Paint.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\_Options.png" />
+    <None Include="Properties\_Image.png" />
     <Content Include="_ProgramIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -27,7 +27,7 @@ namespace PhotoMarket {
         //clears the drawings, then closes the warning window
         private void clear_btn_Click(object sender, EventArgs e) {
 
-            parent.clearDrawings();
+            parent.ClearDrawings();
             Close();
         }
     }

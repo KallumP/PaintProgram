@@ -161,7 +161,6 @@ D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\Pho
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.ColorPicker.resources
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.Form1.resources
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.Properties.Resources.resources
-D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.SaveChecker.resources
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.Warning.resources
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.csproj.GenerateResource.cache
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.csproj.CoreCompileInputs.cache
@@ -169,3 +168,4 @@ D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\Pho
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.application
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.exe
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.pdb
+D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.OptionsWindow.resources

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace PhotoMarket {
+namespace PhotoMarket.DrawingClasses {
     class LineDrawings : DeepCopy {
         PointF startRatio;
         PointF endRatio;
@@ -75,7 +75,7 @@ namespace PhotoMarket {
         }
 
         //draws out the line
-        public void drawLine(PaintEventArgs g) {
+        public void Draw(PaintEventArgs g) {
             if (temp == true)
                 g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
             else
@@ -83,7 +83,7 @@ namespace PhotoMarket {
         }
 
         //draws the line to the bitmap out the line
-        public void exportLine(Graphics g) {
+        public void Export(Graphics g) {
             if (temp == true)
                 g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
             else

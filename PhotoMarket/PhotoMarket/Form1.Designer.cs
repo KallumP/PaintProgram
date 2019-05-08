@@ -52,10 +52,10 @@
             this.drawArea_pic.Size = new System.Drawing.Size(1200, 620);
             this.drawArea_pic.TabIndex = 0;
             this.drawArea_pic.TabStop = false;
-            this.drawArea_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.drawArea_pic_Paint);
-            this.drawArea_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawArea_pic_MouseDown);
-            this.drawArea_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawArea_pic_MouseMove);
-            this.drawArea_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawArea_pic_MouseUp);
+            this.drawArea_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawArea_pic_Paint);
+            this.drawArea_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseDown);
+            this.drawArea_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseMove);
+            this.drawArea_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseUp);
             // 
             // colorPallet_pic
             // 
@@ -65,8 +65,8 @@
             this.colorPallet_pic.Size = new System.Drawing.Size(45, 340);
             this.colorPallet_pic.TabIndex = 10;
             this.colorPallet_pic.TabStop = false;
-            this.colorPallet_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.colorPallet_pic_Paint);
-            this.colorPallet_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colorPallet_pic_MouseClick);
+            this.colorPallet_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.ColorPallet_pic_Paint);
+            this.colorPallet_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ColorPallet_pic_MouseClick);
             // 
             // widthDemo_pic
             // 
@@ -77,7 +77,7 @@
             this.widthDemo_pic.Size = new System.Drawing.Size(40, 40);
             this.widthDemo_pic.TabIndex = 18;
             this.widthDemo_pic.TabStop = false;
-            this.widthDemo_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.widthDemo_pic_Paint);
+            this.widthDemo_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.WidthDemo_pic_Paint);
             // 
             // options_pic
             // 
@@ -87,20 +87,20 @@
             this.options_pic.Size = new System.Drawing.Size(354, 45);
             this.options_pic.TabIndex = 21;
             this.options_pic.TabStop = false;
-            this.options_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.options_pic_Paint);
-            this.options_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.options_pic_MouseClick);
+            this.options_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.Options_pic_Paint);
+            this.options_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Options_pic_MouseClick);
             // 
             // functionBtns_pic
             // 
             this.functionBtns_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.functionBtns_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.functionBtns_pic.Location = new System.Drawing.Point(1120, 2);
+            this.functionBtns_pic.Location = new System.Drawing.Point(1170, 2);
             this.functionBtns_pic.Name = "functionBtns_pic";
-            this.functionBtns_pic.Size = new System.Drawing.Size(140, 45);
+            this.functionBtns_pic.Size = new System.Drawing.Size(90, 45);
             this.functionBtns_pic.TabIndex = 22;
             this.functionBtns_pic.TabStop = false;
-            this.functionBtns_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.functionBtns_pic_Paint);
-            this.functionBtns_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.functionBtns_pic_MouseClick);
+            this.functionBtns_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.FunctionBtns_pic_Paint);
+            this.functionBtns_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FunctionBtns_pic_MouseClick);
             // 
             // brushSizeChange_pic
             // 
@@ -111,9 +111,9 @@
             this.brushSizeChange_pic.Size = new System.Drawing.Size(40, 55);
             this.brushSizeChange_pic.TabIndex = 23;
             this.brushSizeChange_pic.TabStop = false;
-            this.brushSizeChange_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.brushSizeChange_pic_Paint);
-            this.brushSizeChange_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.brushSizeChange_pic_MouseClick);
-            this.brushSizeChange_pic.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.brushSizeChange_pic_MouseDoubleClick);
+            this.brushSizeChange_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.BrushSizeChange_pic_Paint);
+            this.brushSizeChange_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BrushSizeChange_pic_MouseClick);
+            this.brushSizeChange_pic.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BrushSizeChange_pic_MouseDoubleClick);
             // 
             // Form1
             // 

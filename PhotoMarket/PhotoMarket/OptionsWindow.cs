@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PhotoMarket {
-    public partial class SaveChecker : Form {
+    public partial class OptionsWindow : Form {
 
         Form1 parent;
 
-        public SaveChecker(Form1 _parent) {
+        public OptionsWindow(Form1 _parent) {
             InitializeComponent();
 
             parent = _parent;
@@ -24,12 +24,27 @@ namespace PhotoMarket {
         }
 
         private void Export_btn_Click(object sender, EventArgs e) {
-            parent.exportImage();
+            parent.ExportImage();
             Close();
         }
 
         private void save_btn_Click(object sender, EventArgs e) {
-            parent.saveProject();
+            parent.SaveProject();
+            Close();
+        }
+
+        private void load_btn_Click(object sender, EventArgs e) {
+            parent.LoadProject();
+            Close();
+        }
+
+        private void changeBackImg_btn_Click(object sender, EventArgs e) {
+            parent.ChangeBackground();
+            Close();
+        }
+
+        private void removeBackground_btn_Click(object sender, EventArgs e) {
+            parent.RemoveBackground();
             Close();
         }
     }

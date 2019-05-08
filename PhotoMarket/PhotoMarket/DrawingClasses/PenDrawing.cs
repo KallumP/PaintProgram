@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace PhotoMarket {
+namespace PhotoMarket.DrawingClasses {
     class PenDrawing {
         List<PointF> coords = new List<PointF>();
         Pen pen;
@@ -29,7 +29,7 @@ namespace PhotoMarket {
         }
 
         //shows the drawing
-        public void showDrawings(PaintEventArgs g) {
+        public void Draw(PaintEventArgs g) {
 
             //loops through all of the points
             for (int i = 0; i < coords.Count() - 1; i++) {
@@ -45,7 +45,7 @@ namespace PhotoMarket {
         }
 
         //draws out the drawing to the bitmap
-        public void exportDrawings(Graphics g) {
+        public void Export(Graphics g) {
 
             //loops through all of the points
             for (int i = 0; i < coords.Count() - 1; i++) {

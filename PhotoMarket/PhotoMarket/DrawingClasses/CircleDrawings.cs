@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace PhotoMarket {
+namespace PhotoMarket.DrawingClasses {
     class CircleDrawings : DeepCopy {
         PointF startRatio;
         PointF endRatio;
@@ -53,7 +53,7 @@ namespace PhotoMarket {
         }
 
         //draws out the circle using the rectangle made in the set end point
-        public void drawCircle(PaintEventArgs g) {
+        public void Draw(PaintEventArgs g) {
 
             //sets up the rectangle each time, incase there was a change in window size
             createRectangle();
@@ -65,7 +65,7 @@ namespace PhotoMarket {
         }
 
         //draws out the circle using the rectangle made in the set end point to the bitmap
-        public void exportCircle(Graphics g) {
+        public void Export(Graphics g) {
 
             //sets up the rectangle each time, incase there was a change in window size
             createRectangle();
