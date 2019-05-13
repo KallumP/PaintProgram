@@ -55,7 +55,7 @@ namespace PhotoMarket.DrawingClasses {
 
             Image todraw = Image.FromFile(imagePath);
 
-            g.DrawImage(todraw, new Point(parent.Width / (int)startRatio.X, parent.Height / (int)startRatio.Y));
+            g.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
         }
 
         //writes out the data to a text file

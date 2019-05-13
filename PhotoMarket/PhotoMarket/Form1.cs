@@ -389,6 +389,8 @@ namespace PhotoMarket {
             } else if (e.X < 270) {
                 createImageDrawing();
             }
+
+            InvalidateAll();
         }
 
         //updates the global pen
@@ -609,11 +611,7 @@ namespace PhotoMarket {
 
                     drawType = DrawingMode.Image;
                 }
-
             }
-
-            options_pic.Invalidate();
-            InvalidateAll();
         }
 
         //finds out what save option the user wants
@@ -863,7 +861,6 @@ namespace PhotoMarket {
                     background = new ImageDrawing(new PointF(0f, 0f), path, this);
                 }
             }
-
         }
 
         //removes the background image
