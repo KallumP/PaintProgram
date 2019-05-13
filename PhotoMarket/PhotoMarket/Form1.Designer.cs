@@ -45,11 +45,14 @@
             // 
             // drawArea_pic
             // 
+            this.drawArea_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.drawArea_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.drawArea_pic.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.drawArea_pic.Location = new System.Drawing.Point(10, 50);
+            this.drawArea_pic.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.drawArea_pic.Location = new System.Drawing.Point(10, 63);
             this.drawArea_pic.Name = "drawArea_pic";
-            this.drawArea_pic.Size = new System.Drawing.Size(1200, 620);
+            this.drawArea_pic.Size = new System.Drawing.Size(1200, 607);
             this.drawArea_pic.TabIndex = 0;
             this.drawArea_pic.TabStop = false;
             this.drawArea_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawArea_pic_Paint);
@@ -59,8 +62,9 @@
             // 
             // colorPallet_pic
             // 
+            this.colorPallet_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.colorPallet_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.colorPallet_pic.Location = new System.Drawing.Point(1215, 50);
+            this.colorPallet_pic.Location = new System.Drawing.Point(1215, 63);
             this.colorPallet_pic.Name = "colorPallet_pic";
             this.colorPallet_pic.Size = new System.Drawing.Size(45, 340);
             this.colorPallet_pic.TabIndex = 10;
@@ -70,6 +74,7 @@
             // 
             // widthDemo_pic
             // 
+            this.widthDemo_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.widthDemo_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.widthDemo_pic.InitialImage = null;
             this.widthDemo_pic.Location = new System.Drawing.Point(1220, 629);
@@ -82,7 +87,7 @@
             // options_pic
             // 
             this.options_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.options_pic.Location = new System.Drawing.Point(10, 2);
+            this.options_pic.Location = new System.Drawing.Point(10, 12);
             this.options_pic.Name = "options_pic";
             this.options_pic.Size = new System.Drawing.Size(354, 45);
             this.options_pic.TabIndex = 21;
@@ -92,9 +97,10 @@
             // 
             // functionBtns_pic
             // 
+            this.functionBtns_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.functionBtns_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.functionBtns_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.functionBtns_pic.Location = new System.Drawing.Point(1170, 2);
+            this.functionBtns_pic.Location = new System.Drawing.Point(1170, 12);
             this.functionBtns_pic.Name = "functionBtns_pic";
             this.functionBtns_pic.Size = new System.Drawing.Size(90, 45);
             this.functionBtns_pic.TabIndex = 22;
@@ -104,6 +110,7 @@
             // 
             // brushSizeChange_pic
             // 
+            this.brushSizeChange_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.brushSizeChange_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.brushSizeChange_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.brushSizeChange_pic.Location = new System.Drawing.Point(1220, 560);
@@ -128,11 +135,11 @@
             this.Controls.Add(this.drawArea_pic);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "Form1";
             this.Text = "PhotoMarket";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.drawArea_pic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorPallet_pic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthDemo_pic)).EndInit();

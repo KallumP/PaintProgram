@@ -31,6 +31,9 @@
             this.changeBackImg_btn = new System.Windows.Forms.Button();
             this.load_btn = new System.Windows.Forms.Button();
             this.removeBackground_btn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.newCompression_txt = new System.Windows.Forms.TextBox();
+            this.changeCompression_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +75,7 @@
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(119, 79);
             this.cancel_btn.TabIndex = 3;
-            this.cancel_btn.Text = "Cancel";
+            this.cancel_btn.Text = "Close";
             this.cancel_btn.UseVisualStyleBackColor = true;
             this.cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
             // 
@@ -109,11 +112,42 @@
             this.removeBackground_btn.UseVisualStyleBackColor = true;
             this.removeBackground_btn.Click += new System.EventHandler(this.RemoveBackground_btn_Click);
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 271);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(241, 50);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Change pen compression length (enter 0 for no compression)";
+            // 
+            // newCompression_txt
+            // 
+            this.newCompression_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newCompression_txt.Location = new System.Drawing.Point(13, 331);
+            this.newCompression_txt.Name = "newCompression_txt";
+            this.newCompression_txt.Size = new System.Drawing.Size(119, 26);
+            this.newCompression_txt.TabIndex = 8;
+            // 
+            // changeCompression_btn
+            // 
+            this.changeCompression_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeCompression_btn.Location = new System.Drawing.Point(161, 317);
+            this.changeCompression_btn.Name = "changeCompression_btn";
+            this.changeCompression_btn.Size = new System.Drawing.Size(89, 40);
+            this.changeCompression_btn.TabIndex = 9;
+            this.changeCompression_btn.Text = "Change";
+            this.changeCompression_btn.UseVisualStyleBackColor = true;
+            this.changeCompression_btn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // OptionsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 238);
+            this.ClientSize = new System.Drawing.Size(408, 411);
+            this.Controls.Add(this.changeCompression_btn);
+            this.Controls.Add(this.newCompression_txt);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.removeBackground_btn);
             this.Controls.Add(this.load_btn);
             this.Controls.Add(this.changeBackImg_btn);
@@ -125,6 +159,7 @@
             this.Name = "OptionsWindow";
             this.Text = "Options";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -137,5 +172,8 @@
         private System.Windows.Forms.Button changeBackImg_btn;
         private System.Windows.Forms.Button load_btn;
         private System.Windows.Forms.Button removeBackground_btn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox newCompression_txt;
+        private System.Windows.Forms.Button changeCompression_btn;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PhotoMarket.DrawingClasses;
 
 namespace PhotoMarket {
     public partial class OptionsWindow : Form {
@@ -25,27 +26,29 @@ namespace PhotoMarket {
 
         private void Export_btn_Click(object sender, EventArgs e) {
             parent.ExportImage();
-            Close();
         }
 
         private void Save_btn_Click(object sender, EventArgs e) {
             parent.SaveProject();
-            Close();
         }
 
         private void Load_btn_Click(object sender, EventArgs e) {
             parent.LoadProject();
-            Close();
         }
 
         private void ChangeBackImg_btn_Click(object sender, EventArgs e) {
             parent.ChangeBackground();
-            Close();
         }
 
         private void RemoveBackground_btn_Click(object sender, EventArgs e) {
             parent.RemoveBackground();
-            Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            if (Convert.ToInt16(newCompression_txt.Text) >= 0)
+                PenDrawing.compressionDistance = Convert.ToInt16(newCompression_txt.Text);
+            else
+                MessageBox.Show("Please enter a value greater than or equal to 0");
         }
     }
 }

@@ -7,8 +7,13 @@ using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
     class PenDrawing {
+
+        public static int compressionDistance = 10;
+
         List<PointF> coords = new List<PointF>();
         Pen pen;
+
+        PointF latestRawPoint;
 
         Form1 parent;
 
@@ -25,7 +30,27 @@ namespace PhotoMarket.DrawingClasses {
 
         //adds a new item to the list of coordinates
         public void AddNewCoordinate(PointF newCoords) {
-            coords.Add(new PointF(parent.Width/newCoords.X, parent.Height/newCoords.Y));
+
+            //checks the distance between the latest point, and the new point to check if they are far apart enough to add
+            if (CheckDistance(latestRawPoint, newCoords)) {
+                coords.Add(new PointF(parent.Width / newCoords.X, parent.Height / newCoords.Y));
+                latestRawPoint = newCoords;
+            }
+        }
+
+        bool CheckDistance(PointF firstPoint, PointF secondPoint) {
+
+            float aDist, bDist, cDist;
+
+            aDist = (float)Math.Pow(firstPoint.X - secondPoint.X, 2);
+            bDist = (float)Math.Pow(firstPoint.Y - secondPoint.Y, 2);
+
+            cDist = (float)Math.Sqrt(aDist + bDist);
+
+            if (cDist >= compressionDistance)
+                return true;
+            else
+                return false;
         }
 
         //shows the drawing
@@ -37,10 +62,10 @@ namespace PhotoMarket.DrawingClasses {
                 //draws out a line between each of the coordinates in the list
                 g.Graphics.DrawLine(
                     pen,
-                    parent.Width/coords[i].X,
-                    parent.Height/coords[i].Y,
-                    parent.Width/coords[i + 1].X,
-                    parent.Height/coords[i + 1].Y);
+                    parent.Width / coords[i].X,
+                    parent.Height / coords[i].Y,
+                    parent.Width / coords[i + 1].X,
+                    parent.Height / coords[i + 1].Y);
             }
         }
 
@@ -91,7 +116,7 @@ namespace PhotoMarket.DrawingClasses {
 
             //keeps looping until the end of the points has been found
             while (!finished) {
-                
+
                 //saves the next line to be check and used
                 checkForEnd = sr.ReadLine();
 
@@ -119,6 +144,5 @@ namespace PhotoMarket.DrawingClasses {
                 System.Drawing.Drawing2D.LineCap.Round,
                 System.Drawing.Drawing2D.DashCap.Round);
         }
-
     }
 }

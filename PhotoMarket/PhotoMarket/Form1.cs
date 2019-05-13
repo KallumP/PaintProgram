@@ -57,30 +57,6 @@ namespace PhotoMarket {
 
             //updates the location of objects and updates labels
             InvalidateAll();
-            UpdateObjectLocations();
-        }
-
-        //normalizes the resize function
-        private void Form1_Resize(object sender, EventArgs e) {
-
-            //resizes the drawing area when the window resizes
-            if (Height < 600) {
-                Height = 600;
-            }
-            if (Width < 600) {
-                Width = 600;
-            }
-            UpdateObjectLocations();
-        }
-
-        //updates the location of all the objects in the program. used for scalability
-        void UpdateObjectLocations() {
-            drawArea_pic.Size = new Size(Width - 80, Height - 100);
-            colorPallet_pic.Location = new Point(Width - 65, 50);
-            brushSizeChange_pic.Location = new Point(Width - 60, Height - 160);
-            widthDemo_pic.Location = new Point(Width - 60, Height - 91);
-            functionBtns_pic.Location = new Point(Width - 110, 2);
-            InvalidateAll();
         }
 
         //updates the user on what drawing mode they are using

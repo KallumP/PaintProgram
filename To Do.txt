@@ -2,9 +2,5 @@ When saving, ask the user what size image they want, and pass that into the draw
 (default option of current window size)
 
 
-fix comments and naming conventions
-
-keybinds for images
-
 image rezise using commented code
 
