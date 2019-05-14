@@ -25,10 +25,16 @@ namespace PhotoMarket {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            if (Convert.ToInt16(newCompression_txt.Text) >= 0)
-                PenDrawing.compressionDistance = Convert.ToInt16(newCompression_txt.Text);
+            if (newCompression_txt.Text != "") 
+
+                if (Convert.ToInt16(newCompression_txt.Text) >= 0)
+                    PenDrawing.compressionDistance = Convert.ToInt16(newCompression_txt.Text);
+                else
+                    MessageBox.Show("Please enter a value greater than or equal to 0");
+
             else
-                MessageBox.Show("Please enter a value greater than or equal to 0");
+                MessageBox.Show("Please enter a value");
+
         }
     }
 }

@@ -80,8 +80,9 @@ namespace PhotoMarket {
         //lets the user enter a hex value for their chosen color
         private void CheckHex_btn_Click(object sender, EventArgs e) {
 
-            //gets the input hex value
-            inputHexValue = "#" + hexValue_txt.Text;
+            //gets the input hex value as long as there was an input to check
+            if (hexValue_txt.Text != "")
+                inputHexValue = "#" + hexValue_txt.Text;
 
             //updates the chosenColor
             UpdateColor(false);

@@ -44,9 +44,14 @@ namespace PhotoMarket.DrawingClasses {
         //Draws out the image
         public void Draw(PaintEventArgs g) {
             if (startRatio.X != 0 && startRatio.Y != 0) {
-                Image todraw = Image.FromFile(imagePath);
+                if (File.Exists(imagePath)) {
+                    Image todraw = Image.FromFile(imagePath);
 
-                g.Graphics.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
+                    g.Graphics.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
+                } else {
+                    Console.WriteLine("Image not found");
+                }
+
             }
         }
 
