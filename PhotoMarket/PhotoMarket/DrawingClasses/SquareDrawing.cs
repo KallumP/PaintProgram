@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class SquareDrawings : DeepCopier {
+    class SquareDrawing : DeepCopier {
         PointF startRatio;
         PointF endRatio;
 
@@ -15,13 +15,13 @@ namespace PhotoMarket.DrawingClasses {
         bool temp = true;
 
         //constructors
-        public SquareDrawings(PointF _startCoord, Pen _pen, Form1 _parent) {
+        public SquareDrawing(PointF _startCoord, Pen _pen, Form1 _parent) {
             parent = _parent;
             startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
             DeepCopy(_pen);
         }
-        public SquareDrawings(Form1 _parent) {
+        public SquareDrawing(Form1 _parent) {
             parent = _parent;
         }
 

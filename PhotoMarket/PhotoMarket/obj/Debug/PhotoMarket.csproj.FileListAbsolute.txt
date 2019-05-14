@@ -168,4 +168,4 @@ D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\Pho
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.application
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.exe
 D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.pdb
-D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.OptionsWindow.resources
+D:\Documents\Code\PhotoMarket\PaintProgram\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.CompressionWindow.resources

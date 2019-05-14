@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class CircleDrawings : DeepCopier {
+    class CircleDrawing : DeepCopier {
         PointF startRatio;
         PointF endRatio;
 
@@ -17,13 +17,13 @@ namespace PhotoMarket.DrawingClasses {
         bool temp = true;
 
         //constructors
-        public CircleDrawings(PointF _startCoord, Pen _pen, Form1 _parent) {
+        public CircleDrawing(PointF _startCoord, Pen _pen, Form1 _parent) {
             parent = _parent;
             startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
             pen = _pen;
             DeepCopy(_pen);
         }
-        public CircleDrawings(Form1 _parent) {
+        public CircleDrawing(Form1 _parent) {
             parent = _parent;
         }
 

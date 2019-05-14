@@ -63,6 +63,16 @@ namespace PhotoMarket.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _BackArrow {
+            get {
+                object obj = ResourceManager.GetObject("_BackArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _Brush {
             get {
                 object obj = ResourceManager.GetObject("_Brush", resourceCulture);

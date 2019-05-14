@@ -18,9 +18,9 @@ namespace PhotoMarket {
 
         //creates lists of drawing objects
         List<PenDrawing> penDrawings = new List<PenDrawing>();
-        List<SquareDrawings> squareDrawings = new List<SquareDrawings>();
-        List<CircleDrawings> circleDrawings = new List<CircleDrawings>();
-        List<LineDrawings> lineDrawings = new List<LineDrawings>();
+        List<SquareDrawing> squareDrawings = new List<SquareDrawing>();
+        List<CircleDrawing> circleDrawings = new List<CircleDrawing>();
+        List<LineDrawing> lineDrawings = new List<LineDrawing>();
         List<ImageDrawing> imageDrawings = new List<ImageDrawing>();
         ImageDrawing background;
 
@@ -166,7 +166,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            squareDrawings.Add(new SquareDrawings(new Point(e.X, e.Y), globalPen, this));
+            squareDrawings.Add(new SquareDrawing(new Point(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a square drawing next
             drawOrder.Add(DrawingMode.Square);
@@ -204,7 +204,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            circleDrawings.Add(new CircleDrawings(new PointF(e.X, e.Y), globalPen, this));
+            circleDrawings.Add(new CircleDrawing(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a circle drawing next
             drawOrder.Add(DrawingMode.Circle);
@@ -242,7 +242,7 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //lets the program know that the mouse is held down
-            lineDrawings.Add(new LineDrawings(new PointF(e.X, e.Y), globalPen, this));
+            lineDrawings.Add(new LineDrawing(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a line drawing next
             drawOrder.Add(DrawingMode.Line);
@@ -563,8 +563,8 @@ namespace PhotoMarket {
 
         //draws in the function images
         private void FunctionBtns_pic_Paint(object sender, PaintEventArgs e) {
-            e.Graphics.DrawImage(Properties.Resources._Delete, 0, 0, 40, 40);
-            e.Graphics.DrawImage(Properties.Resources._Options, 50, 0, 40, 40);
+            e.Graphics.DrawImage(Properties.Resources._BackArrow, 0, 0, 40, 40);
+            e.Graphics.DrawImage(Properties.Resources._Delete, 50, 0, 40, 40);
         }
 
 
@@ -591,10 +591,10 @@ namespace PhotoMarket {
         }
 
         //finds out what save option the user wants
-        private void OpenOptions() {
-            OptionsWindow s = new OptionsWindow(this);
+        private void OpenCompression() {
+            CompressionWindow c = new CompressionWindow(this);
 
-            s.Show();
+            c.Show();
         }
 
         //exports the data as an image
@@ -790,19 +790,19 @@ namespace PhotoMarket {
 
                                 //adds the next square drawing                           
                             } else if (drawOrder[i] == DrawingMode.Square) {
-                                squareDrawings.Add(new SquareDrawings(this));
+                                squareDrawings.Add(new SquareDrawing(this));
                                 squareDrawings[squareOrder].LoadData(sr);
                                 squareOrder++;
 
                                 //adds the next circle drawing
                             } else if (drawOrder[i] == DrawingMode.Circle) {
-                                circleDrawings.Add(new CircleDrawings(this));
+                                circleDrawings.Add(new CircleDrawing(this));
                                 circleDrawings[circleOrder].LoadData(sr);
                                 circleOrder++;
 
                                 //adds the next line drawing
                             } else if (drawOrder[i] == DrawingMode.Line) {
-                                lineDrawings.Add(new LineDrawings(this));
+                                lineDrawings.Add(new LineDrawing(this));
                                 lineDrawings[lineOrder].LoadData(sr);
                                 lineOrder++;
 
@@ -866,12 +866,51 @@ namespace PhotoMarket {
             drawArea_pic.Invalidate();
         }
 
+        //removes the latest drawing from the project
+        void UndoDrawing() {
+
+            //makes sure that the project is not empty
+            if (drawOrder.Count != 0) {
+
+                //checks to see what the latest input was before removing it
+                switch (drawOrder[drawOrder.Count - 1]) {
+
+                    case DrawingMode.Pen:
+                    penDrawings.RemoveAt(penDrawings.Count - 1);
+                    break;
+
+                    case DrawingMode.Square:
+                    squareDrawings.RemoveAt(squareDrawings.Count - 1);
+                    break;
+
+                    case DrawingMode.Circle:
+                    circleDrawings.RemoveAt(circleDrawings.Count - 1);
+                    break;
+
+                    case DrawingMode.Line:
+                    lineDrawings.RemoveAt(lineDrawings.Count - 1);
+                    break;
+
+                    case DrawingMode.Image:
+                    imageDrawings.RemoveAt(imageDrawings.Count - 1);
+                    break;
+
+                    default:
+                    break;
+                }
+
+                drawOrder.RemoveAt(drawOrder.Count - 1);
+
+                drawArea_pic.Invalidate();
+            }
+        }
+
         //deals with the function buttons
         private void FunctionBtns_pic_MouseClick(object sender, MouseEventArgs e) {
             if (e.X < 40)
-                EnsureClearDrawing();
+                UndoDrawing();
             else if (e.X > 50 && e.X < 90)
-                OpenOptions();
+                EnsureClearDrawing();
         }
 
         //lets the user use number inputs to change the draw type
@@ -903,6 +942,31 @@ namespace PhotoMarket {
 
             options_pic.Invalidate();
             InvalidateAll();
+        }
+
+        //toobar clicks
+        private void ExportImageToolStripMenuItem_Click(object sender, EventArgs e) {
+            ExportImage();
+        }
+
+        private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+            SaveProject();
+        }
+
+        private void LoadProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+            LoadProject();
+        }
+
+        private void changeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e) {
+            ChangeBackground();
+        }
+
+        private void removeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e) {
+            RemoveBackground();
+        }
+
+        private void Compress_Click(object sender, EventArgs e) {
+            OpenCompression();
         }
     }
 }

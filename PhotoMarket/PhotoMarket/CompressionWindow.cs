@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using PhotoMarket.DrawingClasses;
 
 namespace PhotoMarket {
-    public partial class OptionsWindow : Form {
+    public partial class CompressionWindow : Form {
 
         Form1 parent;
 
-        public OptionsWindow(Form1 _parent) {
+        public CompressionWindow(Form1 _parent) {
             InitializeComponent();
 
             parent = _parent;
@@ -22,26 +22,6 @@ namespace PhotoMarket {
 
         private void Cancel_btn_Click(object sender, EventArgs e) {
             Close();
-        }
-
-        private void Export_btn_Click(object sender, EventArgs e) {
-            parent.ExportImage();
-        }
-
-        private void Save_btn_Click(object sender, EventArgs e) {
-            parent.SaveProject();
-        }
-
-        private void Load_btn_Click(object sender, EventArgs e) {
-            parent.LoadProject();
-        }
-
-        private void ChangeBackImg_btn_Click(object sender, EventArgs e) {
-            parent.ChangeBackground();
-        }
-
-        private void RemoveBackground_btn_Click(object sender, EventArgs e) {
-            parent.RemoveBackground();
         }
 
         private void button1_Click(object sender, EventArgs e) {
