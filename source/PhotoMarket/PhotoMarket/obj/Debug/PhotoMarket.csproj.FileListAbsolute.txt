@@ -186,3 +186,4 @@ D:\Documents\Code\PhotoMarket\PaintProgram\source\PhotoMarket\PhotoMarket\obj\De
 D:\Documents\Code\PhotoMarket\PaintProgram\source\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.application
 D:\Documents\Code\PhotoMarket\PaintProgram\source\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.exe
 D:\Documents\Code\PhotoMarket\PaintProgram\source\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.pdb
+D:\Documents\Code\PhotoMarket\PaintProgram\source\PhotoMarket\PhotoMarket\obj\Debug\PhotoMarket.TrustInfo.xml
