@@ -26,7 +26,6 @@
     <TargetCulture>en-GB</TargetCulture>
     <ProductName>PhotoMarket</ProductName>
     <PublisherName>Kallum Panditharatna</PublisherName>
-    <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -62,7 +61,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>_ProgramIcon.ico</ApplicationIcon>

@@ -8,3 +8,4 @@ recent colors option (have a row of buttons that show the recent colors that whe
 
 
 
+properties + publish tab + options, change the manifest stuff see if that works
