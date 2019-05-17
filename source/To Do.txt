@@ -6,6 +6,6 @@ image rezise using commented code
 
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 
-
+make the window always be a chosen ratio when resizing
 
 properties + publish tab + options, change the manifest stuff see if that works

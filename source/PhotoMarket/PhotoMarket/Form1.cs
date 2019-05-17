@@ -1,10 +1,10 @@
-﻿using System;
+﻿using PhotoMarket.DrawingClasses;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using PhotoMarket.DrawingClasses;
 
 
 namespace PhotoMarket {
@@ -76,19 +76,17 @@ namespace PhotoMarket {
 
             //deals with clicking down
             if (mouseClickedDown == false) {
-                if (drawType == DrawingMode.Pen) {
-                    PenClickDown(e);
-                } else if (drawType == DrawingMode.Square) {
-                    SquareClickDown(e);
-                } else if (drawType == DrawingMode.Circle) {
-                    CircleClickDown(e);
-                } else if (drawType == DrawingMode.Line) {
-                    LineClickDown(e);
-                }
+                if (drawType == DrawingMode.Pen)
+                    PenMouseDown(e);
+                else if (drawType == DrawingMode.Square)
+                    SquareMouseDown(e);
+                else if (drawType == DrawingMode.Circle)
+                    CircleMouseDown(e);
+                else if (drawType == DrawingMode.Line)
+                    LineMouseDown(e);
+                else if (drawType == DrawingMode.Image)
+                    ImageMouseDown(e);
             }
-
-            if (drawType == DrawingMode.Image)
-                ImageClickDown(e);
 
             drawArea_pic.Invalidate();
         }
@@ -96,15 +94,16 @@ namespace PhotoMarket {
 
             //deals with letting go of click
             if (mouseClickedDown == true) {
-                if (drawType == DrawingMode.Pen) {
-                    PenClickUp(e);
-                } else if (drawType == DrawingMode.Square) {
-                    SquareClickUp(e);
-                } else if (drawType == DrawingMode.Circle) {
-                    CircleClickUp(e);
-                } else if (drawType == DrawingMode.Line) {
-                    LineClickUp(e);
-                }
+                if (drawType == DrawingMode.Pen)
+                    PenMouseUp(e);
+                else if (drawType == DrawingMode.Square)
+                    SquareMouseUp(e);
+                else if (drawType == DrawingMode.Circle)
+                    CircleMouseUp(e);
+                else if (drawType == DrawingMode.Line)
+                    LineMouseUp(e);
+                else if (drawType == DrawingMode.Image)
+                    ImageMouseUp(e);
             }
 
             drawArea_pic.Invalidate();
@@ -114,23 +113,25 @@ namespace PhotoMarket {
             //deals with mouse movements while the mouse is held down
             if (mouseClickedDown == true) {
                 if (drawType == DrawingMode.Pen)
-                    PenClickMove(e);
+                    PenMouseMove(e);
                 else if (drawType == DrawingMode.Square)
-                    SquareClickMove(e);
+                    SquareMouseMove(e);
                 else if (drawType == DrawingMode.Circle)
-                    CircleClickMove(e);
+                    CircleMouseMove(e);
                 else if (drawType == DrawingMode.Line)
-                    LineClickMove(e);
+                    LineMouseMove(e);
+                else if (drawType == DrawingMode.Image)
+                    ImageMouseMove(e);
+            } else {
+                if (drawType == DrawingMode.Image)
+                    ImageMouseMoveNoClick(e);
             }
-
-            if (drawType == DrawingMode.Image)
-                ImageMouseMove(e);
 
             drawArea_pic.Invalidate();
         }
 
         //deals with inputs for the pen drawing mode
-        void PenClickDown(MouseEventArgs e) {
+        void PenMouseDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is being held down
             mouseClickedDown = true;
@@ -145,7 +146,7 @@ namespace PhotoMarket {
             //lets the program know to draw a pen drawing next
             drawOrder.Add(DrawingMode.Pen);
         }
-        void PenClickUp(MouseEventArgs e) {
+        void PenMouseUp(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
             penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
@@ -153,14 +154,14 @@ namespace PhotoMarket {
             //lets the program know that click is no longer being held down
             mouseClickedDown = false;
         }
-        void PenClickMove(MouseEventArgs e) {
+        void PenMouseMove(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
             penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
         }
 
         //deals with inputs for the square drawing mode
-        void SquareClickDown(MouseEventArgs e) {
+        void SquareMouseDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -171,7 +172,7 @@ namespace PhotoMarket {
             //lets the program know to draw a square drawing next
             drawOrder.Add(DrawingMode.Square);
         }
-        void SquareClickUp(MouseEventArgs e) {
+        void SquareMouseUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -185,7 +186,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void SquareClickMove(MouseEventArgs e) {
+        void SquareMouseMove(MouseEventArgs e) {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -198,7 +199,7 @@ namespace PhotoMarket {
         }
 
         //deals with inputs for the circle drawing mode
-        void CircleClickDown(MouseEventArgs e) {
+        void CircleMouseDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -209,7 +210,7 @@ namespace PhotoMarket {
             //lets the program know to draw a circle drawing next
             drawOrder.Add(DrawingMode.Circle);
         }
-        void CircleClickUp(MouseEventArgs e) {
+        void CircleMouseUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -223,7 +224,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void CircleClickMove(MouseEventArgs e) {
+        void CircleMouseMove(MouseEventArgs e) {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -236,7 +237,7 @@ namespace PhotoMarket {
         }
 
         //deals with inputs for the line drawing mode
-        void LineClickDown(MouseEventArgs e) {
+        void LineMouseDown(MouseEventArgs e) {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -247,7 +248,7 @@ namespace PhotoMarket {
             //lets the program know to draw a line drawing next
             drawOrder.Add(DrawingMode.Line);
         }
-        void LineClickUp(MouseEventArgs e) {
+        void LineMouseUp(MouseEventArgs e) {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -263,7 +264,7 @@ namespace PhotoMarket {
             //makes the screen redraw
             drawArea_pic.Invalidate();
         }
-        void LineClickMove(MouseEventArgs e) {
+        void LineMouseMove(MouseEventArgs e) {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -278,18 +279,32 @@ namespace PhotoMarket {
         }
 
         //lets the user choose where to put an image
-        void ImageClickDown(MouseEventArgs e) {
+        void ImageMouseDown(MouseEventArgs e) {
 
-            //lets the program know that the mouse is held down
+            //lets the program know that mouse is clicked down
+            mouseClickedDown = true;
+
+            //adds the starting point
             imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+
+
+        }
+        void ImageMouseMove(MouseEventArgs e) {
+            imageDrawings[imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
+        }
+        void ImageMouseMoveNoClick(MouseEventArgs e) {
+            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+        }
+        void ImageMouseUp(MouseEventArgs e) {
+
+            //lets the program know that mouse is no longer clicked down
+            mouseClickedDown = false;
+
+            imageDrawings[imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
 
             //sets the draw mode back to mouse
             drawType = DrawingMode.Mouse;
             InvalidateAll();
-        }
-        void ImageMouseMove(MouseEventArgs e) {
-            //lets the program know that the mouse is held down
-            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
         }
 
 

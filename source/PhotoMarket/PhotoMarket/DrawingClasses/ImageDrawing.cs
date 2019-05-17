@@ -14,6 +14,7 @@ namespace PhotoMarket.DrawingClasses {
 
         string imagePath;
         PointF startRatio;
+        PointF endRatio;
 
         //Constructors
         //used for setting up a background image
@@ -37,21 +38,42 @@ namespace PhotoMarket.DrawingClasses {
 
         //used to set up where to draw the image
         public void SetStartPoint(PointF newStart) {
+
             startRatio = new PointF(parent.Width / newStart.X, parent.Height / newStart.Y);
 
         }
 
+        public void SetEndPoint(PointF endPoint) {
+            endRatio = new PointF(parent.Width / endPoint.X, parent.Height / endPoint.Y);
+        }
+
         //Draws out the image
         public void Draw(PaintEventArgs g) {
-            if (startRatio.X != 0 && startRatio.Y != 0) {
-                if (File.Exists(imagePath)) {
-                    Image todraw = Image.FromFile(imagePath);
+            if (endRatio.X == 0 && endRatio.Y == 0) {
 
-                    g.Graphics.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
-                } else {
-                    Console.WriteLine("Image not found");
+                Image todraw = Image.FromFile(imagePath);
+
+                //draws out the full sized image, because an endpoint hasnt been determined yet
+                g.Graphics.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
+
+            } else {
+
+                //makes sure that the ratios arent 0
+                if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
+                    if (File.Exists(imagePath)) {
+                        Image todraw = Image.FromFile(imagePath);
+
+                        g.Graphics.DrawImage(
+                            todraw, 
+                            parent.Width / startRatio.X,
+                            parent.Height / startRatio.Y, 
+                            parent.Width / endRatio.X - parent.Width / startRatio.X, 
+                            parent.Height / endRatio.Y - parent.Height / startRatio.Y);
+
+                    } else {
+                        Console.WriteLine("Image not found");
+                    }
                 }
-
             }
         }
 
@@ -75,13 +97,6 @@ namespace PhotoMarket.DrawingClasses {
 
             imagePath = sr.ReadLine();
             startRatio = new PointF(Convert.ToSingle(sr.ReadLine()), Convert.ToSingle(sr.ReadLine()));
-
         }
-
-        //public static Image resizeImage(Image imgToResize, Size size) {
-        //    return (Image)(new Bitmap(imgToResize, size));
-        //}
-
-        //yourImage = resizeImage(yourImage, new Size(50,50));
     }
 }

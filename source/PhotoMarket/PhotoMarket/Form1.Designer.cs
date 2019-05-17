@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.file_tool = new System.Windows.Forms.ToolStripDropDownButton();
+            this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.image_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.changeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Compress = new System.Windows.Forms.ToolStripButton();
             this.brushSizeChange_pic = new System.Windows.Forms.PictureBox();
             this.functionBtns_pic = new System.Windows.Forms.PictureBox();
             this.options_pic = new System.Windows.Forms.PictureBox();
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.drawArea_pic = new System.Windows.Forms.PictureBox();
-            this.file_tool = new System.Windows.Forms.ToolStripDropDownButton();
-            this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Compress = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
@@ -64,6 +64,37 @@
             this.toolStrip.Size = new System.Drawing.Size(584, 25);
             this.toolStrip.TabIndex = 24;
             this.toolStrip.Text = "toolStrip1";
+            // 
+            // file_tool
+            // 
+            this.file_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportImageToolStripMenuItem,
+            this.saveProjectToolStripMenuItem,
+            this.loadProjectToolStripMenuItem});
+            this.file_tool.Name = "file_tool";
+            this.file_tool.Size = new System.Drawing.Size(38, 22);
+            this.file_tool.Text = "File";
+            // 
+            // exportImageToolStripMenuItem
+            // 
+            this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exportImageToolStripMenuItem.Text = "Export Image";
+            this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.ExportImageToolStripMenuItem_Click);
+            // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
+            // 
+            // loadProjectToolStripMenuItem
+            // 
+            this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.loadProjectToolStripMenuItem.Text = "Load Project";
+            this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItem_Click);
             // 
             // image_tool
             // 
@@ -87,6 +118,16 @@
             this.removeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.removeBackgroundImageToolStripMenuItem.Text = "Remove Background Image";
             this.removeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.removeBackgroundImageToolStripMenuItem_Click);
+            // 
+            // Compress
+            // 
+            this.Compress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Compress.Image = ((System.Drawing.Image)(resources.GetObject("Compress.Image")));
+            this.Compress.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Compress.Name = "Compress";
+            this.Compress.Size = new System.Drawing.Size(81, 22);
+            this.Compress.Text = "Compression";
+            this.Compress.Click += new System.EventHandler(this.Compress_Click);
             // 
             // brushSizeChange_pic
             // 
@@ -141,6 +182,7 @@
             // colorPallet_pic
             // 
             this.colorPallet_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorPallet_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.colorPallet_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.colorPallet_pic.Location = new System.Drawing.Point(535, 79);
             this.colorPallet_pic.Name = "colorPallet_pic";
@@ -166,47 +208,6 @@
             this.drawArea_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseDown);
             this.drawArea_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseMove);
             this.drawArea_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseUp);
-            // 
-            // file_tool
-            // 
-            this.file_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportImageToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
-            this.loadProjectToolStripMenuItem});
-            this.file_tool.Name = "file_tool";
-            this.file_tool.Size = new System.Drawing.Size(38, 22);
-            this.file_tool.Text = "File";
-            // 
-            // exportImageToolStripMenuItem
-            // 
-            this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportImageToolStripMenuItem.Text = "Export Image";
-            this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.ExportImageToolStripMenuItem_Click);
-            // 
-            // saveProjectToolStripMenuItem
-            // 
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
-            // 
-            // loadProjectToolStripMenuItem
-            // 
-            this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadProjectToolStripMenuItem.Text = "Load Project";
-            this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItem_Click);
-            // 
-            // Compress
-            // 
-            this.Compress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Compress.Image = ((System.Drawing.Image)(resources.GetObject("Compress.Image")));
-            this.Compress.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Compress.Name = "Compress";
-            this.Compress.Size = new System.Drawing.Size(81, 22);
-            this.Compress.Text = "Compression";
-            this.Compress.Click += new System.EventHandler(this.Compress_Click);
             // 
             // Form1
             // 
