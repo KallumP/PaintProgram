@@ -82,7 +82,12 @@ namespace PhotoMarket.DrawingClasses {
 
             Image todraw = Image.FromFile(imagePath);
 
-            g.DrawImage(todraw, new PointF(parent.Width / startRatio.X, parent.Height / startRatio.Y));
+            g.DrawImage(
+                todraw,
+                parent.Width / startRatio.X,
+                parent.Height / startRatio.Y,
+                parent.Width / endRatio.X - parent.Width / startRatio.X,
+                parent.Height / endRatio.Y - parent.Height / startRatio.Y);
         }
 
         //writes out the data to a text file
@@ -90,6 +95,8 @@ namespace PhotoMarket.DrawingClasses {
             sw.WriteLine(imagePath);
             sw.WriteLine(startRatio.X);
             sw.WriteLine(startRatio.Y);
+            sw.WriteLine(endRatio.X);
+            sw.WriteLine(endRatio.Y);
         }
 
         //loads up data from a text file
@@ -97,6 +104,7 @@ namespace PhotoMarket.DrawingClasses {
 
             imagePath = sr.ReadLine();
             startRatio = new PointF(Convert.ToSingle(sr.ReadLine()), Convert.ToSingle(sr.ReadLine()));
+            endRatio = new PointF(Convert.ToSingle(sr.ReadLine()), Convert.ToSingle(sr.ReadLine()));
         }
     }
 }

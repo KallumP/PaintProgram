@@ -983,5 +983,9 @@ namespace PhotoMarket {
         private void Compress_Click(object sender, EventArgs e) {
             OpenCompression();
         }
+
+        private void Form1_Resize(object sender, EventArgs e) {
+            InvalidateAll();
+        }
     }
 }

@@ -1,11 +1,8 @@
 When saving, ask the user what size image they want, and pass that into the draw function as the height and width 
 (default option of current window size)
 
-
-image rezise using commented code
+try to combine draw and export funcitons into one
 
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 
 make the window always be a chosen ratio when resizing
-
-properties + publish tab + options, change the manifest stuff see if that works

@@ -1,0 +1,11 @@
+Image,Image
+C:\Users\User\Documents\Coding\PaintProgram\source\Low-Resolution-Image.jpg
+20.62687
+14.58823
+1.117219
+1.365138
+C:\Users\User\Documents\Coding\PaintProgram\source\Low-Resolution-Image.jpg
+1.330125
+2.207715
+1.971469
+5.430657

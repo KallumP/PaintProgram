@@ -228,6 +228,7 @@
             this.Text = "PhotoMarket";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).EndInit();
