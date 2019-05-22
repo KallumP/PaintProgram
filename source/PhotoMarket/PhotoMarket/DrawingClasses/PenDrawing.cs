@@ -53,23 +53,7 @@ namespace PhotoMarket.DrawingClasses {
                 return false;
         }
 
-        //shows the drawing
-        public void Draw(PaintEventArgs g) {
-
-            //loops through all of the points
-            for (int i = 0; i < coords.Count() - 1; i++) {
-
-                //draws out a line between each of the coordinates in the list
-                g.Graphics.DrawLine(
-                    pen,
-                    parent.Width / coords[i].X,
-                    parent.Height / coords[i].Y,
-                    parent.Width / coords[i + 1].X,
-                    parent.Height / coords[i + 1].Y);
-            }
-        }
-
-        //draws out the drawing to the bitmap
+        //draws out the pen drawing
         public void Export(Graphics g) {
 
             //loops through all of the points

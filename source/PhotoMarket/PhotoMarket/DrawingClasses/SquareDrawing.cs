@@ -44,36 +44,21 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the rectangle using lines
-        public void Draw(PaintEventArgs g) {
-            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
-                if (temp == true) {
-                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                    g.Graphics.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                } else {
-                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                    g.Graphics.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                }
-            }
-        }
+        public void Draw(Graphics g) {
 
-        //draws out the rectangle using lines
-        public void Export(Graphics g) {
-            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
+            //makes sure that divides by zero doesnt happen
+            if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0)
                 if (temp == true) {
                     g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
                     g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
                     g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
                     g.DrawLine(tempPen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                } else
+                } else {
                     g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / startRatio.X, parent.Height / endRatio.Y);
-                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
-                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-                g.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            }
+                    g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / startRatio.Y);
+                    g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / endRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(pen, parent.Width / endRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                }
         }
 
         //saves the data about this object

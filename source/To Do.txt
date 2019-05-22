@@ -1,7 +1,7 @@
 When saving, ask the user what size image they want, and pass that into the draw function as the height and width 
 (default option of current window size)
 
-try to combine draw and export funcitons into one
+openGL control box
 
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 

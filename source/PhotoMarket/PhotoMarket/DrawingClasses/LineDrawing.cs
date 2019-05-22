@@ -74,23 +74,15 @@ namespace PhotoMarket.DrawingClasses {
             }
         }
 
-        //draws out the line
-        public void Draw(PaintEventArgs g) {
+        //draws out the line drawing
+        public void Export(Graphics g) {
 
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
                 if (temp == true)
-                    g.Graphics.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
                 else
-                    g.Graphics.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
             }
-        }
-
-        //draws the line to the bitmap out the line
-        public void Export(Graphics g) {
-            if (temp == true)
-                g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
-            else
-                g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
         }
 
         //saves the data abou this object

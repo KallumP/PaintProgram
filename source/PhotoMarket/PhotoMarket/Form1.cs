@@ -378,7 +378,7 @@ namespace PhotoMarket {
             } else if (e.X < 225) {
                 drawType = DrawingMode.Line;
             } else if (e.X < 270) {
-                createImageDrawing();
+                CreateImageDrawing();
             }
 
             InvalidateAll();
@@ -425,10 +425,6 @@ namespace PhotoMarket {
             //updates the global pen
             UpdateGlobalPen(penColor, penWidth);
             InvalidateAll();
-
-            //updates the brush picture (showing the size and color of the brush)
-            widthDemo_pic.Invalidate();
-            colorPallet_pic.Invalidate();
         }
 
 
@@ -442,7 +438,7 @@ namespace PhotoMarket {
             e.Graphics.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
 
             if (background != null)
-                background.Draw(e);
+                background.Draw(e.Graphics);
 
             //an if statement to make sure that there are drawing to draw before trying to draw
             if (drawOrder.Count() != 0) {
@@ -459,27 +455,27 @@ namespace PhotoMarket {
 
                     //draws the next pen drawing
                     if (drawOrder[i] == DrawingMode.Pen) {
-                        penDrawings[penOrder].Draw(e);
+                        penDrawings[penOrder].Export(e.Graphics);
                         penOrder++;
 
                         //draws the next square drawing
                     } else if (drawOrder[i] == DrawingMode.Square) {
-                        squareDrawings[squareOrder].Draw(e);
+                        squareDrawings[squareOrder].Draw(e.Graphics);
                         squareOrder++;
 
                         //draws the next circle drawing
                     } else if (drawOrder[i] == DrawingMode.Circle) {
-                        circleDrawings[circleOrder].Draw(e);
+                        circleDrawings[circleOrder].Draw(e.Graphics);
                         circleOrder++;
 
                         //draws the next line drawing
                     } else if (drawOrder[i] == DrawingMode.Line) {
-                        lineDrawings[lineOrder].Draw(e);
+                        lineDrawings[lineOrder].Export(e.Graphics);
                         lineOrder++;
 
                         //draws the next image drawing
                     } else if (drawOrder[i] == DrawingMode.Image) {
-                        imageDrawings[imageOrder].Draw(e);
+                        imageDrawings[imageOrder].Draw(e.Graphics);
                         imageOrder++;
                     }
                 }
@@ -587,7 +583,7 @@ namespace PhotoMarket {
         //Functions----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //lets the user choose an image to add to the drawing
-        void createImageDrawing() {
+        void CreateImageDrawing() {
             //makes the user open a project
             OpenFileDialog opener = new OpenFileDialog();
             if (opener.ShowDialog() == DialogResult.OK) {
@@ -634,7 +630,7 @@ namespace PhotoMarket {
                     g.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
 
                     if (background != null)
-                        background.Export(g);
+                        background.Draw(g);
 
                     if (drawOrder.Count() != 0) {
 
@@ -655,12 +651,12 @@ namespace PhotoMarket {
 
                                 //draws the next square drawing                           
                             } else if (drawOrder[i] == DrawingMode.Square) {
-                                squareDrawings[squareOrder].Export(g);
+                                squareDrawings[squareOrder].Draw(g);
                                 squareOrder++;
 
                                 //draws the next circle drawing
                             } else if (drawOrder[i] == DrawingMode.Circle) {
-                                circleDrawings[circleOrder].Export(g);
+                                circleDrawings[circleOrder].Draw(g);
                                 circleOrder++;
 
                                 //draws the next line drawing
@@ -670,7 +666,7 @@ namespace PhotoMarket {
 
                                 //draws the next image
                             } else if (drawOrder[i] == DrawingMode.Image) {
-                                imageDrawings[imageOrder].Export(g);
+                                imageDrawings[imageOrder].Draw(g);
                                 imageOrder++;
                             }
                         }
@@ -849,7 +845,11 @@ namespace PhotoMarket {
                 if (opener.FileName.ToLower().Contains(".jpg") || opener.FileName.ToLower().Contains(".png")) {
 
                     path = opener.FileName;
-                    background = new ImageDrawing(new PointF(0f, 0f), path, this);
+                    background = new ImageDrawing(
+                        new PointF(0f, 0f),
+                        new PointF(drawArea_pic.Width, drawArea_pic.Height),
+                        path,
+                        this);
                 }
             }
         }
@@ -891,27 +891,27 @@ namespace PhotoMarket {
                 switch (drawOrder[drawOrder.Count - 1]) {
 
                     case DrawingMode.Pen:
-                    penDrawings.RemoveAt(penDrawings.Count - 1);
-                    break;
+                        penDrawings.RemoveAt(penDrawings.Count - 1);
+                        break;
 
                     case DrawingMode.Square:
-                    squareDrawings.RemoveAt(squareDrawings.Count - 1);
-                    break;
+                        squareDrawings.RemoveAt(squareDrawings.Count - 1);
+                        break;
 
                     case DrawingMode.Circle:
-                    circleDrawings.RemoveAt(circleDrawings.Count - 1);
-                    break;
+                        circleDrawings.RemoveAt(circleDrawings.Count - 1);
+                        break;
 
                     case DrawingMode.Line:
-                    lineDrawings.RemoveAt(lineDrawings.Count - 1);
-                    break;
+                        lineDrawings.RemoveAt(lineDrawings.Count - 1);
+                        break;
 
                     case DrawingMode.Image:
-                    imageDrawings.RemoveAt(imageDrawings.Count - 1);
-                    break;
+                        imageDrawings.RemoveAt(imageDrawings.Count - 1);
+                        break;
 
                     default:
-                    break;
+                        break;
                 }
 
                 drawOrder.RemoveAt(drawOrder.Count - 1);
@@ -944,7 +944,7 @@ namespace PhotoMarket {
                 else if (e.KeyCode == Keys.D5)
                     drawType = DrawingMode.Line;
                 else if (e.KeyCode == Keys.D6)
-                    createImageDrawing();
+                    CreateImageDrawing();
                 else if (e.KeyCode == Keys.Add)
                     IncreasePenWidth();
                 else if (e.KeyCode == Keys.Oemplus)

@@ -53,19 +53,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the circle using the rectangle made in the set end point
-        public void Draw(PaintEventArgs g) {
-
-            //sets up the rectangle each time, incase there was a change in window size
-            CreateRectangle();
-
-            if (temp == true)
-                g.Graphics.DrawEllipse(tempPen, toDraw);
-            else
-                g.Graphics.DrawEllipse(pen, toDraw);
-        }
-
-        //draws out the circle using the rectangle made in the set end point to the bitmap
-        public void Export(Graphics g) {
+        public void Draw(Graphics g) {
 
             //sets up the rectangle each time, incase there was a change in window size
             CreateRectangle();
