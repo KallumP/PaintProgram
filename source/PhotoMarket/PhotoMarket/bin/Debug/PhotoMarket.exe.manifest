@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PhotoMarket.exe" size="1398232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PhotoMarket.exe" size="1424856">
       <assemblyIdentity name="PhotoMarket" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PBoCFwEesyUzOZFtx0RGgTWqCxDc7/DRf+vhtcQOCp0=</dsig:DigestValue>
+        <dsig:DigestValue>t9g5wUHxNyoRT9lOm5NXDfTvbtf0OykM5XhjjV25388=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

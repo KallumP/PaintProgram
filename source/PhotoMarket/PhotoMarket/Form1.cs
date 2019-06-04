@@ -16,6 +16,12 @@ namespace PhotoMarket {
         public Color penColor;
         Pen globalPen;
 
+        public bool ratioBind = false;
+        public float ratio;
+        public int canvasSizeX;
+        public int canvasSizeY;
+
+
         //creates lists of drawing objects
         List<PenDrawing> penDrawings = new List<PenDrawing>();
         List<SquareDrawing> squareDrawings = new List<SquareDrawing>();
@@ -55,13 +61,22 @@ namespace PhotoMarket {
             //creates a global pen with the chosen color and width
             UpdateGlobalPen(penColor, penWidth);
 
+            //sets the saves the size of the canvas
+            canvasSizeX = canvas.Width;
+            canvasSizeY = canvas.Height;
+
             //updates the location of objects and updates labels
             InvalidateAll();
         }
 
+        //deals with what should happen when the form resizes
+        private void Form1_Resize(object sender, EventArgs e) {
+            ResizeHandler();
+        }
+
         //updates the user on what drawing mode they are using
         public void InvalidateAll() {
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
             colorPallet_pic.Invalidate();
             widthDemo_pic.Invalidate();
             options_pic.Invalidate();
@@ -72,7 +87,7 @@ namespace PhotoMarket {
         //Paint Inputs----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //deals with mouse inputs
-        private void DrawArea_pic_MouseDown(object sender, MouseEventArgs e) {
+        private void Canvas_MouseDown(object sender, MouseEventArgs e) {
 
             //deals with clicking down
             if (mouseClickedDown == false) {
@@ -88,9 +103,9 @@ namespace PhotoMarket {
                     ImageMouseDown(e);
             }
 
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
-        private void DrawArea_pic_MouseUp(object sender, MouseEventArgs e) {
+        private void Canvas_MouseUp(object sender, MouseEventArgs e) {
 
             //deals with letting go of click
             if (mouseClickedDown == true) {
@@ -106,9 +121,9 @@ namespace PhotoMarket {
                     ImageMouseUp(e);
             }
 
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
-        private void DrawArea_pic_MouseMove(object sender, MouseEventArgs e) {
+        private void Canvas_MouseMove(object sender, MouseEventArgs e) {
 
             //deals with mouse movements while the mouse is held down
             if (mouseClickedDown == true) {
@@ -127,7 +142,7 @@ namespace PhotoMarket {
                     ImageMouseMoveNoClick(e);
             }
 
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
 
         //deals with inputs for the pen drawing mode
@@ -184,7 +199,7 @@ namespace PhotoMarket {
                 squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
         void SquareMouseMove(MouseEventArgs e) {
 
@@ -195,7 +210,7 @@ namespace PhotoMarket {
                 squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
 
         //deals with inputs for the circle drawing mode
@@ -222,7 +237,7 @@ namespace PhotoMarket {
                 circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
         void CircleMouseMove(MouseEventArgs e) {
 
@@ -233,7 +248,7 @@ namespace PhotoMarket {
                 circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
 
         //deals with inputs for the line drawing mode
@@ -262,7 +277,7 @@ namespace PhotoMarket {
                 lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, true);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
         void LineMouseMove(MouseEventArgs e) {
 
@@ -275,7 +290,7 @@ namespace PhotoMarket {
                 lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, false);
 
             //makes the screen redraw
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
 
         //lets the user choose where to put an image
@@ -435,7 +450,7 @@ namespace PhotoMarket {
         private void DrawArea_pic_Paint(object sender, PaintEventArgs e) {
 
             //makes the background white
-            e.Graphics.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
+            e.Graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
             if (background != null)
                 background.Draw(e.Graphics);
@@ -608,6 +623,50 @@ namespace PhotoMarket {
             c.Show();
         }
 
+        //finds out what window ratio the user wants
+        void OpenRatio() {
+
+            ScreenRatioWindow s = new ScreenRatioWindow(this);
+
+            s.Show();
+
+        }
+
+        /// <summary>
+        /// Checks to see if the canvas' size needs to be bound to a certain ratio
+        /// </summary>
+        public void ResizeHandler() {
+
+            //checks to see if the canvas has to be bound to a ratio
+            if (ratioBind) {
+
+                WindowState = FormWindowState.Normal;
+
+                //changes the size of the draw area
+                if (ratio >= 1)
+                    canvas.Height = (int)(canvas.Width * ratio);
+                else
+                    canvas.Width = (int)(canvas.Height / ratio);
+                if (canvas.Width <= canvas.Height)
+                    canvas.Height = (int)(canvas.Width / ratio);
+                else
+                    canvas.Width = (int)(canvas.Height * ratio);
+
+                //makes the size of the window fit the canvas
+                Width = canvas.Width + 80;
+                Height = canvas.Height + 130;
+
+            } else
+                canvas.Size = new Size(Width - 80, Height - 130);
+
+
+            //sets the saves the size of the canvas
+            canvasSizeX = canvas.Width;
+            canvasSizeY = canvas.Height;
+
+            InvalidateAll();
+        }
+
         //exports the data as an image
         public void ExportImage() {
 
@@ -621,13 +680,13 @@ namespace PhotoMarket {
             if (saver.ShowDialog() == DialogResult.OK) {
 
                 //creates a bitmap which will be drawn to
-                Bitmap toSave = new Bitmap(drawArea_pic.Width, drawArea_pic.Height);
+                Bitmap toSave = new Bitmap(canvas.Width, canvas.Height);
 
                 //uses a graphics library to draw to the file
                 using (Graphics g = Graphics.FromImage(toSave)) {
 
                     //makes the background white
-                    g.FillRectangle(Brushes.White, 0, 0, drawArea_pic.Width, drawArea_pic.Height);
+                    g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
                     if (background != null)
                         background.Draw(g);
@@ -709,6 +768,10 @@ namespace PhotoMarket {
                             sw.Write(drawOrder[i] + ",");
                     }
 
+                    //saves the ratio of the project
+                    sw.WriteLine(ratioBind);
+                    sw.WriteLine(ratio);
+
                     //goes through the order to draw
                     for (int i = 0; i < drawOrder.Count(); i++) {
 
@@ -780,6 +843,15 @@ namespace PhotoMarket {
                             drawOrder.Add(DrawingMode.Image);
                     }
 
+                    //gets the ratio information
+                    if (sr.ReadLine().ToLower() == "true")
+                        ratioBind = true;
+                    else
+                        ratioBind = false;
+
+                    ratio = Convert.ToSingle(sr.ReadLine());
+
+
                     //makes sure that the drawOrder has atleast one value in it
                     if (drawOrder.Count != 0) {
 
@@ -828,7 +900,7 @@ namespace PhotoMarket {
                     sr.Close();
 
                     //redraws the picture
-                    drawArea_pic.Invalidate();
+                    canvas.Invalidate();
                 }
             }
         }
@@ -847,7 +919,7 @@ namespace PhotoMarket {
                     path = opener.FileName;
                     background = new ImageDrawing(
                         new PointF(0f, 0f),
-                        new PointF(drawArea_pic.Width, drawArea_pic.Height),
+                        new PointF(canvas.Width, canvas.Height),
                         path,
                         this);
                 }
@@ -878,7 +950,7 @@ namespace PhotoMarket {
             drawOrder.Clear();
 
             //makes the screen redraw (now as a blank screen)
-            drawArea_pic.Invalidate();
+            canvas.Invalidate();
         }
 
         //removes the latest drawing from the project
@@ -891,32 +963,32 @@ namespace PhotoMarket {
                 switch (drawOrder[drawOrder.Count - 1]) {
 
                     case DrawingMode.Pen:
-                        penDrawings.RemoveAt(penDrawings.Count - 1);
-                        break;
+                    penDrawings.RemoveAt(penDrawings.Count - 1);
+                    break;
 
                     case DrawingMode.Square:
-                        squareDrawings.RemoveAt(squareDrawings.Count - 1);
-                        break;
+                    squareDrawings.RemoveAt(squareDrawings.Count - 1);
+                    break;
 
                     case DrawingMode.Circle:
-                        circleDrawings.RemoveAt(circleDrawings.Count - 1);
-                        break;
+                    circleDrawings.RemoveAt(circleDrawings.Count - 1);
+                    break;
 
                     case DrawingMode.Line:
-                        lineDrawings.RemoveAt(lineDrawings.Count - 1);
-                        break;
+                    lineDrawings.RemoveAt(lineDrawings.Count - 1);
+                    break;
 
                     case DrawingMode.Image:
-                        imageDrawings.RemoveAt(imageDrawings.Count - 1);
-                        break;
+                    imageDrawings.RemoveAt(imageDrawings.Count - 1);
+                    break;
 
                     default:
-                        break;
+                    break;
                 }
 
                 drawOrder.RemoveAt(drawOrder.Count - 1);
 
-                drawArea_pic.Invalidate();
+                canvas.Invalidate();
             }
         }
 
@@ -959,7 +1031,10 @@ namespace PhotoMarket {
             InvalidateAll();
         }
 
-        //toobar clicks
+
+
+        //toobar clicks -----------------------------------------------------------------------------------
+
         private void ExportImageToolStripMenuItem_Click(object sender, EventArgs e) {
             ExportImage();
         }
@@ -980,12 +1055,13 @@ namespace PhotoMarket {
             RemoveBackground();
         }
 
-        private void Compress_Click(object sender, EventArgs e) {
+
+        private void compresssionToolStripMenuItem_Click(object sender, EventArgs e) {
             OpenCompression();
         }
 
-        private void Form1_Resize(object sender, EventArgs e) {
-            InvalidateAll();
+        private void windowRatioToolStripMenuItem_Click(object sender, EventArgs e) {
+            OpenRatio();
         }
     }
 }

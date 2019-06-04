@@ -37,20 +37,22 @@
             this.image_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.changeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Compress = new System.Windows.Forms.ToolStripButton();
+            this.Settings = new System.Windows.Forms.ToolStripDropDownButton();
+            this.compresssionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowRatioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brushSizeChange_pic = new System.Windows.Forms.PictureBox();
             this.functionBtns_pic = new System.Windows.Forms.PictureBox();
             this.options_pic = new System.Windows.Forms.PictureBox();
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
-            this.drawArea_pic = new System.Windows.Forms.PictureBox();
+            this.canvas = new System.Windows.Forms.PictureBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.options_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthDemo_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorPallet_pic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.drawArea_pic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -58,10 +60,10 @@
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.file_tool,
             this.image_tool,
-            this.Compress});
+            this.Settings});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(584, 25);
+            this.toolStrip.Size = new System.Drawing.Size(484, 25);
             this.toolStrip.TabIndex = 24;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -119,22 +121,38 @@
             this.removeBackgroundImageToolStripMenuItem.Text = "Remove Background Image";
             this.removeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.removeBackgroundImageToolStripMenuItem_Click);
             // 
-            // Compress
+            // Settings
             // 
-            this.Compress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Compress.Image = ((System.Drawing.Image)(resources.GetObject("Compress.Image")));
-            this.Compress.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Compress.Name = "Compress";
-            this.Compress.Size = new System.Drawing.Size(81, 22);
-            this.Compress.Text = "Compression";
-            this.Compress.Click += new System.EventHandler(this.Compress_Click);
+            this.Settings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Settings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.compresssionToolStripMenuItem,
+            this.windowRatioToolStripMenuItem});
+            this.Settings.Image = ((System.Drawing.Image)(resources.GetObject("Settings.Image")));
+            this.Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Settings.Name = "Settings";
+            this.Settings.Size = new System.Drawing.Size(62, 22);
+            this.Settings.Text = "Settings";
+            // 
+            // compresssionToolStripMenuItem
+            // 
+            this.compresssionToolStripMenuItem.Name = "compresssionToolStripMenuItem";
+            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.compresssionToolStripMenuItem.Text = "Compresssion";
+            this.compresssionToolStripMenuItem.Click += new System.EventHandler(this.compresssionToolStripMenuItem_Click);
+            // 
+            // windowRatioToolStripMenuItem
+            // 
+            this.windowRatioToolStripMenuItem.Name = "windowRatioToolStripMenuItem";
+            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.windowRatioToolStripMenuItem.Text = "Window Ratio";
+            this.windowRatioToolStripMenuItem.Click += new System.EventHandler(this.windowRatioToolStripMenuItem_Click);
             // 
             // brushSizeChange_pic
             // 
             this.brushSizeChange_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.brushSizeChange_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.brushSizeChange_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.brushSizeChange_pic.Location = new System.Drawing.Point(540, 440);
+            this.brushSizeChange_pic.Location = new System.Drawing.Point(440, 440);
             this.brushSizeChange_pic.Name = "brushSizeChange_pic";
             this.brushSizeChange_pic.Size = new System.Drawing.Size(40, 55);
             this.brushSizeChange_pic.TabIndex = 23;
@@ -148,7 +166,7 @@
             this.functionBtns_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.functionBtns_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.functionBtns_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.functionBtns_pic.Location = new System.Drawing.Point(490, 28);
+            this.functionBtns_pic.Location = new System.Drawing.Point(390, 28);
             this.functionBtns_pic.Name = "functionBtns_pic";
             this.functionBtns_pic.Size = new System.Drawing.Size(90, 45);
             this.functionBtns_pic.TabIndex = 22;
@@ -172,7 +190,7 @@
             this.widthDemo_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.widthDemo_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.widthDemo_pic.InitialImage = null;
-            this.widthDemo_pic.Location = new System.Drawing.Point(540, 509);
+            this.widthDemo_pic.Location = new System.Drawing.Point(440, 509);
             this.widthDemo_pic.Name = "widthDemo_pic";
             this.widthDemo_pic.Size = new System.Drawing.Size(40, 40);
             this.widthDemo_pic.TabIndex = 18;
@@ -182,9 +200,8 @@
             // colorPallet_pic
             // 
             this.colorPallet_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.colorPallet_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.colorPallet_pic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.colorPallet_pic.Location = new System.Drawing.Point(535, 79);
+            this.colorPallet_pic.Location = new System.Drawing.Point(435, 79);
             this.colorPallet_pic.Name = "colorPallet_pic";
             this.colorPallet_pic.Size = new System.Drawing.Size(45, 324);
             this.colorPallet_pic.TabIndex = 10;
@@ -192,38 +209,38 @@
             this.colorPallet_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.ColorPallet_pic_Paint);
             this.colorPallet_pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ColorPallet_pic_MouseClick);
             // 
-            // drawArea_pic
+            // canvas
             // 
-            this.drawArea_pic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.drawArea_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.drawArea_pic.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.drawArea_pic.Location = new System.Drawing.Point(10, 79);
-            this.drawArea_pic.Name = "drawArea_pic";
-            this.drawArea_pic.Size = new System.Drawing.Size(520, 470);
-            this.drawArea_pic.TabIndex = 0;
-            this.drawArea_pic.TabStop = false;
-            this.drawArea_pic.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawArea_pic_Paint);
-            this.drawArea_pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseDown);
-            this.drawArea_pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseMove);
-            this.drawArea_pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawArea_pic_MouseUp);
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.canvas.Location = new System.Drawing.Point(10, 79);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(420, 470);
+            this.canvas.TabIndex = 0;
+            this.canvas.TabStop = false;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawArea_pic_Paint);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(484, 561);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.brushSizeChange_pic);
             this.Controls.Add(this.functionBtns_pic);
             this.Controls.Add(this.options_pic);
             this.Controls.Add(this.widthDemo_pic);
             this.Controls.Add(this.colorPallet_pic);
-            this.Controls.Add(this.drawArea_pic);
+            this.Controls.Add(this.canvas);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(600, 600);
+            this.MinimumSize = new System.Drawing.Size(500, 600);
             this.Name = "Form1";
             this.Text = "PhotoMarket";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -236,7 +253,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.options_pic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthDemo_pic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorPallet_pic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.drawArea_pic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,7 +261,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox drawArea_pic;
+        private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.PictureBox colorPallet_pic;
         private System.Windows.Forms.PictureBox widthDemo_pic;
         private System.Windows.Forms.PictureBox options_pic;
@@ -258,7 +275,9 @@
         private System.Windows.Forms.ToolStripMenuItem exportImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton Compress;
+        private System.Windows.Forms.ToolStripDropDownButton Settings;
+        private System.Windows.Forms.ToolStripMenuItem compresssionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem windowRatioToolStripMenuItem;
     }
 }
 

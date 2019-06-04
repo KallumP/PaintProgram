@@ -19,7 +19,7 @@ namespace PhotoMarket.DrawingClasses {
         //constructors
         public CircleDrawing(PointF _startCoord, Pen _pen, Form1 _parent) {
             parent = _parent;
-            startRatio = new PointF(parent.Width / _startCoord.X, parent.Height / _startCoord.Y);
+            startRatio = new PointF(parent.canvasSizeX / _startCoord.X, parent.canvasSizeY / _startCoord.Y);
             pen = _pen;
             DeepCopy(_pen);
         }
@@ -32,12 +32,12 @@ namespace PhotoMarket.DrawingClasses {
 
             //gets the final position of the mouse
             if (shiftDown == false)
-                endRatio = new PointF(parent.Width / _endPoint.X, parent.Height / _endPoint.Y);
+                endRatio = new PointF(parent.canvasSizeX / _endPoint.X, parent.canvasSizeY / _endPoint.Y);
             else {
 
                 //if shift was pressed, then the end point distance from the start is equal in x and y
-                endRatio.X = parent.Width / _endPoint.X;
-                endRatio.Y = parent.Height / (startRatio.Y + (endRatio.X - startRatio.X));
+                endRatio.X = parent.canvasSizeX / _endPoint.X;
+                endRatio.Y = parent.canvasSizeY / (startRatio.Y + (endRatio.X - startRatio.X));
             }
 
             if (finalPoint == true)
@@ -49,7 +49,7 @@ namespace PhotoMarket.DrawingClasses {
         public void CreateRectangle() {
 
             //creates a rectangle to be used to draw the circle out
-            toDraw = RectangleF.FromLTRB(parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+            toDraw = RectangleF.FromLTRB(parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
         }
 
         //draws out the circle using the rectangle made in the set end point

@@ -5,4 +5,8 @@ openGL control box
 
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 
-make the window always be a chosen ratio when resizing
+screen ratio to be saved into project file
+
+project file saves into a folder, with the images in that folder
+
+project file has custom extention

@@ -22,7 +22,7 @@ namespace PhotoMarket.DrawingClasses {
         //constructors
         public LineDrawing(PointF _start, Pen _pen, Form1 _parent) {
             parent = _parent;
-            startRatio = new PointF(parent.Width / _start.X, parent.Height / _start.Y);
+            startRatio = new PointF(parent.canvasSizeX / _start.X, parent.canvasSizeY / _start.Y);
             startCoord = _start;
             pen = _pen;
             DeepCopy(_pen);
@@ -40,7 +40,7 @@ namespace PhotoMarket.DrawingClasses {
 
             if (endCoord.X > 0 && endCoord.Y > 0)
                 //sets the ratios after the angle fix
-                endRatio = new PointF(parent.Width / endCoord.X, parent.Height / endCoord.Y);
+                endRatio = new PointF(parent.canvasSizeX / endCoord.X, parent.canvasSizeY / endCoord.Y);
 
             //lets the program know that the final point has been placed
             if (finalPoint == true)
@@ -79,9 +79,9 @@ namespace PhotoMarket.DrawingClasses {
 
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
                 if (temp == true)
-                    g.DrawLine(tempPen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(tempPen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
                 else
-                    g.DrawLine(pen, parent.Width / startRatio.X, parent.Height / startRatio.Y, parent.Width / endRatio.X, parent.Height / endRatio.Y);
+                    g.DrawLine(pen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
             }
         }
 

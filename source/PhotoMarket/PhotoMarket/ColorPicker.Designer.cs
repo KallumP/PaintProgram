@@ -228,6 +228,7 @@
             this.Controls.Add(this.colorPicker_pic);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ColorPicker";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ColorPicker";
             this.Load += new System.EventHandler(this.ColorPicker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.showColor_pic)).EndInit();

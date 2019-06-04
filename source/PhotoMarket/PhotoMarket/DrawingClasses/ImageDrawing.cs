@@ -20,8 +20,8 @@ namespace PhotoMarket.DrawingClasses {
         //used for setting up a background image
         public ImageDrawing(PointF _startPoint, PointF _endPoint, string _path, Form1 _parent) {
             parent = _parent;
-            startRatio = new PointF(parent.Width / _startPoint.X, parent.Height / _startPoint.Y);
-            endRatio = new PointF(parent.Width / _endPoint.X, parent.Height / _endPoint.Y);
+            startRatio = new PointF(parent.canvasSizeX / _startPoint.X, parent.canvasSizeY / _startPoint.Y);
+            endRatio = new PointF(parent.canvasSizeX / _endPoint.X, parent.canvasSizeY / _endPoint.Y);
             imagePath = _path;
 
         }
@@ -40,12 +40,12 @@ namespace PhotoMarket.DrawingClasses {
         //used to set up where to draw the image
         public void SetStartPoint(PointF newStart) {
 
-            startRatio = new PointF(parent.Width / newStart.X, parent.Height / newStart.Y);
+            startRatio = new PointF(parent.canvasSizeX / newStart.X, parent.canvasSizeY / newStart.Y);
 
         }
 
         public void SetEndPoint(PointF endPoint) {
-            endRatio = new PointF(parent.Width / endPoint.X, parent.Height / endPoint.Y);
+            endRatio = new PointF(parent.canvasSizeX / endPoint.X, parent.canvasSizeY / endPoint.Y);
         }
 
         //Draws out the image drawing
@@ -58,10 +58,10 @@ namespace PhotoMarket.DrawingClasses {
 
                     g.DrawImage(
                         todraw,
-                        parent.Width / startRatio.X,
-                        parent.Height / startRatio.Y,
-                        parent.Width / endRatio.X - parent.Width / startRatio.X,
-                        parent.Height / endRatio.Y - parent.Height / startRatio.Y);
+                        parent.canvasSizeX / startRatio.X,
+                        parent.canvasSizeY / startRatio.Y,
+                        parent.canvasSizeX / endRatio.X - parent.canvasSizeX / startRatio.X,
+                        parent.canvasSizeY / endRatio.Y - parent.canvasSizeY / startRatio.Y);
 
                 } else
                     Console.WriteLine("Image not found");

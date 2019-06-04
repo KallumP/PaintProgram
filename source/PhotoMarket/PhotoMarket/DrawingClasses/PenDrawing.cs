@@ -33,7 +33,7 @@ namespace PhotoMarket.DrawingClasses {
 
             //checks the distance between the latest point, and the new point to check if they are far apart enough to add
             if (CheckDistance(latestRawPoint, newCoords)) {
-                coords.Add(new PointF(parent.Width / newCoords.X, parent.Height / newCoords.Y));
+                coords.Add(new PointF(parent.canvasSizeX / newCoords.X, parent.canvasSizeY / newCoords.Y));
                 latestRawPoint = newCoords;
             }
         }
@@ -62,10 +62,10 @@ namespace PhotoMarket.DrawingClasses {
                 //draws out a line between each of the coordinates in the list
                 g.DrawLine(
                     pen,
-                    parent.Width / coords[i].X,
-                    parent.Height / coords[i].Y,
-                    parent.Width / coords[i + 1].X,
-                    parent.Height / coords[i + 1].Y);
+                    parent.canvasSizeX / coords[i].X,
+                    parent.canvasSizeY / coords[i].Y,
+                    parent.canvasSizeX / coords[i + 1].X,
+                    parent.canvasSizeY / coords[i + 1].Y);
             }
         }
 

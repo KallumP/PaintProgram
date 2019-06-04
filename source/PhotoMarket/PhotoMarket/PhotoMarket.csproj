@@ -121,6 +121,12 @@
       <DependentUpon>CompressionWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawingClasses\SquareDrawing.cs" />
+    <Compile Include="ScreenRatioWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreenRatioWindow.Designer.cs">
+      <DependentUpon>ScreenRatioWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </Compile>
     <EmbeddedResource Include="CompressionWindow.resx">
       <DependentUpon>CompressionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreenRatioWindow.resx">
+      <DependentUpon>ScreenRatioWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warning.resx">
       <DependentUpon>Warning.cs</DependentUpon>
