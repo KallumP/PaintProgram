@@ -21,6 +21,9 @@ namespace PhotoMarket {
         public int canvasSizeX;
         public int canvasSizeY;
 
+        //creates a list of layers to be used 
+        List<Layer> layers = new List<Layer>();
+        int currentLayer = 0;
 
         //creates lists of drawing objects
         List<PenDrawing> penDrawings = new List<PenDrawing>();
@@ -64,6 +67,8 @@ namespace PhotoMarket {
             //sets the saves the size of the canvas
             canvasSizeX = canvas.Width;
             canvasSizeY = canvas.Height;
+
+            layers.Add(new Layer());
 
             //updates the location of objects and updates labels
             InvalidateAll();
@@ -152,19 +157,19 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new object of penDrawings to store all the coordinates of the new line
-            penDrawings.Add(new PenDrawing(globalPen, this));
+            layers[currentLayer].penDrawings.Add(new PenDrawing(globalPen, this));
 
             //adds the first line
-            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
-
+            layers[currentLayer].penDrawings[layers[currentLayer].penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
 
             //lets the program know to draw a pen drawing next
-            drawOrder.Add(DrawingMode.Pen);
+            layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Pen);
+
         }
         void PenMouseUp(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
-            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
+            layers[currentLayer].penDrawings[layers[currentLayer].penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
 
             //lets the program know that click is no longer being held down
             mouseClickedDown = false;
@@ -172,7 +177,7 @@ namespace PhotoMarket {
         void PenMouseMove(MouseEventArgs e) {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
-            penDrawings[penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
+            layers[currentLayer].penDrawings[layers[currentLayer].penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
         }
 
         //deals with inputs for the square drawing mode
@@ -182,10 +187,10 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            squareDrawings.Add(new SquareDrawing(new Point(e.X, e.Y), globalPen, this));
+            layers[currentLayer].squareDrawings.Add(new SquareDrawing(new Point(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a square drawing next
-            drawOrder.Add(DrawingMode.Square);
+            layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Square);
         }
         void SquareMouseUp(MouseEventArgs e) {
 
@@ -194,9 +199,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
+                layers[currentLayer].squareDrawings[layers[currentLayer].squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
+                layers[currentLayer].squareDrawings[layers[currentLayer].squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             canvas.Invalidate();
@@ -205,9 +210,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
+                layers[currentLayer].squareDrawings[layers[currentLayer].squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                squareDrawings[squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
+                layers[currentLayer].squareDrawings[layers[currentLayer].squareDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             canvas.Invalidate();
@@ -220,10 +225,10 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //creates a new instance of the square drawing
-            circleDrawings.Add(new CircleDrawing(new PointF(e.X, e.Y), globalPen, this));
+            layers[currentLayer].circleDrawings.Add(new CircleDrawing(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a circle drawing next
-            drawOrder.Add(DrawingMode.Circle);
+            layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Circle);
         }
         void CircleMouseUp(MouseEventArgs e) {
 
@@ -232,9 +237,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
+                layers[currentLayer].circleDrawings[layers[currentLayer].circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, true);
             else
-                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
+                layers[currentLayer].circleDrawings[layers[currentLayer].circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, true);
 
             //makes the screen redraw
             canvas.Invalidate();
@@ -243,9 +248,9 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
+                layers[currentLayer].circleDrawings[layers[currentLayer].circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), true, false);
             else
-                circleDrawings[circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
+                layers[currentLayer].circleDrawings[layers[currentLayer].circleDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y), false, false);
 
             //makes the screen redraw
             canvas.Invalidate();
@@ -258,10 +263,10 @@ namespace PhotoMarket {
             mouseClickedDown = true;
 
             //lets the program know that the mouse is held down
-            lineDrawings.Add(new LineDrawing(new PointF(e.X, e.Y), globalPen, this));
+            layers[currentLayer].lineDrawings.Add(new LineDrawing(new PointF(e.X, e.Y), globalPen, this));
 
             //lets the program know to draw a line drawing next
-            drawOrder.Add(DrawingMode.Line);
+            layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Line);
         }
         void LineMouseUp(MouseEventArgs e) {
 
@@ -270,11 +275,11 @@ namespace PhotoMarket {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, true);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, true);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, true);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, true);
             else
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, true);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, true);
 
             //makes the screen redraw
             canvas.Invalidate();
@@ -283,39 +288,41 @@ namespace PhotoMarket {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, false);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), true, false, false);
             else if (ModifierKeys == Keys.Control)
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, false);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, true, false);
             else
-                lineDrawings[lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, false);
+                layers[currentLayer].lineDrawings[layers[currentLayer].lineDrawings.Count - 1].SetEnd(new PointF(e.X, e.Y), false, false, false);
 
             //makes the screen redraw
             canvas.Invalidate();
         }
 
         //lets the user choose where to put an image
+        void ImageMouseMoveNoClick(MouseEventArgs e) {
+
+            //lets the program know to draw an image next
+            layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+        }
         void ImageMouseDown(MouseEventArgs e) {
 
             //lets the program know that mouse is clicked down
             mouseClickedDown = true;
 
             //adds the starting point
-            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
-
+            layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
 
         }
         void ImageMouseMove(MouseEventArgs e) {
-            imageDrawings[imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
-        }
-        void ImageMouseMoveNoClick(MouseEventArgs e) {
-            imageDrawings[imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
+            layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
         }
         void ImageMouseUp(MouseEventArgs e) {
 
             //lets the program know that mouse is no longer clicked down
             mouseClickedDown = false;
 
-            imageDrawings[imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
+
+            layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
 
             //sets the draw mode back to mouse
             drawType = DrawingMode.Mouse;
@@ -455,46 +462,8 @@ namespace PhotoMarket {
             if (background != null)
                 background.Draw(e.Graphics);
 
-            //an if statement to make sure that there are drawing to draw before trying to draw
-            if (drawOrder.Count() != 0) {
-
-                //numbers used to store which order each drawing list is at 
-                int penOrder = 0;
-                int squareOrder = 0;
-                int circleOrder = 0;
-                int lineOrder = 0;
-                int imageOrder = 0;
-
-                //goes through the order to draw
-                for (int i = 0; i < drawOrder.Count(); i++) {
-
-                    //draws the next pen drawing
-                    if (drawOrder[i] == DrawingMode.Pen) {
-                        penDrawings[penOrder].Export(e.Graphics);
-                        penOrder++;
-
-                        //draws the next square drawing
-                    } else if (drawOrder[i] == DrawingMode.Square) {
-                        squareDrawings[squareOrder].Draw(e.Graphics);
-                        squareOrder++;
-
-                        //draws the next circle drawing
-                    } else if (drawOrder[i] == DrawingMode.Circle) {
-                        circleDrawings[circleOrder].Draw(e.Graphics);
-                        circleOrder++;
-
-                        //draws the next line drawing
-                    } else if (drawOrder[i] == DrawingMode.Line) {
-                        lineDrawings[lineOrder].Export(e.Graphics);
-                        lineOrder++;
-
-                        //draws the next image drawing
-                    } else if (drawOrder[i] == DrawingMode.Image) {
-                        imageDrawings[imageOrder].Draw(e.Graphics);
-                        imageOrder++;
-                    }
-                }
-            }
+            foreach (Layer l in layers) 
+                l.Draw(e);
         }
 
         //draws color pallet
@@ -607,9 +576,10 @@ namespace PhotoMarket {
                 if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg")) {
 
                     //sets up an image with the chosen path
-                    imageDrawings.Add(new ImageDrawing(opener.FileName, this));
+                    layers[currentLayer].imageDrawings.Add(new ImageDrawing(opener.FileName, this));
 
-                    drawOrder.Add(DrawingMode.Image);
+
+                    layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Image);
 
                     drawType = DrawingMode.Image;
                 }
@@ -1062,6 +1032,10 @@ namespace PhotoMarket {
 
         private void windowRatioToolStripMenuItem_Click(object sender, EventArgs e) {
             OpenRatio();
+        }
+
+        private void layersToolStripMenuItem_Click(object sender, EventArgs e) {
+
         }
     }
 }

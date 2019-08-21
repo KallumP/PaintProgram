@@ -46,6 +46,7 @@
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.canvas = new System.Windows.Forms.PictureBox();
+            this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
@@ -102,7 +103,8 @@
             // 
             this.image_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeBackgroundImageToolStripMenuItem,
-            this.removeBackgroundImageToolStripMenuItem});
+            this.removeBackgroundImageToolStripMenuItem,
+            this.layersToolStripMenuItem});
             this.image_tool.Name = "image_tool";
             this.image_tool.Size = new System.Drawing.Size(53, 22);
             this.image_tool.Text = "Image";
@@ -226,6 +228,13 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
+            // layersToolStripMenuItem
+            // 
+            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
+            this.layersToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.layersToolStripMenuItem.Text = "Layers";
+            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +287,7 @@
         private System.Windows.Forms.ToolStripDropDownButton Settings;
         private System.Windows.Forms.ToolStripMenuItem compresssionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowRatioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
     }
 }
 
