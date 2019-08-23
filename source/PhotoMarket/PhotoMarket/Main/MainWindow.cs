@@ -32,11 +32,12 @@ namespace PhotoMarket {
         //a variable that lets the program know that mouse has been held down
         bool mouseClickedDown = false;
 
-        //string projectExtension = ".txt";
+        string projectExtension = ".txt";
 
         //constructor
         public MainWindow() {
             InitializeComponent();
+            Layer.parent = this;
         }
 
         //initial loading code
@@ -672,164 +673,73 @@ namespace PhotoMarket {
             //makes it so that the user can only save as png
             saver.Filter = "TXT(*.TXT)|*.txt";
 
-            ////makes the user choose a file path to save to
-            //if (saver.ShowDialog() == DialogResult.OK) {
+            //makes the user choose a file path to save to
+            if (saver.ShowDialog() == DialogResult.OK) {
 
-            //    //opens up the text file
-            //    StreamWriter sw = new StreamWriter(saver.FileName);
+                //opens up the text file
+                StreamWriter sw = new StreamWriter(saver.FileName);
 
-            //    //starts to go through the different drawings in the project
-            //    if (drawOrder.Count != 0) {
+                //saves the ratio of the project
+                sw.WriteLine(ratioBind);
+                sw.WriteLine(ratio);
 
-            //        //numbers used to store which order each drawing list is at 
-            //        int penOrder = 0;
-            //        int squareOrder = 0;
-            //        int circleOrder = 0;
-            //        int lineOrder = 0;
-            //        int imageOrder = 0;
+                //saves the amount of layers in the project
+                sw.WriteLine(layers.Count);
 
-            //        for (int i = 0; i < drawOrder.Count; i++) {
-            //            if (i == drawOrder.Count - 1)
-            //                sw.WriteLine(drawOrder[i]);
-            //            else
-            //                sw.Write(drawOrder[i] + ",");
-            //        }
+                //goes to each layer to save it's contents
+                foreach (Layer l in layers)
+                    l.Save(sw);
 
-            //        //saves the ratio of the project
-            //        sw.WriteLine(ratioBind);
-            //        sw.WriteLine(ratio);
-
-            //        //goes through the order to draw
-            //        for (int i = 0; i < drawOrder.Count(); i++) {
-
-            //            //saves the next pen drawing
-            //            if (drawOrder[i] == DrawingMode.Pen) {
-            //                penDrawings[penOrder].SaveData(sw);
-            //                penOrder++;
-
-            //                //saves the next square drawing                           
-            //            } else if (drawOrder[i] == DrawingMode.Square) {
-            //                squareDrawings[squareOrder].SaveData(sw);
-            //                squareOrder++;
-
-            //                //saves the next circle drawing
-            //            } else if (drawOrder[i] == DrawingMode.Circle) {
-            //                circleDrawings[circleOrder].SaveData(sw);
-            //                circleOrder++;
-
-            //                //saves the next line drawing
-            //            } else if (drawOrder[i] == DrawingMode.Line) {
-            //                lineDrawings[lineOrder].SaveData(sw);
-            //                lineOrder++;
-
-            //                //saves the next image drawing
-            //            } else if (drawOrder[i] == DrawingMode.Image) {
-            //                imageDrawings[imageOrder].SaveData(sw);
-            //                imageOrder++;
-            //            }
-            //        }
-
-            //        //closes the file
-            //        sw.Close();
-            //    }
-            //}
+                //closes the file
+                sw.Close();
+            }
         }
+
 
         //loads up a project
         public void LoadProject() {
 
             OpenFileDialog opener = new OpenFileDialog();
 
-            ////makes the user open a project
-            //if (opener.ShowDialog() == DialogResult.OK) {
+            //makes the user open a project
+            if (opener.ShowDialog() == DialogResult.OK) {
 
-            //    //makes sure that the right type of file was entered
-            //    if (opener.FileName.Contains(projectExtension)) {
+                //makes sure that the right type of file was entered
+                if (opener.FileName.Contains(projectExtension)) {
 
-            //        //clears the drawings ready for the new project
-            //        ClearDrawings();
+                    //clears the drawings ready for the new project
+                    ClearDrawings();
+                    layers.Clear();
 
-            //        //opens the file in the program
-            //        StreamReader sr = new StreamReader(opener.FileName);
+                    //opens the file in the program
+                    StreamReader sr = new StreamReader(opener.FileName);
 
-            //        //gets the first line from the file and splits it into an array (ready to make the draw orders)
-            //        string rawOrder = sr.ReadLine();
-            //        string[] orderArray = rawOrder.Split(',');
+                    //gets the ratio information
+                    if (sr.ReadLine().ToLower() == "true")
+                        ratioBind = true;
+                    else
+                        ratioBind = false;
 
-            //        //goes through the array, and adds the correct drawing mode to the drawOrder list
-            //        foreach (string s in orderArray) {
-            //            if (s == "Square")
-            //                drawOrder.Add(DrawingMode.Square);
-            //            else if (s == "Circle")
-            //                drawOrder.Add(DrawingMode.Circle);
-            //            else if (s == "Line")
-            //                drawOrder.Add(DrawingMode.Line);
-            //            else if (s == "Pen")
-            //                drawOrder.Add(DrawingMode.Pen);
-            //            else if (s == "Image")
-            //                drawOrder.Add(DrawingMode.Image);
-            //        }
+                    //gets the ratio of the project
+                    ratio = Convert.ToSingle(sr.ReadLine());
 
-            //        //gets the ratio information
-            //        if (sr.ReadLine().ToLower() == "true")
-            //            ratioBind = true;
-            //        else
-            //            ratioBind = false;
+                    //gets the amount of layers there are in the project
+                    int noOfLayers = Convert.ToInt32(sr.ReadLine());
 
-            //        ratio = Convert.ToSingle(sr.ReadLine());
+                    for (int i = 0; i < noOfLayers; i++) {
+                        layers.Add(new Layer());
+                        layers[i].Load(sr);
+                    }
+
+                    //closes the file
+                    sr.Close();
+
+                    //redraws the picture
+                    canvas.Invalidate();
 
 
-            //        //makes sure that the drawOrder has atleast one value in it
-            //        if (drawOrder.Count != 0) {
-
-            //            //numbers used to store which order each drawing list is at 
-            //            int penOrder = 0;
-            //            int squareOrder = 0;
-            //            int circleOrder = 0;
-            //            int lineOrder = 0;
-            //            int imageOrder = 0;
-
-            //            //goes through the order to add drawings
-            //            for (int i = 0; i < drawOrder.Count(); i++) {
-
-            //                //adds the next pen drawing
-            //                if (drawOrder[i] == DrawingMode.Pen) {
-            //                    penDrawings.Add(new PenDrawing(this));
-            //                    penDrawings[penOrder].LoadData(sr);
-            //                    penOrder++;
-
-            //                    //adds the next square drawing                           
-            //                } else if (drawOrder[i] == DrawingMode.Square) {
-            //                    squareDrawings.Add(new SquareDrawing(this));
-            //                    squareDrawings[squareOrder].LoadData(sr);
-            //                    squareOrder++;
-
-            //                    //adds the next circle drawing
-            //                } else if (drawOrder[i] == DrawingMode.Circle) {
-            //                    circleDrawings.Add(new CircleDrawing(this));
-            //                    circleDrawings[circleOrder].LoadData(sr);
-            //                    circleOrder++;
-
-            //                    //adds the next line drawing
-            //                } else if (drawOrder[i] == DrawingMode.Line) {
-            //                    lineDrawings.Add(new LineDrawing(this));
-            //                    lineDrawings[lineOrder].LoadData(sr);
-            //                    lineOrder++;
-
-            //                } else if (drawOrder[i] == DrawingMode.Image) {
-            //                    imageDrawings.Add(new ImageDrawing(this));
-            //                    imageDrawings[imageOrder].LoadData(sr);
-            //                    imageOrder++;
-            //                }
-            //            }
-            //        }
-            //        //closes the file
-            //        sr.Close();
-
-            //        //redraws the picture
-            //        canvas.Invalidate();
-            //    }
-            //}
+                }
+            }
         }
 
         //changes the background image

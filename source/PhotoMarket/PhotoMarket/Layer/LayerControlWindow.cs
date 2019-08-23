@@ -141,12 +141,23 @@ namespace PhotoMarket {
         private void deleteLayer_btn_Click(object sender, EventArgs e) {
 
             //makes sure that a layer was selected
-            if (selected != -1)
+            if (selected != -1) {
 
-                //removes the selected layer
-                parent.layers.RemoveAt(selected);
+                //makes sure that the final layer isnt being removed
+                if (parent.layers.Count > 1) {
 
-            else
+                    //removes the selected layer
+                    parent.layers.RemoveAt(selected);
+
+                    //deselects after deleting something
+                    selected = -1;
+
+                    UpdateListBox();
+
+                } else
+                    MessageBox.Show("You can't remove the final layer (or you won't have anything to draw on)");
+
+            } else
                 MessageBox.Show("Please click on a layer to select first");
         }
 
@@ -164,5 +175,7 @@ namespace PhotoMarket {
      * saving and loading
      * 
      * do project extention work
+     * 
+     * make clear drawings reset everything in the mainwindow including things like ratio bind
      */
 }
