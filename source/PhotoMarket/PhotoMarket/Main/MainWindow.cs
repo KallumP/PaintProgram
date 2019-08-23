@@ -8,7 +8,8 @@ using System.Windows.Forms;
 
 
 namespace PhotoMarket {
-    public partial class Form1 : Form {
+    public partial class MainWindow : Form {
+
         enum DrawingMode { Mouse, Pen, Square, Circle, Line, Image };
         DrawingMode drawType;
 
@@ -22,27 +23,19 @@ namespace PhotoMarket {
         public int canvasSizeY;
 
         //creates a list of layers to be used 
-        List<Layer> layers = new List<Layer>();
-        int currentLayer = 0;
+        public List<Layer> layers = new List<Layer>();
+        public int currentLayer = 0;
 
-        //creates lists of drawing objects
-        List<PenDrawing> penDrawings = new List<PenDrawing>();
-        List<SquareDrawing> squareDrawings = new List<SquareDrawing>();
-        List<CircleDrawing> circleDrawings = new List<CircleDrawing>();
-        List<LineDrawing> lineDrawings = new List<LineDrawing>();
-        List<ImageDrawing> imageDrawings = new List<ImageDrawing>();
+        //the image used for a background
         ImageDrawing background;
-
-        //creates a list of drawing modes to be used to order each drawing
-        List<DrawingMode> drawOrder = new List<DrawingMode>();
 
         //a variable that lets the program know that mouse has been held down
         bool mouseClickedDown = false;
 
-        string projectExtension = ".txt";
+        //string projectExtension = ".txt";
 
         //constructor
-        public Form1() {
+        public MainWindow() {
             InitializeComponent();
         }
 
@@ -462,7 +455,7 @@ namespace PhotoMarket {
             if (background != null)
                 background.Draw(e.Graphics);
 
-            foreach (Layer l in layers) 
+            foreach (Layer l in layers)
                 l.Draw(e);
         }
 
@@ -661,45 +654,9 @@ namespace PhotoMarket {
                     if (background != null)
                         background.Draw(g);
 
-                    if (drawOrder.Count() != 0) {
-
-                        //numbers used to store which order each drawing list is at 
-                        int penOrder = 0;
-                        int squareOrder = 0;
-                        int circleOrder = 0;
-                        int lineOrder = 0;
-                        int imageOrder = 0;
-
-                        //goes through the order to draw
-                        for (int i = 0; i < drawOrder.Count(); i++) {
-
-                            //draws the next pen drawing
-                            if (drawOrder[i] == DrawingMode.Pen) {
-                                penDrawings[penOrder].Export(g);
-                                penOrder++;
-
-                                //draws the next square drawing                           
-                            } else if (drawOrder[i] == DrawingMode.Square) {
-                                squareDrawings[squareOrder].Draw(g);
-                                squareOrder++;
-
-                                //draws the next circle drawing
-                            } else if (drawOrder[i] == DrawingMode.Circle) {
-                                circleDrawings[circleOrder].Draw(g);
-                                circleOrder++;
-
-                                //draws the next line drawing
-                            } else if (drawOrder[i] == DrawingMode.Line) {
-                                lineDrawings[lineOrder].Export(g);
-                                lineOrder++;
-
-                                //draws the next image
-                            } else if (drawOrder[i] == DrawingMode.Image) {
-                                imageDrawings[imageOrder].Draw(g);
-                                imageOrder++;
-                            }
-                        }
-                    }
+                    //goes through and draws the content from each layer
+                    foreach (Layer l in layers)
+                        l.Export(g);
                 }
 
                 //saves the image
@@ -715,67 +672,67 @@ namespace PhotoMarket {
             //makes it so that the user can only save as png
             saver.Filter = "TXT(*.TXT)|*.txt";
 
-            //makes the user choose a file path to save to
-            if (saver.ShowDialog() == DialogResult.OK) {
+            ////makes the user choose a file path to save to
+            //if (saver.ShowDialog() == DialogResult.OK) {
 
-                //opens up the text file
-                StreamWriter sw = new StreamWriter(saver.FileName);
+            //    //opens up the text file
+            //    StreamWriter sw = new StreamWriter(saver.FileName);
 
-                //starts to go through the different drawings in the project
-                if (drawOrder.Count != 0) {
+            //    //starts to go through the different drawings in the project
+            //    if (drawOrder.Count != 0) {
 
-                    //numbers used to store which order each drawing list is at 
-                    int penOrder = 0;
-                    int squareOrder = 0;
-                    int circleOrder = 0;
-                    int lineOrder = 0;
-                    int imageOrder = 0;
+            //        //numbers used to store which order each drawing list is at 
+            //        int penOrder = 0;
+            //        int squareOrder = 0;
+            //        int circleOrder = 0;
+            //        int lineOrder = 0;
+            //        int imageOrder = 0;
 
-                    for (int i = 0; i < drawOrder.Count; i++) {
-                        if (i == drawOrder.Count - 1)
-                            sw.WriteLine(drawOrder[i]);
-                        else
-                            sw.Write(drawOrder[i] + ",");
-                    }
+            //        for (int i = 0; i < drawOrder.Count; i++) {
+            //            if (i == drawOrder.Count - 1)
+            //                sw.WriteLine(drawOrder[i]);
+            //            else
+            //                sw.Write(drawOrder[i] + ",");
+            //        }
 
-                    //saves the ratio of the project
-                    sw.WriteLine(ratioBind);
-                    sw.WriteLine(ratio);
+            //        //saves the ratio of the project
+            //        sw.WriteLine(ratioBind);
+            //        sw.WriteLine(ratio);
 
-                    //goes through the order to draw
-                    for (int i = 0; i < drawOrder.Count(); i++) {
+            //        //goes through the order to draw
+            //        for (int i = 0; i < drawOrder.Count(); i++) {
 
-                        //saves the next pen drawing
-                        if (drawOrder[i] == DrawingMode.Pen) {
-                            penDrawings[penOrder].SaveData(sw);
-                            penOrder++;
+            //            //saves the next pen drawing
+            //            if (drawOrder[i] == DrawingMode.Pen) {
+            //                penDrawings[penOrder].SaveData(sw);
+            //                penOrder++;
 
-                            //saves the next square drawing                           
-                        } else if (drawOrder[i] == DrawingMode.Square) {
-                            squareDrawings[squareOrder].SaveData(sw);
-                            squareOrder++;
+            //                //saves the next square drawing                           
+            //            } else if (drawOrder[i] == DrawingMode.Square) {
+            //                squareDrawings[squareOrder].SaveData(sw);
+            //                squareOrder++;
 
-                            //saves the next circle drawing
-                        } else if (drawOrder[i] == DrawingMode.Circle) {
-                            circleDrawings[circleOrder].SaveData(sw);
-                            circleOrder++;
+            //                //saves the next circle drawing
+            //            } else if (drawOrder[i] == DrawingMode.Circle) {
+            //                circleDrawings[circleOrder].SaveData(sw);
+            //                circleOrder++;
 
-                            //saves the next line drawing
-                        } else if (drawOrder[i] == DrawingMode.Line) {
-                            lineDrawings[lineOrder].SaveData(sw);
-                            lineOrder++;
+            //                //saves the next line drawing
+            //            } else if (drawOrder[i] == DrawingMode.Line) {
+            //                lineDrawings[lineOrder].SaveData(sw);
+            //                lineOrder++;
 
-                            //saves the next image drawing
-                        } else if (drawOrder[i] == DrawingMode.Image) {
-                            imageDrawings[imageOrder].SaveData(sw);
-                            imageOrder++;
-                        }
-                    }
+            //                //saves the next image drawing
+            //            } else if (drawOrder[i] == DrawingMode.Image) {
+            //                imageDrawings[imageOrder].SaveData(sw);
+            //                imageOrder++;
+            //            }
+            //        }
 
-                    //closes the file
-                    sw.Close();
-                }
-            }
+            //        //closes the file
+            //        sw.Close();
+            //    }
+            //}
         }
 
         //loads up a project
@@ -783,96 +740,96 @@ namespace PhotoMarket {
 
             OpenFileDialog opener = new OpenFileDialog();
 
-            //makes the user open a project
-            if (opener.ShowDialog() == DialogResult.OK) {
+            ////makes the user open a project
+            //if (opener.ShowDialog() == DialogResult.OK) {
 
-                //makes sure that the right type of file was entered
-                if (opener.FileName.Contains(projectExtension)) {
+            //    //makes sure that the right type of file was entered
+            //    if (opener.FileName.Contains(projectExtension)) {
 
-                    //clears the drawings ready for the new project
-                    ClearDrawings();
+            //        //clears the drawings ready for the new project
+            //        ClearDrawings();
 
-                    //opens the file in the program
-                    StreamReader sr = new StreamReader(opener.FileName);
+            //        //opens the file in the program
+            //        StreamReader sr = new StreamReader(opener.FileName);
 
-                    //gets the first line from the file and splits it into an array (ready to make the draw orders)
-                    string rawOrder = sr.ReadLine();
-                    string[] orderArray = rawOrder.Split(',');
+            //        //gets the first line from the file and splits it into an array (ready to make the draw orders)
+            //        string rawOrder = sr.ReadLine();
+            //        string[] orderArray = rawOrder.Split(',');
 
-                    //goes through the array, and adds the correct drawing mode to the drawOrder list
-                    foreach (string s in orderArray) {
-                        if (s == "Square")
-                            drawOrder.Add(DrawingMode.Square);
-                        else if (s == "Circle")
-                            drawOrder.Add(DrawingMode.Circle);
-                        else if (s == "Line")
-                            drawOrder.Add(DrawingMode.Line);
-                        else if (s == "Pen")
-                            drawOrder.Add(DrawingMode.Pen);
-                        else if (s == "Image")
-                            drawOrder.Add(DrawingMode.Image);
-                    }
+            //        //goes through the array, and adds the correct drawing mode to the drawOrder list
+            //        foreach (string s in orderArray) {
+            //            if (s == "Square")
+            //                drawOrder.Add(DrawingMode.Square);
+            //            else if (s == "Circle")
+            //                drawOrder.Add(DrawingMode.Circle);
+            //            else if (s == "Line")
+            //                drawOrder.Add(DrawingMode.Line);
+            //            else if (s == "Pen")
+            //                drawOrder.Add(DrawingMode.Pen);
+            //            else if (s == "Image")
+            //                drawOrder.Add(DrawingMode.Image);
+            //        }
 
-                    //gets the ratio information
-                    if (sr.ReadLine().ToLower() == "true")
-                        ratioBind = true;
-                    else
-                        ratioBind = false;
+            //        //gets the ratio information
+            //        if (sr.ReadLine().ToLower() == "true")
+            //            ratioBind = true;
+            //        else
+            //            ratioBind = false;
 
-                    ratio = Convert.ToSingle(sr.ReadLine());
+            //        ratio = Convert.ToSingle(sr.ReadLine());
 
 
-                    //makes sure that the drawOrder has atleast one value in it
-                    if (drawOrder.Count != 0) {
+            //        //makes sure that the drawOrder has atleast one value in it
+            //        if (drawOrder.Count != 0) {
 
-                        //numbers used to store which order each drawing list is at 
-                        int penOrder = 0;
-                        int squareOrder = 0;
-                        int circleOrder = 0;
-                        int lineOrder = 0;
-                        int imageOrder = 0;
+            //            //numbers used to store which order each drawing list is at 
+            //            int penOrder = 0;
+            //            int squareOrder = 0;
+            //            int circleOrder = 0;
+            //            int lineOrder = 0;
+            //            int imageOrder = 0;
 
-                        //goes through the order to add drawings
-                        for (int i = 0; i < drawOrder.Count(); i++) {
+            //            //goes through the order to add drawings
+            //            for (int i = 0; i < drawOrder.Count(); i++) {
 
-                            //adds the next pen drawing
-                            if (drawOrder[i] == DrawingMode.Pen) {
-                                penDrawings.Add(new PenDrawing(this));
-                                penDrawings[penOrder].LoadData(sr);
-                                penOrder++;
+            //                //adds the next pen drawing
+            //                if (drawOrder[i] == DrawingMode.Pen) {
+            //                    penDrawings.Add(new PenDrawing(this));
+            //                    penDrawings[penOrder].LoadData(sr);
+            //                    penOrder++;
 
-                                //adds the next square drawing                           
-                            } else if (drawOrder[i] == DrawingMode.Square) {
-                                squareDrawings.Add(new SquareDrawing(this));
-                                squareDrawings[squareOrder].LoadData(sr);
-                                squareOrder++;
+            //                    //adds the next square drawing                           
+            //                } else if (drawOrder[i] == DrawingMode.Square) {
+            //                    squareDrawings.Add(new SquareDrawing(this));
+            //                    squareDrawings[squareOrder].LoadData(sr);
+            //                    squareOrder++;
 
-                                //adds the next circle drawing
-                            } else if (drawOrder[i] == DrawingMode.Circle) {
-                                circleDrawings.Add(new CircleDrawing(this));
-                                circleDrawings[circleOrder].LoadData(sr);
-                                circleOrder++;
+            //                    //adds the next circle drawing
+            //                } else if (drawOrder[i] == DrawingMode.Circle) {
+            //                    circleDrawings.Add(new CircleDrawing(this));
+            //                    circleDrawings[circleOrder].LoadData(sr);
+            //                    circleOrder++;
 
-                                //adds the next line drawing
-                            } else if (drawOrder[i] == DrawingMode.Line) {
-                                lineDrawings.Add(new LineDrawing(this));
-                                lineDrawings[lineOrder].LoadData(sr);
-                                lineOrder++;
+            //                    //adds the next line drawing
+            //                } else if (drawOrder[i] == DrawingMode.Line) {
+            //                    lineDrawings.Add(new LineDrawing(this));
+            //                    lineDrawings[lineOrder].LoadData(sr);
+            //                    lineOrder++;
 
-                            } else if (drawOrder[i] == DrawingMode.Image) {
-                                imageDrawings.Add(new ImageDrawing(this));
-                                imageDrawings[imageOrder].LoadData(sr);
-                                imageOrder++;
-                            }
-                        }
-                    }
-                    //closes the file
-                    sr.Close();
+            //                } else if (drawOrder[i] == DrawingMode.Image) {
+            //                    imageDrawings.Add(new ImageDrawing(this));
+            //                    imageDrawings[imageOrder].LoadData(sr);
+            //                    imageOrder++;
+            //                }
+            //            }
+            //        }
+            //        //closes the file
+            //        sr.Close();
 
-                    //redraws the picture
-                    canvas.Invalidate();
-                }
-            }
+            //        //redraws the picture
+            //        canvas.Invalidate();
+            //    }
+            //}
         }
 
         //changes the background image
@@ -912,12 +869,9 @@ namespace PhotoMarket {
         public void ClearDrawings() {
 
             //removes all elements from the list
-            penDrawings.Clear();
-            squareDrawings.Clear();
-            circleDrawings.Clear();
-            lineDrawings.Clear();
-            imageDrawings.Clear();
-            drawOrder.Clear();
+            layers.Clear();
+            layers.Add(new Layer());
+            currentLayer = 0;
 
             //makes the screen redraw (now as a blank screen)
             canvas.Invalidate();
@@ -927,36 +881,36 @@ namespace PhotoMarket {
         void UndoDrawing() {
 
             //makes sure that the project is not empty
-            if (drawOrder.Count != 0) {
+            if (layers[currentLayer].drawOrder.Count != 0) {
 
                 //checks to see what the latest input was before removing it
-                switch (drawOrder[drawOrder.Count - 1]) {
+                switch (layers[currentLayer].drawOrder[layers[currentLayer].drawOrder.Count - 1]) {
 
-                    case DrawingMode.Pen:
-                    penDrawings.RemoveAt(penDrawings.Count - 1);
+                    case Layer.DrawingMode.Pen:
+                    layers[currentLayer].penDrawings.RemoveAt(layers[currentLayer].penDrawings.Count - 1);
                     break;
 
-                    case DrawingMode.Square:
-                    squareDrawings.RemoveAt(squareDrawings.Count - 1);
+                    case Layer.DrawingMode.Square:
+                    layers[currentLayer].squareDrawings.RemoveAt(layers[currentLayer].squareDrawings.Count - 1);
                     break;
 
-                    case DrawingMode.Circle:
-                    circleDrawings.RemoveAt(circleDrawings.Count - 1);
+                    case Layer.DrawingMode.Circle:
+                    layers[currentLayer].circleDrawings.RemoveAt(layers[currentLayer].circleDrawings.Count - 1);
                     break;
 
-                    case DrawingMode.Line:
-                    lineDrawings.RemoveAt(lineDrawings.Count - 1);
+                    case Layer.DrawingMode.Line:
+                    layers[currentLayer].lineDrawings.RemoveAt(layers[currentLayer].lineDrawings.Count - 1);
                     break;
 
-                    case DrawingMode.Image:
-                    imageDrawings.RemoveAt(imageDrawings.Count - 1);
+                    case Layer.DrawingMode.Image:
+                    layers[currentLayer].imageDrawings.RemoveAt(layers[currentLayer].imageDrawings.Count - 1);
                     break;
 
                     default:
                     break;
                 }
 
-                drawOrder.RemoveAt(drawOrder.Count - 1);
+                layers[currentLayer].drawOrder.RemoveAt(layers[currentLayer].drawOrder.Count - 1);
 
                 canvas.Invalidate();
             }
@@ -1035,7 +989,9 @@ namespace PhotoMarket {
         }
 
         private void layersToolStripMenuItem_Click(object sender, EventArgs e) {
+            LayerControlWindow l = new LayerControlWindow(this);
 
+            l.Show();
         }
     }
 }

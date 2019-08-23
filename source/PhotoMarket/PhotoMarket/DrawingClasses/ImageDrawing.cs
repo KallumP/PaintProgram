@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.IO;
 
 namespace PhotoMarket.DrawingClasses {
-    class ImageDrawing {
+    public class ImageDrawing {
 
-        Form1 parent;
+        MainWindow parent;
 
         string imagePath;
         PointF startRatio;
@@ -18,7 +18,7 @@ namespace PhotoMarket.DrawingClasses {
 
         //Constructors
         //used for setting up a background image
-        public ImageDrawing(PointF _startPoint, PointF _endPoint, string _path, Form1 _parent) {
+        public ImageDrawing(PointF _startPoint, PointF _endPoint, string _path, MainWindow _parent) {
             parent = _parent;
             startRatio = new PointF(parent.canvasSizeX / _startPoint.X, parent.canvasSizeY / _startPoint.Y);
             endRatio = new PointF(parent.canvasSizeX / _endPoint.X, parent.canvasSizeY / _endPoint.Y);
@@ -26,14 +26,14 @@ namespace PhotoMarket.DrawingClasses {
 
         }
         //used for creating an image (before the location is made)
-        public ImageDrawing(string _path, Form1 _parent) {
+        public ImageDrawing(string _path, MainWindow _parent) {
             parent = _parent;
             startRatio = new PointF(0f, 0f);
             imagePath = _path;
 
         }
         //used for loading up an image from a project file
-        public ImageDrawing(Form1 _parent) {
+        public ImageDrawing(MainWindow _parent) {
             parent = _parent;
         }
 

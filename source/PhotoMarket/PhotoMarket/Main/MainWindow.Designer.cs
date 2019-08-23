@@ -1,6 +1,6 @@
 ﻿namespace PhotoMarket
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.file_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

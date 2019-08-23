@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class LineDrawing : DeepCopier {
+    public class LineDrawing : DeepCopier {
         PointF startRatio;
         PointF endRatio;
         Pen pen;
@@ -12,7 +12,7 @@ namespace PhotoMarket.DrawingClasses {
         PointF startCoord;
         PointF endCoord;
 
-        Form1 parent;
+        MainWindow parent;
 
         bool temp = true;
 
@@ -20,14 +20,14 @@ namespace PhotoMarket.DrawingClasses {
         bool shiftDown;
 
         //constructors
-        public LineDrawing(PointF _start, Pen _pen, Form1 _parent) {
+        public LineDrawing(PointF _start, Pen _pen, MainWindow _parent) {
             parent = _parent;
             startRatio = new PointF(parent.canvasSizeX / _start.X, parent.canvasSizeY / _start.Y);
             startCoord = _start;
             pen = _pen;
             DeepCopy(_pen);
         }
-        public LineDrawing(Form1 _parent) {
+        public LineDrawing(MainWindow _parent) {
             parent = _parent;
         }
 
@@ -75,7 +75,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the line drawing
-        public void Export(Graphics g) {
+        public void Draw(Graphics g) {
 
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
                 if (temp == true)

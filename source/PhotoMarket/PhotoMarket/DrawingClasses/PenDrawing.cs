@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace PhotoMarket.DrawingClasses {
-    class PenDrawing {
+    public class PenDrawing {
 
         public static int compressionDistance = 10;
 
@@ -15,16 +15,16 @@ namespace PhotoMarket.DrawingClasses {
 
         PointF latestRawPoint;
 
-        Form1 parent;
+        MainWindow parent;
 
         string finishedIndicator = "END";
 
         //constructors
-        public PenDrawing(Pen color, Form1 _parent) {
+        public PenDrawing(Pen color, MainWindow _parent) {
             pen = color;
             parent = _parent;
         }
-        public PenDrawing(Form1 _parent) {
+        public PenDrawing(MainWindow _parent) {
             parent = _parent;
         }
 
@@ -54,7 +54,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the pen drawing
-        public void Export(Graphics g) {
+        public void Draw(Graphics g) {
 
             //loops through all of the points
             for (int i = 0; i < coords.Count() - 1; i++) {

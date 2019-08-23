@@ -11,10 +11,10 @@ using System.Windows.Forms;
 namespace PhotoMarket {
     public partial class ScreenRatioWindow : Form {
 
-        Form1 parent;
+        MainWindow parent;
 
 
-        public ScreenRatioWindow(Form1 _parent) {
+        public ScreenRatioWindow(MainWindow _parent) {
             parent = _parent;
             InitializeComponent();
         }

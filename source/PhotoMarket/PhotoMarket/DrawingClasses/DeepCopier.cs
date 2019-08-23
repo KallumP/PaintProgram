@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 namespace PhotoMarket {
-    class DeepCopier {
+    public class DeepCopier {
         public Pen tempPen;
 
         //creates a deep copy of the pen, instead of by reference (lets the change of variable without changing other variables)

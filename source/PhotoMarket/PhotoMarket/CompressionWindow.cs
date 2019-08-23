@@ -12,9 +12,9 @@ using PhotoMarket.DrawingClasses;
 namespace PhotoMarket {
     public partial class CompressionWindow : Form {
 
-        Form1 parent;
+        MainWindow parent;
 
-        public CompressionWindow(Form1 _parent) {
+        public CompressionWindow(MainWindow _parent) {
             InitializeComponent();
 
             parent = _parent;

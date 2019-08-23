@@ -11,9 +11,9 @@ using System.Windows.Forms;
 namespace PhotoMarket {
     public partial class Warning : Form {
 
-        Form1 parent;
+        MainWindow parent;
 
-        public Warning(Form1 _parent) {
+        public Warning(MainWindow _parent) {
             InitializeComponent();
 
             parent = _parent;

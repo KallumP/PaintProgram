@@ -16,13 +16,13 @@ namespace PhotoMarket {
         Bitmap colorPickerBitmap;
         string inputHexValue;
 
-        Form1 mainForm;
+        MainWindow mainForm;
 
         //constructors
         public ColorPicker() {
             InitializeComponent();
         }
-        public ColorPicker(Form1 f) {
+        public ColorPicker(MainWindow f) {
             InitializeComponent();
             mainForm = f;
         }
