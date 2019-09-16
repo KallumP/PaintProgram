@@ -25,6 +25,7 @@ namespace PhotoMarket {
         public ColorPicker(MainWindow f) {
             InitializeComponent();
             mainForm = f;
+
         }
 
         //loads up the form

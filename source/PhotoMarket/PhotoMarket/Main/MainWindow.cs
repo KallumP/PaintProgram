@@ -7,8 +7,10 @@ using System.Linq;
 using System.Windows.Forms;
 
 
-namespace PhotoMarket {
-    public partial class MainWindow : Form {
+namespace PhotoMarket
+{
+    public partial class MainWindow : Form
+    {
 
         enum DrawingMode { Mouse, Pen, Square, Circle, Line, Image };
         DrawingMode drawType;
@@ -357,7 +359,6 @@ namespace PhotoMarket {
             //updates the brush and the labels
             UpdateGlobalPen(penColor, penWidth);
             InvalidateAll();
-            widthDemo_pic.Invalidate();
         }
         private void IncreasePenWidth() {
             if (ModifierKeys == Keys.Shift) {
@@ -378,7 +379,6 @@ namespace PhotoMarket {
             //updates the brush and the labels
             UpdateGlobalPen(penColor, penWidth);
             InvalidateAll();
-            widthDemo_pic.Invalidate();
         }
 
         //finds out where on the options was clicked, and sets the draw type accordingly
@@ -432,10 +432,7 @@ namespace PhotoMarket {
             else if (e.Y < 280)
                 penColor = Color.White;
             else if (e.Y < 320) {
-                ColorPicker cp = new ColorPicker(this);
-                cp.Show();
-                string newColor = "#000000";
-                penColor = ColorTranslator.FromHtml(newColor);
+                OpenColorpicker();
             }
 
             //updates the global pen
@@ -695,7 +692,6 @@ namespace PhotoMarket {
             }
         }
 
-
         //loads up a project
         public void LoadProject() {
 
@@ -826,6 +822,22 @@ namespace PhotoMarket {
             }
         }
 
+        void OpenColorpicker() {
+
+            //creates a new color picker window
+            ColorPicker cp = new ColorPicker(this);
+
+            //opens the window
+            cp.Show();
+
+
+            //not sure what these do
+
+            //sets up a new color
+            //string newColor = "#000000";
+
+            //penColor = ColorTranslator.FromHtml(newColor);
+        }
         //deals with the function buttons
         private void FunctionBtns_pic_MouseClick(object sender, MouseEventArgs e) {
             if (e.X < 40)
@@ -902,6 +914,21 @@ namespace PhotoMarket {
             LayerControlWindow l = new LayerControlWindow(this);
 
             l.Show();
+        }
+
+
+
+        private void EditBrushSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+
+            //sets up a brush size window
+            BrushSize bs = new BrushSize(this);
+
+            //shows the window
+            bs.Show();
+        }
+
+        private void EditBrushColoursToolStripMenuItem_Click(object sender, EventArgs e) {
+            OpenColorpicker();
         }
     }
 }

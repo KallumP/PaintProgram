@@ -37,6 +37,10 @@
             this.image_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.changeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editBrushSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editBrushColoursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Settings = new System.Windows.Forms.ToolStripDropDownButton();
             this.compresssionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowRatioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +50,6 @@
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.canvas = new System.Windows.Forms.PictureBox();
-            this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
@@ -81,21 +84,21 @@
             // exportImageToolStripMenuItem
             // 
             this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.exportImageToolStripMenuItem.Text = "Export Image";
             this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.ExportImageToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
             // 
             // loadProjectToolStripMenuItem
             // 
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItem_Click);
             // 
@@ -104,7 +107,8 @@
             this.image_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeBackgroundImageToolStripMenuItem,
             this.removeBackgroundImageToolStripMenuItem,
-            this.layersToolStripMenuItem});
+            this.layersToolStripMenuItem,
+            this.brushToolStripMenuItem});
             this.image_tool.Name = "image_tool";
             this.image_tool.Size = new System.Drawing.Size(53, 22);
             this.image_tool.Text = "Image";
@@ -123,6 +127,36 @@
             this.removeBackgroundImageToolStripMenuItem.Text = "Remove Background Image";
             this.removeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.removeBackgroundImageToolStripMenuItem_Click);
             // 
+            // layersToolStripMenuItem
+            // 
+            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
+            this.layersToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.layersToolStripMenuItem.Text = "Layers";
+            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
+            // 
+            // brushToolStripMenuItem
+            // 
+            this.brushToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editBrushSizeToolStripMenuItem,
+            this.editBrushColoursToolStripMenuItem});
+            this.brushToolStripMenuItem.Name = "brushToolStripMenuItem";
+            this.brushToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.brushToolStripMenuItem.Text = "Brush";
+            // 
+            // editBrushSizeToolStripMenuItem
+            // 
+            this.editBrushSizeToolStripMenuItem.Name = "editBrushSizeToolStripMenuItem";
+            this.editBrushSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editBrushSizeToolStripMenuItem.Text = "Edit brush size";
+            this.editBrushSizeToolStripMenuItem.Click += new System.EventHandler(this.EditBrushSizeToolStripMenuItem_Click);
+            // 
+            // editBrushColoursToolStripMenuItem
+            // 
+            this.editBrushColoursToolStripMenuItem.Name = "editBrushColoursToolStripMenuItem";
+            this.editBrushColoursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editBrushColoursToolStripMenuItem.Text = "Edit brush colours";
+            this.editBrushColoursToolStripMenuItem.Click += new System.EventHandler(this.EditBrushColoursToolStripMenuItem_Click);
+            // 
             // Settings
             // 
             this.Settings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -138,14 +172,14 @@
             // compresssionToolStripMenuItem
             // 
             this.compresssionToolStripMenuItem.Name = "compresssionToolStripMenuItem";
-            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compresssionToolStripMenuItem.Text = "Compresssion";
             this.compresssionToolStripMenuItem.Click += new System.EventHandler(this.compresssionToolStripMenuItem_Click);
             // 
             // windowRatioToolStripMenuItem
             // 
             this.windowRatioToolStripMenuItem.Name = "windowRatioToolStripMenuItem";
-            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.windowRatioToolStripMenuItem.Text = "Window Ratio";
             this.windowRatioToolStripMenuItem.Click += new System.EventHandler(this.windowRatioToolStripMenuItem_Click);
             // 
@@ -228,14 +262,7 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
-            // layersToolStripMenuItem
-            // 
-            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
-            this.layersToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.layersToolStripMenuItem.Text = "Layers";
-            this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
-            // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,7 +277,7 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(500, 600);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "PhotoMarket";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -288,6 +315,9 @@
         private System.Windows.Forms.ToolStripMenuItem compresssionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowRatioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brushToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editBrushSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editBrushColoursToolStripMenuItem;
     }
 }
 
