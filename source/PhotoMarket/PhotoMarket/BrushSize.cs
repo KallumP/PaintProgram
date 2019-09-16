@@ -15,6 +15,9 @@ namespace PhotoMarket
         MainWindow main;
         int newSize;
 
+        int inputTimeout = 1000;
+        int inputTime;
+
         //constructor
         public BrushSize(MainWindow m) {
 
@@ -38,11 +41,35 @@ namespace PhotoMarket
             newSize_txt.Text = brushSize_bar.Value.ToString();
         }
 
-        //lets the user enter their own values
-        private void NewSize_txt_TextChanged(object sender, EventArgs e) {
+        //starts a timer as soon as a key button is let go of
+        private void NewSize_txt_KeyUp(object sender, KeyEventArgs e) {
+
+            //resets the time since last keypress
+            inputTime = 0;
+
+            //starts the timer;
+            inputTimer.Start();
+        }
+
+        private void InputTimer_Tick(object sender, EventArgs e) {
+
+            //keeps track of how much time has passed since the last keypress
+            inputTime += inputTimer.Interval;
+
+            //if the user has stopped typing it sets the new size
+            if (inputTime >= inputTimeout) {
+                UpdateTextBrushSize();
+
+                inputTimer.Stop();
+            }
+        }
+
+        //sets the new size from the text box value
+        void UpdateTextBrushSize() {
 
             int textValue;
 
+            //checks to see if the text input was a number
             Int32.TryParse(newSize_txt.Text, out textValue);
 
             //makes sure that a valid number was entered
@@ -61,6 +88,7 @@ namespace PhotoMarket
                 //reverts the change if an invalid change was made
                 newSize_txt.Text = newSize.ToString();
         }
+
 
         //lets the user go back without making changes
         private void Cancel_btn_Click(object sender, EventArgs e) {
@@ -81,5 +109,7 @@ namespace PhotoMarket
             //closes the window
             Close();
         }
+
+
     }
 }

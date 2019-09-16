@@ -25,11 +25,13 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.brushSize_bar = new System.Windows.Forms.TrackBar();
             this.lable1 = new System.Windows.Forms.Label();
             this.newSize_txt = new System.Windows.Forms.TextBox();
             this.select_btn = new System.Windows.Forms.Button();
             this.cancel_btn = new System.Windows.Forms.Button();
+            this.inputTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.brushSize_bar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@
             this.newSize_txt.Name = "newSize_txt";
             this.newSize_txt.Size = new System.Drawing.Size(74, 26);
             this.newSize_txt.TabIndex = 2;
-            this.newSize_txt.TextChanged += new System.EventHandler(this.NewSize_txt_TextChanged);
+            this.newSize_txt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NewSize_txt_KeyUp);
             // 
             // select_btn
             // 
@@ -84,6 +86,10 @@
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
             this.cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
+            // 
+            // inputTimer
+            // 
+            this.inputTimer.Tick += new System.EventHandler(this.InputTimer_Tick);
             // 
             // BrushSize
             // 
@@ -110,5 +116,6 @@
         private System.Windows.Forms.TextBox newSize_txt;
         private System.Windows.Forms.Button select_btn;
         private System.Windows.Forms.Button cancel_btn;
+        private System.Windows.Forms.Timer inputTimer;
     }
 }
