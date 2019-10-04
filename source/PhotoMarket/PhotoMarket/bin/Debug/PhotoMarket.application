@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="PhotoMarket.exe.manifest" size="5055">
+    <dependentAssembly dependencyType="install" codebase="PhotoMarket.exe.manifest" size="5054">
       <assemblyIdentity name="PhotoMarket.exe" version="3.0.0.6" publicKeyToken="0000000000000000" language="en-GB" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hzBDAW0Rh48OkKT9t8t0adB7oKiRcwsnYLi74L+WUIU=</dsig:DigestValue>
+        <dsig:DigestValue>CqVG/DOtDyoc9pU4CPo+d6BbUD2CsQsyeu0+19UD6bU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
