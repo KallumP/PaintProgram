@@ -128,6 +128,7 @@ namespace PhotoMarket
             //updates the pen in the main window
             main.UpdateGlobalPen(main.penColor, newSize);
 
+            
             //closes the window
             Close();
         }

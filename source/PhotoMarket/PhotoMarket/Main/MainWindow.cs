@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 
 namespace PhotoMarket
@@ -35,15 +36,18 @@ namespace PhotoMarket
         bool mouseClickedDown = false;
 
         string projectExtension = ".txt";
+        string path;
 
         //constructor
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
             Layer.parent = this;
         }
 
         //initial loading code
-        private void Form1_Load(object sender, EventArgs e) {
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
             //maximises the form
             WindowState = FormWindowState.Maximized;
@@ -53,6 +57,7 @@ namespace PhotoMarket
 
             //sets the color of the pen
             penColor = Color.Black;
+
 
             //sets the width of the pen
             penWidth = 1;
@@ -71,27 +76,20 @@ namespace PhotoMarket
         }
 
         //deals with what should happen when the form resizes
-        private void Form1_Resize(object sender, EventArgs e) {
+        private void Form1_Resize(object sender, EventArgs e)
+        {
             ResizeHandler();
         }
 
-        //updates the user on what drawing mode they are using
-        public void InvalidateAll() {
-            canvas.Invalidate();
-            colorPallet_pic.Invalidate();
-            widthDemo_pic.Invalidate();
-            options_pic.Invalidate();
-        }
 
-
-
-        //Paint Inputs----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        #region Paint Inputs
         //deals with mouse inputs
-        private void Canvas_MouseDown(object sender, MouseEventArgs e) {
+        private void Canvas_MouseDown(object sender, MouseEventArgs e)
+        {
 
             //deals with clicking down
-            if (mouseClickedDown == false) {
+            if (mouseClickedDown == false)
+            {
                 if (drawType == DrawingMode.Pen)
                     PenMouseDown(e);
                 else if (drawType == DrawingMode.Square)
@@ -106,10 +104,12 @@ namespace PhotoMarket
 
             canvas.Invalidate();
         }
-        private void Canvas_MouseUp(object sender, MouseEventArgs e) {
+        private void Canvas_MouseUp(object sender, MouseEventArgs e)
+        {
 
             //deals with letting go of click
-            if (mouseClickedDown == true) {
+            if (mouseClickedDown == true)
+            {
                 if (drawType == DrawingMode.Pen)
                     PenMouseUp(e);
                 else if (drawType == DrawingMode.Square)
@@ -124,10 +124,12 @@ namespace PhotoMarket
 
             canvas.Invalidate();
         }
-        private void Canvas_MouseMove(object sender, MouseEventArgs e) {
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
 
             //deals with mouse movements while the mouse is held down
-            if (mouseClickedDown == true) {
+            if (mouseClickedDown == true)
+            {
                 if (drawType == DrawingMode.Pen)
                     PenMouseMove(e);
                 else if (drawType == DrawingMode.Square)
@@ -138,7 +140,9 @@ namespace PhotoMarket
                     LineMouseMove(e);
                 else if (drawType == DrawingMode.Image)
                     ImageMouseMove(e);
-            } else {
+            }
+            else
+            {
                 if (drawType == DrawingMode.Image)
                     ImageMouseMoveNoClick(e);
             }
@@ -147,7 +151,8 @@ namespace PhotoMarket
         }
 
         //deals with inputs for the pen drawing mode
-        void PenMouseDown(MouseEventArgs e) {
+        void PenMouseDown(MouseEventArgs e)
+        {
 
             //lets the program know that the mouse is being held down
             mouseClickedDown = true;
@@ -162,7 +167,8 @@ namespace PhotoMarket
             layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Pen);
 
         }
-        void PenMouseUp(MouseEventArgs e) {
+        void PenMouseUp(MouseEventArgs e)
+        {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
             layers[currentLayer].penDrawings[layers[currentLayer].penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
@@ -170,14 +176,16 @@ namespace PhotoMarket
             //lets the program know that click is no longer being held down
             mouseClickedDown = false;
         }
-        void PenMouseMove(MouseEventArgs e) {
+        void PenMouseMove(MouseEventArgs e)
+        {
 
             //adds a new coordinate to the coordinate list of the current index of the pen drawing list
             layers[currentLayer].penDrawings[layers[currentLayer].penDrawings.Count() - 1].AddNewCoordinate(new Point(e.X, e.Y));
         }
 
         //deals with inputs for the square drawing mode
-        void SquareMouseDown(MouseEventArgs e) {
+        void SquareMouseDown(MouseEventArgs e)
+        {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -188,7 +196,8 @@ namespace PhotoMarket
             //lets the program know to draw a square drawing next
             layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Square);
         }
-        void SquareMouseUp(MouseEventArgs e) {
+        void SquareMouseUp(MouseEventArgs e)
+        {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -202,7 +211,8 @@ namespace PhotoMarket
             //makes the screen redraw
             canvas.Invalidate();
         }
-        void SquareMouseMove(MouseEventArgs e) {
+        void SquareMouseMove(MouseEventArgs e)
+        {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -215,7 +225,8 @@ namespace PhotoMarket
         }
 
         //deals with inputs for the circle drawing mode
-        void CircleMouseDown(MouseEventArgs e) {
+        void CircleMouseDown(MouseEventArgs e)
+        {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -226,7 +237,8 @@ namespace PhotoMarket
             //lets the program know to draw a circle drawing next
             layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Circle);
         }
-        void CircleMouseUp(MouseEventArgs e) {
+        void CircleMouseUp(MouseEventArgs e)
+        {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -240,7 +252,8 @@ namespace PhotoMarket
             //makes the screen redraw
             canvas.Invalidate();
         }
-        void CircleMouseMove(MouseEventArgs e) {
+        void CircleMouseMove(MouseEventArgs e)
+        {
 
             //adds in the final position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -253,7 +266,8 @@ namespace PhotoMarket
         }
 
         //deals with inputs for the line drawing mode
-        void LineMouseDown(MouseEventArgs e) {
+        void LineMouseDown(MouseEventArgs e)
+        {
 
             //lets the program know that the mouse is held down
             mouseClickedDown = true;
@@ -264,7 +278,8 @@ namespace PhotoMarket
             //lets the program know to draw a line drawing next
             layers[currentLayer].drawOrder.Add(Layer.DrawingMode.Line);
         }
-        void LineMouseUp(MouseEventArgs e) {
+        void LineMouseUp(MouseEventArgs e)
+        {
 
             //lets the program know that click has been let go of
             mouseClickedDown = false;
@@ -280,7 +295,8 @@ namespace PhotoMarket
             //makes the screen redraw
             canvas.Invalidate();
         }
-        void LineMouseMove(MouseEventArgs e) {
+        void LineMouseMove(MouseEventArgs e)
+        {
 
             //adds in the position of the mouse and parses if shift was pressed
             if (ModifierKeys == Keys.Shift)
@@ -295,12 +311,14 @@ namespace PhotoMarket
         }
 
         //lets the user choose where to put an image
-        void ImageMouseMoveNoClick(MouseEventArgs e) {
+        void ImageMouseMoveNoClick(MouseEventArgs e)
+        {
 
             //lets the program know to draw an image next
             layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
         }
-        void ImageMouseDown(MouseEventArgs e) {
+        void ImageMouseDown(MouseEventArgs e)
+        {
 
             //lets the program know that mouse is clicked down
             mouseClickedDown = true;
@@ -309,10 +327,12 @@ namespace PhotoMarket
             layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetStartPoint(new PointF(e.X, e.Y));
 
         }
-        void ImageMouseMove(MouseEventArgs e) {
+        void ImageMouseMove(MouseEventArgs e)
+        {
             layers[currentLayer].imageDrawings[layers[currentLayer].imageDrawings.Count - 1].SetEndPoint(new PointF(e.X, e.Y));
         }
-        void ImageMouseUp(MouseEventArgs e) {
+        void ImageMouseUp(MouseEventArgs e)
+        {
 
             //lets the program know that mouse is no longer clicked down
             mouseClickedDown = false;
@@ -324,29 +344,34 @@ namespace PhotoMarket
             drawType = DrawingMode.Mouse;
             InvalidateAll();
         }
+        #endregion
 
-
-        //Brushes----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        #region Brushes
         //changes the sizes of the pen
-        private void BrushSizeChange_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void BrushSizeChange_pic_MouseClick(object sender, MouseEventArgs e)
+        {
             if (e.Y < 25)
                 IncreasePenWidth();
             else if (e.Y > 30 && e.Y < 55)
                 DecreasePenWidth();
         }
-        private void BrushSizeChange_pic_MouseDoubleClick(object sender, MouseEventArgs e) {
+        private void BrushSizeChange_pic_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
             if (e.Y < 27)
                 IncreasePenWidth();
             else if (e.Y >= 27)
                 DecreasePenWidth();
         }
-        private void DecreasePenWidth() {
-            if (ModifierKeys == Keys.Shift) {
+        private void DecreasePenWidth()
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
 
                 //decreases the width of the pen for normal click
                 penWidth /= 2;
-            } else {
+            }
+            else
+            {
 
                 //fine decrease for shift click
                 penWidth -= 1;
@@ -360,13 +385,17 @@ namespace PhotoMarket
             UpdateGlobalPen(penColor, penWidth);
             InvalidateAll();
         }
-        private void IncreasePenWidth() {
-            if (ModifierKeys == Keys.Shift) {
+        private void IncreasePenWidth()
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
 
                 //increase the width of the pen for normal click
                 penWidth *= 2;
 
-            } else {
+            }
+            else
+            {
 
                 //fine increase for shift click
                 penWidth += 1;
@@ -382,18 +411,30 @@ namespace PhotoMarket
         }
 
         //finds out where on the options was clicked, and sets the draw type accordingly
-        private void Options_pic_MouseClick(object sender, MouseEventArgs e) {
-            if (e.X < 45) {
+        private void Options_pic_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.X < 45)
+            {
                 drawType = DrawingMode.Mouse;
-            } else if (e.X < 90) {
+            }
+            else if (e.X < 90)
+            {
                 drawType = DrawingMode.Pen;
-            } else if (e.X < 135) {
+            }
+            else if (e.X < 135)
+            {
                 drawType = DrawingMode.Square;
-            } else if (e.X < 180) {
+            }
+            else if (e.X < 180)
+            {
                 drawType = DrawingMode.Circle;
-            } else if (e.X < 225) {
+            }
+            else if (e.X < 225)
+            {
                 drawType = DrawingMode.Line;
-            } else if (e.X < 270) {
+            }
+            else if (e.X < 270)
+            {
                 CreateImageDrawing();
             }
 
@@ -401,7 +442,8 @@ namespace PhotoMarket
         }
 
         //updates the global pen
-        public void UpdateGlobalPen(Color newColor, float newWidth) {
+        public void UpdateGlobalPen(Color newColor, float newWidth)
+        {
 
             //sets the color and width of the pen
             globalPen = new Pen(newColor, newWidth);
@@ -411,10 +453,13 @@ namespace PhotoMarket
                 System.Drawing.Drawing2D.LineCap.Round,
                 System.Drawing.Drawing2D.LineCap.Round,
                 System.Drawing.Drawing2D.DashCap.Round);
+
+            widthDemo_pic.Invalidate();
         }
 
         //checks to see what color was chosen when clicking on the color pallet
-        private void ColorPallet_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void ColorPallet_pic_MouseClick(object sender, MouseEventArgs e)
+        {
 
             //sets the color of the pen
             if (e.Y < 40)
@@ -431,7 +476,8 @@ namespace PhotoMarket
                 penColor = Color.Brown;
             else if (e.Y < 280)
                 penColor = Color.White;
-            else if (e.Y < 320) {
+            else if (e.Y < 320)
+            {
                 OpenColorpicker();
             }
 
@@ -439,14 +485,22 @@ namespace PhotoMarket
             UpdateGlobalPen(penColor, penWidth);
             InvalidateAll();
         }
+        #endregion
 
+        #region Invalidates
+        //updates the user on what drawing mode they are using
+        public void InvalidateAll()
+        {
+            canvas.Invalidate();
+            colorPallet_pic.Invalidate();
+            widthDemo_pic.Invalidate();
+            options_pic.Invalidate();
 
-
-        //Invalidates----------------------------------------------------------------------------------------------------------------------------------------------------------
+        }
 
         //draws the screen
-        private void DrawArea_pic_Paint(object sender, PaintEventArgs e) {
-
+        private void canvas_Paint(object sender, PaintEventArgs e)
+        {
             //makes the background white
             e.Graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
@@ -458,7 +512,8 @@ namespace PhotoMarket
         }
 
         //draws color pallet
-        private void ColorPallet_pic_Paint(object sender, PaintEventArgs e) {
+        private void ColorPallet_pic_Paint(object sender, PaintEventArgs e)
+        {
 
             //draws a small indicator for the color being used
             if (globalPen.Color == Color.Black)
@@ -505,14 +560,16 @@ namespace PhotoMarket
         }
 
         //draws out the increase and decrease buttons
-        private void BrushSizeChange_pic_Paint(object sender, PaintEventArgs e) {
+        private void BrushSizeChange_pic_Paint(object sender, PaintEventArgs e)
+        {
             e.Graphics.DrawLine(Pens.Black, 0, brushSizeChange_pic.Height / 2, brushSizeChange_pic.Width, brushSizeChange_pic.Height / 2);
             e.Graphics.DrawString("+", DefaultFont, Brushes.Black, -7 + brushSizeChange_pic.Width / 2, -6 + brushSizeChange_pic.Height / 4);
             e.Graphics.DrawString("-", DefaultFont, Brushes.Black, -6 + brushSizeChange_pic.Width / 2, -6 + brushSizeChange_pic.Height * 3 / 4);
         }
 
         //draws out the different options that can be used
-        private void Options_pic_Paint(object sender, PaintEventArgs e) {
+        private void Options_pic_Paint(object sender, PaintEventArgs e)
+        {
 
             //shows what option has been selected
             if (drawType == DrawingMode.Mouse)
@@ -542,29 +599,32 @@ namespace PhotoMarket
         }
 
         //shows the thickness of the brush
-        private void WidthDemo_pic_Paint(object sender, PaintEventArgs e) {
+        private void WidthDemo_pic_Paint(object sender, PaintEventArgs e)
+        {
             SolidBrush brush = new SolidBrush(penColor);
             e.Graphics.FillEllipse(brush, 19 - (penWidth / 2), 19 - (penWidth / 2), penWidth, penWidth);
         }
 
         //draws in the function images
-        private void FunctionBtns_pic_Paint(object sender, PaintEventArgs e) {
+        private void FunctionBtns_pic_Paint(object sender, PaintEventArgs e)
+        {
             e.Graphics.DrawImage(Properties.Resources._BackArrow, 0, 0, 40, 40);
             e.Graphics.DrawImage(Properties.Resources._Delete, 50, 0, 40, 40);
         }
+        #endregion
 
-
-
-        //Functions----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        #region Functions
         //lets the user choose an image to add to the drawing
-        void CreateImageDrawing() {
+        void CreateImageDrawing()
+        {
             //makes the user open a project
             OpenFileDialog opener = new OpenFileDialog();
-            if (opener.ShowDialog() == DialogResult.OK) {
+            if (opener.ShowDialog() == DialogResult.OK)
+            {
 
                 //makes sure that the right type of file was entered
-                if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg")) {
+                if (opener.FileName.ToLower().Contains(".png") || opener.FileName.ToLower().Contains(".jpg"))
+                {
 
                     //sets up an image with the chosen path
                     layers[currentLayer].imageDrawings.Add(new ImageDrawing(opener.FileName, this));
@@ -578,14 +638,16 @@ namespace PhotoMarket
         }
 
         //finds out what save option the user wants
-        private void OpenCompression() {
+        private void OpenCompression()
+        {
             CompressionWindow c = new CompressionWindow(this);
 
             c.Show();
         }
 
         //finds out what window ratio the user wants
-        void OpenRatio() {
+        void OpenRatio()
+        {
 
             ScreenRatioWindow s = new ScreenRatioWindow(this);
 
@@ -596,10 +658,12 @@ namespace PhotoMarket
         /// <summary>
         /// Checks to see if the canvas' size needs to be bound to a certain ratio
         /// </summary>
-        public void ResizeHandler() {
+        public void ResizeHandler()
+        {
 
             //checks to see if the canvas has to be bound to a ratio
-            if (ratioBind) {
+            if (ratioBind)
+            {
 
                 WindowState = FormWindowState.Normal;
 
@@ -617,7 +681,8 @@ namespace PhotoMarket
                 Width = canvas.Width + 80;
                 Height = canvas.Height + 130;
 
-            } else
+            }
+            else
                 canvas.Size = new Size(Width - 80, Height - 130);
 
 
@@ -629,7 +694,8 @@ namespace PhotoMarket
         }
 
         //exports the data as an image
-        public void ExportImage() {
+        public void ExportImage()
+        {
 
             //creates a save file dialog
             SaveFileDialog saver = new SaveFileDialog();
@@ -638,13 +704,15 @@ namespace PhotoMarket
             saver.Filter = "PNG(*.PNG)|*.png|JPG(*.JPG)|*.jpg";
 
             //makes the user choose where to save the file
-            if (saver.ShowDialog() == DialogResult.OK) {
+            if (saver.ShowDialog() == DialogResult.OK)
+            {
 
                 //creates a bitmap which will be drawn to
                 Bitmap toSave = new Bitmap(canvas.Width, canvas.Height);
 
                 //uses a graphics library to draw to the file
-                using (Graphics g = Graphics.FromImage(toSave)) {
+                using (Graphics g = Graphics.FromImage(toSave))
+                {
 
                     //makes the background white
                     g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
@@ -663,7 +731,8 @@ namespace PhotoMarket
         }
 
         //saves the data as a project file
-        public void SaveProject() {
+        public void SaveProjectAs()
+        {
 
             SaveFileDialog saver = new SaveFileDialog();
 
@@ -671,10 +740,14 @@ namespace PhotoMarket
             saver.Filter = "TXT(*.TXT)|*.txt";
 
             //makes the user choose a file path to save to
-            if (saver.ShowDialog() == DialogResult.OK) {
+            if (saver.ShowDialog() == DialogResult.OK)
+            {
 
                 //opens up the text file
                 StreamWriter sw = new StreamWriter(saver.FileName);
+
+                //saves the path of the file
+                sw.WriteLine(path);
 
                 //saves the ratio of the project
                 sw.WriteLine(ratioBind);
@@ -689,19 +762,78 @@ namespace PhotoMarket
 
                 //closes the file
                 sw.Close();
+
+                path = saver.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Allows the user to save the project to the same selected path as before
+        /// </summary>
+        public void SaveProject()
+        {
+
+            //checks to see if a path had previously been used
+            if (path != null)
+            {
+
+                //checks to see if the path still exists
+                if (File.Exists(path))
+                {
+
+                    //opens up the text file from the path
+                    StreamWriter sw = new StreamWriter(path);
+
+                    //saves the path of the file
+                    sw.WriteLine(path);
+
+                    //saves the ratio of the project
+                    sw.WriteLine(ratioBind);
+                    sw.WriteLine(ratio);
+
+                    //saves the amount of layers in the project
+                    sw.WriteLine(layers.Count);
+
+                    //goes to each layer to save it's contents
+                    foreach (Layer l in layers)
+                        l.Save(sw);
+
+                    //closes the file
+                    sw.Close();
+                }
+                else
+                {
+                    //lets the user know that the path no longer exists
+                    MessageBox.Show("The selected path no longer exists, file will save as instead");
+
+                    //lets the user save as instead
+                    SaveProjectAs();
+                }
+            }
+            else
+            {
+
+                //lets the user know that there was no selected path
+                MessageBox.Show("There was no selected path, file will save as instead");
+
+                //lets the user save as instead
+                SaveProjectAs();
             }
         }
 
         //loads up a project
-        public void LoadProject() {
+        public void LoadProject()
+        {
 
             OpenFileDialog opener = new OpenFileDialog();
 
             //makes the user open a project
-            if (opener.ShowDialog() == DialogResult.OK) {
+            if (opener.ShowDialog() == DialogResult.OK)
+            {
 
                 //makes sure that the right type of file was entered
-                if (opener.FileName.Contains(projectExtension)) {
+                if (opener.FileName.Contains(projectExtension))
+                {
 
                     //clears the drawings ready for the new project
                     ClearDrawings();
@@ -709,6 +841,8 @@ namespace PhotoMarket
 
                     //opens the file in the program
                     StreamReader sr = new StreamReader(opener.FileName);
+
+                    path = sr.ReadLine();
 
                     //gets the ratio information
                     if (sr.ReadLine().ToLower() == "true")
@@ -722,7 +856,8 @@ namespace PhotoMarket
                     //gets the amount of layers there are in the project
                     int noOfLayers = Convert.ToInt32(sr.ReadLine());
 
-                    for (int i = 0; i < noOfLayers; i++) {
+                    for (int i = 0; i < noOfLayers; i++)
+                    {
                         layers.Add(new Layer());
                         layers[i].Load(sr);
                     }
@@ -739,15 +874,18 @@ namespace PhotoMarket
         }
 
         //changes the background image
-        public void ChangeBackground() {
+        public void ChangeBackground()
+        {
 
             string path = "";
 
             OpenFileDialog opener = new OpenFileDialog();
 
             //makes the user open a project
-            if (opener.ShowDialog() == DialogResult.OK) {
-                if (opener.FileName.ToLower().Contains(".jpg") || opener.FileName.ToLower().Contains(".png")) {
+            if (opener.ShowDialog() == DialogResult.OK)
+            {
+                if (opener.FileName.ToLower().Contains(".jpg") || opener.FileName.ToLower().Contains(".png"))
+                {
 
                     path = opener.FileName;
                     background = new ImageDrawing(
@@ -760,19 +898,22 @@ namespace PhotoMarket
         }
 
         //removes the background image
-        public void RemoveBackground() {
+        public void RemoveBackground()
+        {
             background = null;
         }
 
         //ensures that the user wants to clear the drawing
-        private void EnsureClearDrawing() {
+        private void EnsureClearDrawing()
+        {
             Warning w = new Warning(this);
 
             w.Show();
         }
 
         //clears out the paint area
-        public void ClearDrawings() {
+        public void ClearDrawings()
+        {
 
             //removes all elements from the list
             layers.Clear();
@@ -784,36 +925,39 @@ namespace PhotoMarket
         }
 
         //removes the latest drawing from the project
-        void UndoDrawing() {
+        void UndoDrawing()
+        {
 
             //makes sure that the project is not empty
-            if (layers[currentLayer].drawOrder.Count != 0) {
+            if (layers[currentLayer].drawOrder.Count != 0)
+            {
 
                 //checks to see what the latest input was before removing it
-                switch (layers[currentLayer].drawOrder[layers[currentLayer].drawOrder.Count - 1]) {
+                switch (layers[currentLayer].drawOrder[layers[currentLayer].drawOrder.Count - 1])
+                {
 
                     case Layer.DrawingMode.Pen:
-                    layers[currentLayer].penDrawings.RemoveAt(layers[currentLayer].penDrawings.Count - 1);
-                    break;
+                        layers[currentLayer].penDrawings.RemoveAt(layers[currentLayer].penDrawings.Count - 1);
+                        break;
 
                     case Layer.DrawingMode.Square:
-                    layers[currentLayer].squareDrawings.RemoveAt(layers[currentLayer].squareDrawings.Count - 1);
-                    break;
+                        layers[currentLayer].squareDrawings.RemoveAt(layers[currentLayer].squareDrawings.Count - 1);
+                        break;
 
                     case Layer.DrawingMode.Circle:
-                    layers[currentLayer].circleDrawings.RemoveAt(layers[currentLayer].circleDrawings.Count - 1);
-                    break;
+                        layers[currentLayer].circleDrawings.RemoveAt(layers[currentLayer].circleDrawings.Count - 1);
+                        break;
 
                     case Layer.DrawingMode.Line:
-                    layers[currentLayer].lineDrawings.RemoveAt(layers[currentLayer].lineDrawings.Count - 1);
-                    break;
+                        layers[currentLayer].lineDrawings.RemoveAt(layers[currentLayer].lineDrawings.Count - 1);
+                        break;
 
                     case Layer.DrawingMode.Image:
-                    layers[currentLayer].imageDrawings.RemoveAt(layers[currentLayer].imageDrawings.Count - 1);
-                    break;
+                        layers[currentLayer].imageDrawings.RemoveAt(layers[currentLayer].imageDrawings.Count - 1);
+                        break;
 
                     default:
-                    break;
+                        break;
                 }
 
                 layers[currentLayer].drawOrder.RemoveAt(layers[currentLayer].drawOrder.Count - 1);
@@ -822,24 +966,18 @@ namespace PhotoMarket
             }
         }
 
-        void OpenColorpicker() {
+        void OpenColorpicker()
+        {
 
             //creates a new color picker window
             ColorPicker cp = new ColorPicker(this);
 
             //opens the window
             cp.Show();
-
-
-            //not sure what these do
-
-            //sets up a new color
-            //string newColor = "#000000";
-
-            //penColor = ColorTranslator.FromHtml(newColor);
         }
         //deals with the function buttons
-        private void FunctionBtns_pic_MouseClick(object sender, MouseEventArgs e) {
+        private void FunctionBtns_pic_MouseClick(object sender, MouseEventArgs e)
+        {
             if (e.X < 40)
                 UndoDrawing();
             else if (e.X > 50 && e.X < 90)
@@ -847,10 +985,12 @@ namespace PhotoMarket
         }
 
         //lets the user use number inputs to change the draw type
-        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
             //makes sure that the mode can't be switched mid drawing
-            if (mouseClickedDown == false) {
+            if (mouseClickedDown == false)
+            {
                 if (e.KeyCode == Keys.D1)
                     drawType = DrawingMode.Mouse;
                 else if (e.KeyCode == Keys.D2)
@@ -871,54 +1011,81 @@ namespace PhotoMarket
                     DecreasePenWidth();
                 else if (e.KeyCode == Keys.OemMinus)
                     DecreasePenWidth();
+                else if (e.KeyCode == Keys.Z)
+                {
+                    if (ModifierKeys == Keys.Control)
+                        UndoDrawing();
+                }
+                else if (e.KeyCode == Keys.S)
+                {
+
+                    //checks to see if both control and shift was pressed
+                    if (e.Modifiers == (Keys.Control | Keys.Shift))
+
+                        SaveProjectAs();
+
+                    //checks to see if only control was pressed
+                    else if (e.Modifiers == Keys.Control)
+
+                        SaveProject();
+                }
             }
 
             options_pic.Invalidate();
             InvalidateAll();
         }
+        #endregion
 
-
-
-        //toobar clicks -----------------------------------------------------------------------------------
-
-        private void ExportImageToolStripMenuItem_Click(object sender, EventArgs e) {
+        #region Toolbar Clicks
+        private void ExportImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             ExportImage();
         }
 
-        private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             SaveProject();
         }
 
-        private void LoadProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void SaveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveProjectAs();
+        }
+
+        private void LoadProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             LoadProject();
         }
 
-        private void changeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void changeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             ChangeBackground();
         }
 
-        private void removeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void removeBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             RemoveBackground();
         }
 
-
-        private void compresssionToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void compresssionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenCompression();
         }
 
-        private void windowRatioToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void windowRatioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenRatio();
         }
 
-        private void layersToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void layersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             LayerControlWindow l = new LayerControlWindow(this);
 
             l.Show();
         }
 
-
-
-        private void EditBrushSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void EditBrushSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
             //sets up a brush size window
             BrushSize bs = new BrushSize(this);
@@ -927,8 +1094,11 @@ namespace PhotoMarket
             bs.Show();
         }
 
-        private void EditBrushColoursToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void EditBrushColoursToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenColorpicker();
         }
+        #endregion
+
     }
 }

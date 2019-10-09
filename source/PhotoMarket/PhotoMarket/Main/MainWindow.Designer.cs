@@ -33,6 +33,7 @@
             this.file_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.image_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.changeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +77,7 @@
             this.file_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportImageToolStripMenuItem,
             this.saveProjectToolStripMenuItem,
+            this.saveProjectAsToolStripMenuItem,
             this.loadProjectToolStripMenuItem});
             this.file_tool.Name = "file_tool";
             this.file_tool.Size = new System.Drawing.Size(38, 22);
@@ -84,21 +86,28 @@
             // exportImageToolStripMenuItem
             // 
             this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.exportImageToolStripMenuItem.Text = "Export Image";
             this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.ExportImageToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            // 
+            // saveProjectAsToolStripMenuItem
+            // 
+            this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveProjectAsToolStripMenuItem.Text = "Save Project As";
+            this.saveProjectAsToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectAsToolStripMenuItem_Click);
             // 
             // loadProjectToolStripMenuItem
             // 
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItem_Click);
             // 
@@ -146,14 +155,14 @@
             // editBrushSizeToolStripMenuItem
             // 
             this.editBrushSizeToolStripMenuItem.Name = "editBrushSizeToolStripMenuItem";
-            this.editBrushSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editBrushSizeToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.editBrushSizeToolStripMenuItem.Text = "Edit brush size";
             this.editBrushSizeToolStripMenuItem.Click += new System.EventHandler(this.EditBrushSizeToolStripMenuItem_Click);
             // 
             // editBrushColoursToolStripMenuItem
             // 
             this.editBrushColoursToolStripMenuItem.Name = "editBrushColoursToolStripMenuItem";
-            this.editBrushColoursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editBrushColoursToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.editBrushColoursToolStripMenuItem.Text = "Edit brush colours";
             this.editBrushColoursToolStripMenuItem.Click += new System.EventHandler(this.EditBrushColoursToolStripMenuItem_Click);
             // 
@@ -172,14 +181,14 @@
             // compresssionToolStripMenuItem
             // 
             this.compresssionToolStripMenuItem.Name = "compresssionToolStripMenuItem";
-            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.compresssionToolStripMenuItem.Text = "Compresssion";
             this.compresssionToolStripMenuItem.Click += new System.EventHandler(this.compresssionToolStripMenuItem_Click);
             // 
             // windowRatioToolStripMenuItem
             // 
             this.windowRatioToolStripMenuItem.Name = "windowRatioToolStripMenuItem";
-            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.windowRatioToolStripMenuItem.Text = "Window Ratio";
             this.windowRatioToolStripMenuItem.Click += new System.EventHandler(this.windowRatioToolStripMenuItem_Click);
             // 
@@ -257,7 +266,7 @@
             this.canvas.Size = new System.Drawing.Size(420, 470);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
-            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawArea_pic_Paint);
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
@@ -309,7 +318,7 @@
         private System.Windows.Forms.ToolStripMenuItem removeBackgroundImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton file_tool;
         private System.Windows.Forms.ToolStripMenuItem exportImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton Settings;
         private System.Windows.Forms.ToolStripMenuItem compresssionToolStripMenuItem;
@@ -318,6 +327,7 @@
         private System.Windows.Forms.ToolStripMenuItem brushToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editBrushSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editBrushColoursToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
     }
 }
 
