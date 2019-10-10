@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace PhotoMarket.DrawingClasses {
     public class PenDrawing {
 
-        public static int compressionDistance = 10;
+        public static int compressionDistance = 1;
 
         List<PointF> coords = new List<PointF>();
         Pen pen;
