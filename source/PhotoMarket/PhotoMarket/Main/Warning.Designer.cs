@@ -42,7 +42,8 @@
             // 
             // clear_btn
             // 
-            this.clear_btn.BackColor = System.Drawing.Color.Red;
+            this.clear_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.clear_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clear_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clear_btn.Location = new System.Drawing.Point(12, 110);
             this.clear_btn.Name = "clear_btn";
@@ -54,19 +55,22 @@
             // 
             // cancel_btn
             // 
+            this.cancel_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cancel_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancel_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancel_btn.Location = new System.Drawing.Point(12, 194);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(328, 62);
             this.cancel_btn.TabIndex = 2;
             this.cancel_btn.Text = "Cancel";
-            this.cancel_btn.UseVisualStyleBackColor = true;
+            this.cancel_btn.UseVisualStyleBackColor = false;
             this.cancel_btn.Click += new System.EventHandler(this.Clear_btn_Click);
             // 
             // Warning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(352, 286);
             this.Controls.Add(this.cancel_btn);
             this.Controls.Add(this.clear_btn);

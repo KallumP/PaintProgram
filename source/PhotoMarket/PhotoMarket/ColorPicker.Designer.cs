@@ -91,13 +91,15 @@
             // 
             // chooseColor_btn
             // 
+            this.chooseColor_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.chooseColor_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chooseColor_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chooseColor_btn.Location = new System.Drawing.Point(461, 403);
             this.chooseColor_btn.Name = "chooseColor_btn";
             this.chooseColor_btn.Size = new System.Drawing.Size(141, 46);
             this.chooseColor_btn.TabIndex = 7;
             this.chooseColor_btn.Text = "Choose Color";
-            this.chooseColor_btn.UseVisualStyleBackColor = true;
+            this.chooseColor_btn.UseVisualStyleBackColor = false;
             this.chooseColor_btn.Click += new System.EventHandler(this.ChooseColor_btn_Click);
             // 
             // Alpha_bar
@@ -178,6 +180,7 @@
             // 
             // hexValue_txt
             // 
+            this.hexValue_txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.hexValue_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hexValue_txt.Location = new System.Drawing.Point(16, 365);
             this.hexValue_txt.Name = "hexValue_txt";
@@ -186,13 +189,15 @@
             // 
             // CheckHex_btn
             // 
+            this.CheckHex_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.CheckHex_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CheckHex_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CheckHex_btn.Location = new System.Drawing.Point(12, 403);
             this.CheckHex_btn.Name = "CheckHex_btn";
             this.CheckHex_btn.Size = new System.Drawing.Size(167, 46);
             this.CheckHex_btn.TabIndex = 17;
             this.CheckHex_btn.Text = "Check Hex";
-            this.CheckHex_btn.UseVisualStyleBackColor = true;
+            this.CheckHex_btn.UseVisualStyleBackColor = false;
             this.CheckHex_btn.Click += new System.EventHandler(this.CheckHex_btn_Click);
             // 
             // label2
@@ -209,6 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(652, 461);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CheckHex_btn);

@@ -42,13 +42,15 @@
             // 
             // cancel_btn
             // 
+            this.cancel_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cancel_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancel_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancel_btn.Location = new System.Drawing.Point(277, 95);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(119, 40);
             this.cancel_btn.TabIndex = 3;
             this.cancel_btn.Text = "Close";
-            this.cancel_btn.UseVisualStyleBackColor = true;
+            this.cancel_btn.UseVisualStyleBackColor = false;
             this.cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
             // 
             // newCompression_txt
@@ -61,19 +63,22 @@
             // 
             // changeCompression_btn
             // 
+            this.changeCompression_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.changeCompression_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.changeCompression_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeCompression_btn.Location = new System.Drawing.Point(137, 95);
             this.changeCompression_btn.Name = "changeCompression_btn";
             this.changeCompression_btn.Size = new System.Drawing.Size(134, 40);
             this.changeCompression_btn.TabIndex = 9;
             this.changeCompression_btn.Text = "Change";
-            this.changeCompression_btn.UseVisualStyleBackColor = true;
+            this.changeCompression_btn.UseVisualStyleBackColor = false;
             this.changeCompression_btn.Click += new System.EventHandler(this.button1_Click);
             // 
             // CompressionWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(408, 148);
             this.Controls.Add(this.changeCompression_btn);
             this.Controls.Add(this.newCompression_txt);

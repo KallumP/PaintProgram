@@ -58,6 +58,7 @@
             // 
             // newSize_txt
             // 
+            this.newSize_txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.newSize_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newSize_txt.Location = new System.Drawing.Point(135, 90);
             this.newSize_txt.Name = "newSize_txt";
@@ -67,24 +68,28 @@
             // 
             // select_btn
             // 
+            this.select_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.select_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.select_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.select_btn.Location = new System.Drawing.Point(270, 86);
             this.select_btn.Name = "select_btn";
             this.select_btn.Size = new System.Drawing.Size(81, 34);
             this.select_btn.TabIndex = 3;
             this.select_btn.Text = "Select";
-            this.select_btn.UseVisualStyleBackColor = true;
+            this.select_btn.UseVisualStyleBackColor = false;
             this.select_btn.Click += new System.EventHandler(this.Select_btn_Click);
             // 
             // cancel_btn
             // 
+            this.cancel_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cancel_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancel_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancel_btn.Location = new System.Drawing.Point(374, 86);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(81, 34);
             this.cancel_btn.TabIndex = 4;
             this.cancel_btn.Text = "Cancel";
-            this.cancel_btn.UseVisualStyleBackColor = true;
+            this.cancel_btn.UseVisualStyleBackColor = false;
             this.cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
             // 
             // inputTimer
@@ -95,6 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(467, 146);
             this.Controls.Add(this.cancel_btn);
             this.Controls.Add(this.select_btn);

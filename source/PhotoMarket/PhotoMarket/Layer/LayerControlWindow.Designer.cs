@@ -36,6 +36,7 @@
             // 
             // layersList
             // 
+            this.layersList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.layersList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layersList.FormattingEnabled = true;
             this.layersList.ItemHeight = 20;
@@ -47,46 +48,54 @@
             // 
             // layerUp_btn
             // 
+            this.layerUp_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.layerUp_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.layerUp_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layerUp_btn.Location = new System.Drawing.Point(324, 13);
             this.layerUp_btn.Name = "layerUp_btn";
             this.layerUp_btn.Size = new System.Drawing.Size(113, 40);
             this.layerUp_btn.TabIndex = 1;
             this.layerUp_btn.Text = "Move Up";
-            this.layerUp_btn.UseVisualStyleBackColor = true;
+            this.layerUp_btn.UseVisualStyleBackColor = false;
             this.layerUp_btn.Click += new System.EventHandler(this.layerUp_btn_Click);
             // 
             // layerDown_btn
             // 
+            this.layerDown_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.layerDown_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.layerDown_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layerDown_btn.Location = new System.Drawing.Point(324, 59);
             this.layerDown_btn.Name = "layerDown_btn";
             this.layerDown_btn.Size = new System.Drawing.Size(113, 40);
             this.layerDown_btn.TabIndex = 2;
             this.layerDown_btn.Text = "Move Down";
-            this.layerDown_btn.UseVisualStyleBackColor = true;
+            this.layerDown_btn.UseVisualStyleBackColor = false;
             this.layerDown_btn.Click += new System.EventHandler(this.layerDown_btn_Click);
             // 
             // deleteLayer_btn
             // 
+            this.deleteLayer_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.deleteLayer_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteLayer_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteLayer_btn.Location = new System.Drawing.Point(324, 377);
             this.deleteLayer_btn.Name = "deleteLayer_btn";
             this.deleteLayer_btn.Size = new System.Drawing.Size(113, 40);
             this.deleteLayer_btn.TabIndex = 3;
             this.deleteLayer_btn.Text = "Delete Layer";
-            this.deleteLayer_btn.UseVisualStyleBackColor = true;
+            this.deleteLayer_btn.UseVisualStyleBackColor = false;
             this.deleteLayer_btn.Click += new System.EventHandler(this.deleteLayer_btn_Click);
             // 
             // newLayer_btn
             // 
+            this.newLayer_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.newLayer_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newLayer_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newLayer_btn.Location = new System.Drawing.Point(324, 239);
             this.newLayer_btn.Name = "newLayer_btn";
             this.newLayer_btn.Size = new System.Drawing.Size(113, 40);
             this.newLayer_btn.TabIndex = 4;
             this.newLayer_btn.Text = "Add Layer";
-            this.newLayer_btn.UseVisualStyleBackColor = true;
+            this.newLayer_btn.UseVisualStyleBackColor = false;
             this.newLayer_btn.Click += new System.EventHandler(this.newLayer_btn_Click);
             // 
             // currentlyDrawingTo_lbl
@@ -100,30 +109,35 @@
             // 
             // renameLayer_btn
             // 
+            this.renameLayer_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.renameLayer_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.renameLayer_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.renameLayer_btn.Location = new System.Drawing.Point(324, 285);
             this.renameLayer_btn.Name = "renameLayer_btn";
             this.renameLayer_btn.Size = new System.Drawing.Size(113, 40);
             this.renameLayer_btn.TabIndex = 6;
             this.renameLayer_btn.Text = "Rename";
-            this.renameLayer_btn.UseVisualStyleBackColor = true;
+            this.renameLayer_btn.UseVisualStyleBackColor = false;
             this.renameLayer_btn.Click += new System.EventHandler(this.renameLayer_btn_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(324, 331);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 40);
             this.button1.TabIndex = 7;
             this.button1.Text = "Select Layer";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.selectLayer_Click);
             // 
             // LayerControlWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(458, 433);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.renameLayer_btn);

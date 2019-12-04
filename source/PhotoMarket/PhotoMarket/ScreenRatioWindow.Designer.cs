@@ -57,6 +57,7 @@
             // 
             // xRatio_txt
             // 
+            this.xRatio_txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.xRatio_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xRatio_txt.Location = new System.Drawing.Point(119, 127);
             this.xRatio_txt.Name = "xRatio_txt";
@@ -66,6 +67,7 @@
             // 
             // yRatio_txt
             // 
+            this.yRatio_txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.yRatio_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yRatio_txt.Location = new System.Drawing.Point(214, 127);
             this.yRatio_txt.Name = "yRatio_txt";
@@ -85,24 +87,28 @@
             // 
             // Confirm_btn
             // 
+            this.Confirm_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Confirm_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Confirm_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Confirm_btn.Location = new System.Drawing.Point(17, 181);
             this.Confirm_btn.Name = "Confirm_btn";
             this.Confirm_btn.Size = new System.Drawing.Size(166, 35);
             this.Confirm_btn.TabIndex = 5;
             this.Confirm_btn.Text = "Confirm";
-            this.Confirm_btn.UseVisualStyleBackColor = true;
+            this.Confirm_btn.UseVisualStyleBackColor = false;
             this.Confirm_btn.Click += new System.EventHandler(this.Confirm_btn_Click);
             // 
             // Cancel_btn
             // 
+            this.Cancel_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Cancel_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Cancel_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cancel_btn.Location = new System.Drawing.Point(214, 181);
             this.Cancel_btn.Name = "Cancel_btn";
             this.Cancel_btn.Size = new System.Drawing.Size(180, 35);
             this.Cancel_btn.TabIndex = 6;
             this.Cancel_btn.Text = "Cancel";
-            this.Cancel_btn.UseVisualStyleBackColor = true;
+            this.Cancel_btn.UseVisualStyleBackColor = false;
             this.Cancel_btn.Click += new System.EventHandler(this.Cancel_btn_Click);
             // 
             // label4
@@ -127,6 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(407, 238);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
