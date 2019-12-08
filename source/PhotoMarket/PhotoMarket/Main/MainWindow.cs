@@ -32,6 +32,8 @@ namespace PhotoMarket
         //the image used for a background
         ImageDrawing background;
 
+        bool transparentBackground;
+
         //a variable that lets the program know that mouse has been held down
         bool mouseClickedDown = false;
 
@@ -501,8 +503,9 @@ namespace PhotoMarket
         //draws the screen
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-            //makes the background white
-            e.Graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
+            //checks to see if the background should be drawn
+            if (!transparentBackground)
+                e.Graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
             if (background != null)
                 background.Draw(e.Graphics);
@@ -714,8 +717,10 @@ namespace PhotoMarket
                 using (Graphics g = Graphics.FromImage(toSave))
                 {
 
-                    //makes the background white
-                    g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
+                    //checks to see if the background should be tranparent
+                    if (!transparentBackground)
+
+                        g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
                     if (background != null)
                         background.Draw(g);
@@ -1098,7 +1103,13 @@ namespace PhotoMarket
         {
             OpenColorpicker();
         }
+
+        private void toggleTransparentBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            transparentBackground = !transparentBackground;
+        }
         #endregion
+
 
     }
 }
