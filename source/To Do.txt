@@ -5,13 +5,6 @@ openGL control box
 
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 
-screen ratio to be saved into project file
-
 project file saves into a folder, with the images in that folder
 
-project file has custom extention
-https://social.msdn.microsoft.com/Forums/vstudio/en-US/77f1bffa-86db-47cd-bcb2-3da029b1cd46/file-association-how-does-my-application-open-the-file?forum=csharpgeneral
-
 choose image to color pick from
-
-Check if removing _photos and resources file in the visual studio solution explorer breaks anything
