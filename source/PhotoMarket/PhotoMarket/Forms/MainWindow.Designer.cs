@@ -51,6 +51,7 @@
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.canvas = new System.Windows.Forms.PictureBox();
+            this.toggleTransparentBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
@@ -117,6 +118,7 @@
             this.image_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeBackgroundImageToolStripMenuItem,
             this.removeBackgroundImageToolStripMenuItem,
+            this.toggleTransparentBackgroundToolStripMenuItem,
             this.layersToolStripMenuItem,
             this.brushToolStripMenuItem});
             this.image_tool.Name = "image_tool";
@@ -126,21 +128,21 @@
             // changeBackgroundImageToolStripMenuItem
             // 
             this.changeBackgroundImageToolStripMenuItem.Name = "changeBackgroundImageToolStripMenuItem";
-            this.changeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.changeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.changeBackgroundImageToolStripMenuItem.Text = "Change Background Image";
             this.changeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.changeBackgroundImageToolStripMenuItem_Click);
             // 
             // removeBackgroundImageToolStripMenuItem
             // 
             this.removeBackgroundImageToolStripMenuItem.Name = "removeBackgroundImageToolStripMenuItem";
-            this.removeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.removeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.removeBackgroundImageToolStripMenuItem.Text = "Remove Background Image";
             this.removeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.removeBackgroundImageToolStripMenuItem_Click);
             // 
             // layersToolStripMenuItem
             // 
             this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
-            this.layersToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.layersToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.layersToolStripMenuItem.Text = "Layers";
             this.layersToolStripMenuItem.Click += new System.EventHandler(this.layersToolStripMenuItem_Click);
             // 
@@ -150,7 +152,7 @@
             this.editBrushSizeToolStripMenuItem,
             this.editBrushColoursToolStripMenuItem});
             this.brushToolStripMenuItem.Name = "brushToolStripMenuItem";
-            this.brushToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.brushToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.brushToolStripMenuItem.Text = "Brush";
             // 
             // editBrushSizeToolStripMenuItem
@@ -272,6 +274,13 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
+            // toggleTransparentBackgroundToolStripMenuItem
+            // 
+            this.toggleTransparentBackgroundToolStripMenuItem.Name = "toggleTransparentBackgroundToolStripMenuItem";
+            this.toggleTransparentBackgroundToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.toggleTransparentBackgroundToolStripMenuItem.Text = "Toggle Transparent Background";
+            this.toggleTransparentBackgroundToolStripMenuItem.Click += new System.EventHandler(this.toggleTransparentBackgroundToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +340,7 @@
         private System.Windows.Forms.ToolStripMenuItem editBrushSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editBrushColoursToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toggleTransparentBackgroundToolStripMenuItem;
     }
 }
 
