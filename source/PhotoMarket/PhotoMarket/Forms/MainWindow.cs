@@ -46,8 +46,13 @@ namespace PhotoMarket {
 
             //checks to see if the argument array was empty
             if (args.Length != 0)
+
+                //loads the path that the program was opened from
                 LoadProject(args[0]);
-            
+
+            //project loading reference from this source
+            //https://social.msdn.microsoft.com/Forums/vstudio/en-US/77f1bffa-86db-47cd-bcb2-3da029b1cd46/file-association-how-does-my-application-open-the-file?forum=csharpgeneral
+
         }
 
         //initial loading code
@@ -73,7 +78,11 @@ namespace PhotoMarket {
             canvasSizeX = canvas.Width;
             canvasSizeY = canvas.Height;
 
-            layers.Add(new Layer());
+            //checks to see if there weren't any layers
+            if (layers.Count == 0)
+
+                //adds a layer
+                layers.Add(new Layer());
 
             //updates the location of objects and updates labels
             InvalidateAll();
@@ -700,7 +709,7 @@ namespace PhotoMarket {
                     l.Save(sw);
 
                 //closes the file
-                sw.Close();   
+                sw.Close();
             }
         }
 
@@ -941,11 +950,12 @@ namespace PhotoMarket {
                 else if (e.KeyCode == Keys.OemMinus)
                     DecreasePenWidth();
                 else if (e.KeyCode == Keys.Z) {
+
                     if (ModifierKeys == Keys.Control)
                         UndoDrawing();
                 } else if (e.KeyCode == Keys.S) {
 
-                    //checks to see if both control and shift was pressed
+                    //checks to see if both control and shift was pressed at the same time
                     if (e.Modifiers == (Keys.Control | Keys.Shift))
 
                         SaveProjectAs();
@@ -954,6 +964,11 @@ namespace PhotoMarket {
                     else if (e.Modifiers == Keys.Control)
 
                         SaveProject();
+                } else if (e.KeyCode == Keys.O) {
+
+                    if (e.Modifiers == Keys.Control)
+
+                        ChooseFile();
                 }
             }
 
