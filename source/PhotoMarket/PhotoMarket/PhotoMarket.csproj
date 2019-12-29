@@ -224,9 +224,6 @@
     <None Include="Properties\_Square.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="_photos\Folder.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\_Folder.png" />
   </ItemGroup>
   <ItemGroup>
@@ -238,8 +235,6 @@
     <None Include="Properties\_BackArrow.png" />
     <Content Include="_ProgramIcon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
