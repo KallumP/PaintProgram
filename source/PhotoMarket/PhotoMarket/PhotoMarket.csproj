@@ -82,76 +82,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrushSize.cs">
+    <Compile Include="Forms\BrushSize.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrushSize.Designer.cs">
+    <Compile Include="Forms\BrushSize.Designer.cs">
       <DependentUpon>BrushSize.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawingClasses\CircleDrawing.cs" />
-    <Compile Include="ColorPicker.cs">
+    <Compile Include="Classes\DrawingClasses\CircleDrawing.cs" />
+    <Compile Include="Forms\ColorPicker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorPicker.Designer.cs">
+    <Compile Include="Forms\ColorPicker.Designer.cs">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawingClasses\DeepCopier.cs" />
-    <Compile Include="DrawingClasses\ImageDrawing.cs" />
-    <Compile Include="Layer\LayerRename.cs">
+    <Compile Include="Classes\DrawingClasses\DeepCopier.cs" />
+    <Compile Include="Classes\DrawingClasses\ImageDrawing.cs" />
+    <Compile Include="Forms\Layers\LayerRename.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Layer\LayerRename.Designer.cs">
+    <Compile Include="Forms\Layers\LayerRename.Designer.cs">
       <DependentUpon>LayerRename.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main\MainWindow.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main\MainWindow.Designer.cs">
+    <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawingClasses\LineDrawing.cs" />
-    <Compile Include="DrawingClasses\PenDrawing.cs" />
-    <Compile Include="Layer\Layer.cs" />
-    <Compile Include="Layer\LayerControlWindow.cs">
+    <Compile Include="Classes\DrawingClasses\LineDrawing.cs" />
+    <Compile Include="Classes\DrawingClasses\PenDrawing.cs" />
+    <Compile Include="Classes\Layer.cs" />
+    <Compile Include="Forms\Layers\LayerControlWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Layer\LayerControlWindow.Designer.cs">
+    <Compile Include="Forms\Layers\LayerControlWindow.Designer.cs">
       <DependentUpon>LayerControlWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CompressionWindow.cs">
+    <Compile Include="Forms\CompressionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CompressionWindow.Designer.cs">
+    <Compile Include="Forms\CompressionWindow.Designer.cs">
       <DependentUpon>CompressionWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawingClasses\SquareDrawing.cs" />
-    <Compile Include="ScreenRatioWindow.cs">
+    <Compile Include="Classes\DrawingClasses\SquareDrawing.cs" />
+    <Compile Include="Forms\ScreenRatioWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScreenRatioWindow.Designer.cs">
+    <Compile Include="Forms\ScreenRatioWindow.Designer.cs">
       <DependentUpon>ScreenRatioWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main\Warning.cs">
+    <Compile Include="Forms\Warning.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main\Warning.Designer.cs">
+    <Compile Include="Forms\Warning.Designer.cs">
       <DependentUpon>Warning.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BrushSize.resx">
+    <EmbeddedResource Include="Forms\BrushSize.resx">
       <DependentUpon>BrushSize.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ColorPicker.resx">
+    <EmbeddedResource Include="Forms\ColorPicker.resx">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Layer\LayerRename.resx">
+    <EmbeddedResource Include="Forms\Layers\LayerRename.resx">
       <DependentUpon>LayerRename.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main\MainWindow.resx">
+    <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Layer\LayerControlWindow.resx">
+    <EmbeddedResource Include="Forms\Layers\LayerControlWindow.resx">
       <DependentUpon>LayerControlWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -164,13 +164,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="CompressionWindow.resx">
+    <EmbeddedResource Include="Forms\CompressionWindow.resx">
       <DependentUpon>CompressionWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScreenRatioWindow.resx">
+    <EmbeddedResource Include="Forms\ScreenRatioWindow.resx">
       <DependentUpon>ScreenRatioWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main\Warning.resx">
+    <EmbeddedResource Include="Forms\Warning.resx">
       <DependentUpon>Warning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
