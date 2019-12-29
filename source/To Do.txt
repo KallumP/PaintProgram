@@ -11,6 +11,8 @@ project file saves into a folder, with the images in that folder
 
 project file has custom extention
 https://social.msdn.microsoft.com/Forums/vstudio/en-US/77f1bffa-86db-47cd-bcb2-3da029b1cd46/file-association-how-does-my-application-open-the-file?forum=csharpgeneral
+find out where layer2 is coming from
+debug this by sending the path in from main manually and breakpointing to find the bug
 
 choose image to color pick from
 

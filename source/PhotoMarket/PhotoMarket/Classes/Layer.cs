@@ -198,8 +198,8 @@ namespace PhotoMarket {
             name = sr.ReadLine();
 
             //gets the next line from the file and splits it into an array (ready to make the draw orders)
-            string rawOrder = sr.ReadLine();
-            string[] orderArray = rawOrder.Split(',');
+            string _drawOrder = sr.ReadLine();
+            string[] orderArray = _drawOrder.Split(',');
 
             //goes through the array, and adds the correct drawing mode to the drawOrder list
             foreach (string s in orderArray) {

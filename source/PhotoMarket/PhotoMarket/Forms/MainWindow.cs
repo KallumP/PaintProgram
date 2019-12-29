@@ -37,12 +37,17 @@ namespace PhotoMarket {
 
         public string projectExtension = ".pain";
 
-        string path;
+        string projectPath;
 
         //constructor
-        public MainWindow() {
+        public MainWindow(string[] args) {
             InitializeComponent();
             Layer.parent = this;
+
+            //checks to see if the argument array was empty
+            if (args.Length != 0)
+                LoadProject(args[0]);
+            
         }
 
         //initial loading code
@@ -675,11 +680,13 @@ namespace PhotoMarket {
             //makes the user choose a file path to save to
             if (saver.ShowDialog() == DialogResult.OK) {
 
-                //opens up the text file
-                StreamWriter sw = new StreamWriter(saver.FileName);
+                projectPath = saver.FileName;
+
+                //opens up the text file from the path
+                StreamWriter sw = new StreamWriter(projectPath);
 
                 //saves the path of the file
-                sw.WriteLine(path);
+                sw.WriteLine(projectPath);
 
                 //saves the ratio of the project
                 sw.WriteLine(ratioBind);
@@ -693,9 +700,7 @@ namespace PhotoMarket {
                     l.Save(sw);
 
                 //closes the file
-                sw.Close();
-
-                path = saver.FileName;
+                sw.Close();   
             }
         }
 
@@ -705,16 +710,16 @@ namespace PhotoMarket {
         public void SaveProject() {
 
             //checks to see if a path had previously been used
-            if (path != null) {
+            if (projectPath != null) {
 
                 //checks to see if the path still exists
-                if (File.Exists(path)) {
+                if (File.Exists(projectPath)) {
 
                     //opens up the text file from the path
-                    StreamWriter sw = new StreamWriter(path);
+                    StreamWriter sw = new StreamWriter(projectPath);
 
                     //saves the path of the file
-                    sw.WriteLine(path);
+                    sw.WriteLine(projectPath);
 
                     //saves the ratio of the project
                     sw.WriteLine(ratioBind);
@@ -729,6 +734,7 @@ namespace PhotoMarket {
 
                     //closes the file
                     sw.Close();
+
                 } else {
                     //lets the user know that the path no longer exists
                     MessageBox.Show("The selected path no longer exists, file will save as instead");
@@ -775,7 +781,7 @@ namespace PhotoMarket {
                 //opens the file in the program
                 StreamReader sr = new StreamReader(path);
 
-                path = sr.ReadLine();
+                projectPath = sr.ReadLine();
 
                 //gets the ratio information
                 if (sr.ReadLine().ToLower() == "true")
@@ -799,6 +805,7 @@ namespace PhotoMarket {
 
                 //redraws the picture
                 canvas.Invalidate();
+
             } else {
 
                 //lets the user know that the correct file type was not chosen
