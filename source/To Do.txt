@@ -1,10 +1,17 @@
 When saving, ask the user what size image they want, and pass that into the draw function as the height and width 
 (default option of current window size)
 
-openGL control box
-
 recent colors option (have a row of buttons that show the recent colors that when clicked, set the color)
 
 project file saves into a folder, with the images in that folder
 
 choose image to color pick from
+
+when drawing the squares, it should check if the start is above the end (rather than doing it when setting the points)
+this way it will not need to keep changing the start and end points
+the draw event can just use two temp point variables to store the normalised start and end required to draw properly
+
+The size of the canvas should change according to the ratio not the size of the window
+this way the user can still full screen
+
+Add the ability to resize without keeping the drawing ratio (like cropping)
