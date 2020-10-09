@@ -8,6 +8,8 @@ namespace PhotoMarket.DrawingClasses {
         PointF startRatio;
         PointF endRatio;
 
+        PointF startPoint;
+
         MainWindow parent;
 
         RectangleF toDraw;
@@ -20,6 +22,7 @@ namespace PhotoMarket.DrawingClasses {
         public CircleDrawing(PointF _startCoord, Pen _pen, MainWindow _parent) {
             parent = _parent;
             startRatio = new PointF(parent.canvasSizeX / _startCoord.X, parent.canvasSizeY / _startCoord.Y);
+            startPoint = _startCoord;
             pen = _pen;
             DeepCopy(_pen);
         }
@@ -35,9 +38,28 @@ namespace PhotoMarket.DrawingClasses {
                 endRatio = new PointF(parent.canvasSizeX / _endPoint.X, parent.canvasSizeY / _endPoint.Y);
             else {
 
-                //if shift was pressed, then the end point distance from the start is equal in x and y
-                endRatio.X = parent.canvasSizeX / _endPoint.X;
-                endRatio.Y = parent.canvasSizeY / (startRatio.Y + (endRatio.X - startRatio.X));
+                //sets the new point trying to make the square with equal sides
+
+
+                bool xBigger = false;
+
+                //finds out which coord of the mouse was furthest from the original starting point
+                if (Math.Pow(startPoint.X - _endPoint.X, 2) > Math.Pow(startPoint.Y - _endPoint.Y, 2))
+                    xBigger = true;
+
+
+                if (xBigger) {
+
+                    //if x was bigger then y is set to same distance from the xstart as y is from the ystart
+                    endRatio.X = parent.canvasSizeX / _endPoint.X;
+                    endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+
+                } else {
+
+                    //if y was bigger then x is set to same distance from the xstart as y is from the ystart
+                    endRatio.Y = parent.canvasSizeY / _endPoint.Y;
+                    endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+                }
             }
 
             if (finalPoint == true)
