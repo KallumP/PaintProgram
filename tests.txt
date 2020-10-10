@@ -1,0 +1,82 @@
+Add background image
+
+
+
+Remove background image
+
+
+
+Toggle transparent back
+
+
+
+Draw with pen
+
+change pen compression
+
+
+
+Draw line
+
+draw line with shift
+
+draw line with ctrl
+
+
+
+Draw square
+
+draw square with shift
+
+
+
+Draw circle
+
+Draw circle with shift
+
+
+
+Draw image
+
+Draw image with shift
+no change
+
+
+
+Layers
+
+
+
+Ctrl z
+should only effect the layer you are working on
+
+
+
+Save project
+Should save all drawings, layers, backgrounds
+should open save as if no save already available or doesn't open the save path picker
+
+Save using ctrl+s
+
+
+
+Save as
+should save all drawings, layers, backgrounds
+opens save path
+
+Save as using ctrl+shift+s
+
+
+
+Load project
+Project should look the same as when saved (all layers visible, background image should be there)
+
+
+
+Export image
+
+choose small image size
+
+choose big image size
+
+choose same size as canvas

@@ -15,3 +15,8 @@ The size of the canvas should change according to the ratio not the size of the 
 this way the user can still full screen
 
 Add the ability to resize without keeping the drawing ratio (like cropping)
+
+remove background image doesn't update until mouse movement over canvas
+toggle transparent image doesn't update until mouse movement over canvas
+
+Saving project doesn't save the background image

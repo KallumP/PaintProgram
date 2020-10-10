@@ -75,13 +75,13 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the line drawing
-        public void Draw(Graphics g) {
+        public void Draw(Graphics g, int drawWidth, int drawHeight) {
 
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
                 if (temp == true)
-                    g.DrawLine(tempPen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
+                    g.DrawLine(tempPen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
                 else
-                    g.DrawLine(pen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
+                    g.DrawLine(pen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
             }
         }
 

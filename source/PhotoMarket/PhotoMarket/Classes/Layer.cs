@@ -64,27 +64,27 @@ namespace PhotoMarket {
 
                     //draws the next pen drawing
                     if (drawOrder[i] == DrawingMode.Pen) {
-                        penDrawings[penOrder].Draw(e.Graphics);
+                        penDrawings[penOrder].Draw(e.Graphics, parent.canvasSizeX, parent.canvasSizeY);
                         penOrder++;
 
                         //draws the next square drawing
                     } else if (drawOrder[i] == DrawingMode.Square) {
-                        squareDrawings[squareOrder].Draw(e.Graphics);
+                        squareDrawings[squareOrder].Draw(e.Graphics, parent.canvasSizeX, parent.canvasSizeY);
                         squareOrder++;
 
                         //draws the next circle drawing
                     } else if (drawOrder[i] == DrawingMode.Circle) {
-                        circleDrawings[circleOrder].Draw(e.Graphics);
+                        circleDrawings[circleOrder].Draw(e.Graphics, parent.canvasSizeX, parent.canvasSizeY);
                         circleOrder++;
 
                         //draws the next line drawing
                     } else if (drawOrder[i] == DrawingMode.Line) {
-                        lineDrawings[lineOrder].Draw(e.Graphics);
+                        lineDrawings[lineOrder].Draw(e.Graphics, parent.canvasSizeX, parent.canvasSizeY);
                         lineOrder++;
 
                         //draws the next image drawing
                     } else if (drawOrder[i] == DrawingMode.Image) {
-                        imageDrawings[imageOrder].Draw(e.Graphics);
+                        imageDrawings[imageOrder].Draw(e.Graphics, parent.canvasSizeX, parent.canvasSizeY);
                         imageOrder++;
                     }
                 }
@@ -92,7 +92,7 @@ namespace PhotoMarket {
         }
 
         //exports the layer to the image
-        public void Export(Graphics g) {
+        public void Export(Graphics g, int drawWidth, int drawHeight) {
 
             if (drawOrder.Count() != 0) {
 
@@ -108,27 +108,27 @@ namespace PhotoMarket {
 
                     //draws the next pen drawing
                     if (drawOrder[i] == DrawingMode.Pen) {
-                        penDrawings[penOrder].Draw(g);
+                        penDrawings[penOrder].Draw(g, drawWidth, drawHeight);
                         penOrder++;
 
                         //draws the next square drawing                           
                     } else if (drawOrder[i] == DrawingMode.Square) {
-                        squareDrawings[squareOrder].Draw(g);
+                        squareDrawings[squareOrder].Draw(g, drawWidth, drawHeight);
                         squareOrder++;
 
                         //draws the next circle drawing
                     } else if (drawOrder[i] == DrawingMode.Circle) {
-                        circleDrawings[circleOrder].Draw(g);
+                        circleDrawings[circleOrder].Draw(g, drawWidth, drawHeight);
                         circleOrder++;
 
                         //draws the next line drawing
                     } else if (drawOrder[i] == DrawingMode.Line) {
-                        lineDrawings[lineOrder].Draw(g);
+                        lineDrawings[lineOrder].Draw(g, drawWidth, drawHeight);
                         lineOrder++;
 
                         //draws the next image
                     } else if (drawOrder[i] == DrawingMode.Image) {
-                        imageDrawings[imageOrder].Draw(g);
+                        imageDrawings[imageOrder].Draw(g, drawWidth, drawHeight);
                         imageOrder++;
                     }
                 }

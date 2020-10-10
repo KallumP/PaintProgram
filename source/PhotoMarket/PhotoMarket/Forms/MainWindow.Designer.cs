@@ -38,6 +38,7 @@
             this.image_tool = new System.Windows.Forms.ToolStripDropDownButton();
             this.changeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleTransparentBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editBrushSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,6 @@
             this.widthDemo_pic = new System.Windows.Forms.PictureBox();
             this.colorPallet_pic = new System.Windows.Forms.PictureBox();
             this.canvas = new System.Windows.Forms.PictureBox();
-            this.toggleTransparentBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.brushSizeChange_pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionBtns_pic)).BeginInit();
@@ -81,6 +81,7 @@
             this.saveProjectToolStripMenuItem,
             this.saveProjectAsToolStripMenuItem,
             this.loadProjectToolStripMenuItem});
+            this.file_tool.ForeColor = System.Drawing.Color.Black;
             this.file_tool.Name = "file_tool";
             this.file_tool.Size = new System.Drawing.Size(38, 22);
             this.file_tool.Text = "File";
@@ -88,28 +89,28 @@
             // exportImageToolStripMenuItem
             // 
             this.exportImageToolStripMenuItem.Name = "exportImageToolStripMenuItem";
-            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.exportImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportImageToolStripMenuItem.Text = "Export Image";
             this.exportImageToolStripMenuItem.Click += new System.EventHandler(this.ExportImageToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem
             // 
             this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
-            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveProjectAsToolStripMenuItem.Text = "Save Project As";
             this.saveProjectAsToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectAsToolStripMenuItem_Click);
             // 
             // loadProjectToolStripMenuItem
             // 
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItem_Click);
             // 
@@ -121,6 +122,7 @@
             this.toggleTransparentBackgroundToolStripMenuItem,
             this.layersToolStripMenuItem,
             this.brushToolStripMenuItem});
+            this.image_tool.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.image_tool.Name = "image_tool";
             this.image_tool.Size = new System.Drawing.Size(53, 22);
             this.image_tool.Text = "Image";
@@ -138,6 +140,13 @@
             this.removeBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.removeBackgroundImageToolStripMenuItem.Text = "Remove Background Image";
             this.removeBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.removeBackgroundImageToolStripMenuItem_Click);
+            // 
+            // toggleTransparentBackgroundToolStripMenuItem
+            // 
+            this.toggleTransparentBackgroundToolStripMenuItem.Name = "toggleTransparentBackgroundToolStripMenuItem";
+            this.toggleTransparentBackgroundToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.toggleTransparentBackgroundToolStripMenuItem.Text = "Toggle Transparent Background";
+            this.toggleTransparentBackgroundToolStripMenuItem.Click += new System.EventHandler(this.toggleTransparentBackgroundToolStripMenuItem_Click);
             // 
             // layersToolStripMenuItem
             // 
@@ -175,6 +184,7 @@
             this.Settings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.compresssionToolStripMenuItem,
             this.windowRatioToolStripMenuItem});
+            this.Settings.ForeColor = System.Drawing.Color.Black;
             this.Settings.Image = ((System.Drawing.Image)(resources.GetObject("Settings.Image")));
             this.Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Settings.Name = "Settings";
@@ -184,14 +194,14 @@
             // compresssionToolStripMenuItem
             // 
             this.compresssionToolStripMenuItem.Name = "compresssionToolStripMenuItem";
-            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.compresssionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compresssionToolStripMenuItem.Text = "Compresssion";
             this.compresssionToolStripMenuItem.Click += new System.EventHandler(this.compresssionToolStripMenuItem_Click);
             // 
             // windowRatioToolStripMenuItem
             // 
             this.windowRatioToolStripMenuItem.Name = "windowRatioToolStripMenuItem";
-            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.windowRatioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.windowRatioToolStripMenuItem.Text = "Window Ratio";
             this.windowRatioToolStripMenuItem.Click += new System.EventHandler(this.windowRatioToolStripMenuItem_Click);
             // 
@@ -273,13 +283,6 @@
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
-            // 
-            // toggleTransparentBackgroundToolStripMenuItem
-            // 
-            this.toggleTransparentBackgroundToolStripMenuItem.Name = "toggleTransparentBackgroundToolStripMenuItem";
-            this.toggleTransparentBackgroundToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
-            this.toggleTransparentBackgroundToolStripMenuItem.Text = "Toggle Transparent Background";
-            this.toggleTransparentBackgroundToolStripMenuItem.Click += new System.EventHandler(this.toggleTransparentBackgroundToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

@@ -68,17 +68,17 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //creates the rectangle used to draw the circle
-        public void CreateRectangle() {
+        public void CreateRectangle(float drawWidth, float drawHeight) {
 
             //creates a rectangle to be used to draw the circle out
-            toDraw = RectangleF.FromLTRB(parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
+            toDraw = RectangleF.FromLTRB(drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
         }
 
         //draws out the circle using the rectangle made in the set end point
-        public void Draw(Graphics g) {
+        public void Draw(Graphics g, int drawWidth, int drawHeight) {
 
             //sets up the rectangle each time, incase there was a change in window size
-            CreateRectangle();
+            CreateRectangle(drawWidth, drawHeight);
 
             if (temp == true)
                 g.DrawEllipse(tempPen, toDraw);

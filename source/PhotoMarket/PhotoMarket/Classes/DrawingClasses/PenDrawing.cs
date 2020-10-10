@@ -54,7 +54,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the pen drawing
-        public void Draw(Graphics g) {
+        public void Draw(Graphics g, int drawWidth, int drawHeight) {
 
             //loops through all of the points
             for (int i = 0; i < coords.Count() - 1; i++) {
@@ -62,10 +62,10 @@ namespace PhotoMarket.DrawingClasses {
                 //draws out a line between each of the coordinates in the list
                 g.DrawLine(
                     pen,
-                    parent.canvasSizeX / coords[i].X,
-                    parent.canvasSizeY / coords[i].Y,
-                    parent.canvasSizeX / coords[i + 1].X,
-                    parent.canvasSizeY / coords[i + 1].Y);
+                    drawWidth / coords[i].X,
+                    drawHeight / coords[i].Y,
+                    drawWidth / coords[i + 1].X,
+                    drawHeight / coords[i + 1].Y);
             }
         }
 

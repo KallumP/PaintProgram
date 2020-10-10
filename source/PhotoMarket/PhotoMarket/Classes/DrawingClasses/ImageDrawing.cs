@@ -49,7 +49,7 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //Draws out the image drawing
-        public void Draw(Graphics g) {
+        public void Draw(Graphics g, int drawWidth, int drawHeight) {
 
             //makes sure that the ratios arent 0
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0) {
@@ -58,10 +58,10 @@ namespace PhotoMarket.DrawingClasses {
 
                     g.DrawImage(
                         todraw,
-                        parent.canvasSizeX / startRatio.X,
-                        parent.canvasSizeY / startRatio.Y,
-                        parent.canvasSizeX / endRatio.X - parent.canvasSizeX / startRatio.X,
-                        parent.canvasSizeY / endRatio.Y - parent.canvasSizeY / startRatio.Y);
+                        drawWidth / startRatio.X,
+                        drawHeight / startRatio.Y,
+                        drawWidth / endRatio.X - drawWidth / startRatio.X,
+                        drawHeight / endRatio.Y - drawHeight / startRatio.Y);
 
                 } else
                     Console.WriteLine("Image not found");

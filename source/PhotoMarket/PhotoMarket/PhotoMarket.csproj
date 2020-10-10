@@ -97,6 +97,12 @@
     </Compile>
     <Compile Include="Classes\DrawingClasses\DeepCopier.cs" />
     <Compile Include="Classes\DrawingClasses\ImageDrawing.cs" />
+    <Compile Include="Forms\ExportOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExportOptions.Designer.cs">
+      <DependentUpon>ExportOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Layers\LayerRename.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColorPicker.resx">
       <DependentUpon>ColorPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExportOptions.resx">
+      <DependentUpon>ExportOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Layers\LayerRename.resx">
       <DependentUpon>LayerRename.cs</DependentUpon>

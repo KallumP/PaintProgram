@@ -66,20 +66,20 @@ namespace PhotoMarket.DrawingClasses {
         }
 
         //draws out the rectangle using lines
-        public void Draw(Graphics g) {
-
+        public void Draw(Graphics g, int drawWidth, int drawHeight) {
+            
             //makes sure that divides by zero doesnt happen
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0)
                 if (temp == true) {
-                    g.DrawLine(tempPen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / endRatio.Y);
-                    g.DrawLine(tempPen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / startRatio.Y);
-                    g.DrawLine(tempPen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / endRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
-                    g.DrawLine(tempPen, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
+                    g.DrawLine(tempPen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / startRatio.X, drawHeight / endRatio.Y);
+                    g.DrawLine(tempPen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / startRatio.Y);
+                    g.DrawLine(tempPen, drawWidth / startRatio.X, drawHeight / endRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
+                    g.DrawLine(tempPen, drawWidth / endRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
                 } else {
-                    g.DrawLine(pen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / endRatio.Y);
-                    g.DrawLine(pen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / startRatio.Y);
-                    g.DrawLine(pen, parent.canvasSizeX / startRatio.X, parent.canvasSizeY / endRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
-                    g.DrawLine(pen, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / startRatio.Y, parent.canvasSizeX / endRatio.X, parent.canvasSizeY / endRatio.Y);
+                    g.DrawLine(pen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / startRatio.X, drawHeight / endRatio.Y);
+                    g.DrawLine(pen, drawWidth / startRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / startRatio.Y);
+                    g.DrawLine(pen, drawWidth / startRatio.X, drawHeight / endRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
+                    g.DrawLine(pen, drawWidth / endRatio.X, drawHeight / startRatio.Y, drawWidth / endRatio.X, drawHeight / endRatio.Y);
                 }
         }
 

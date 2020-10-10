@@ -1,4 +1,5 @@
 ﻿using PhotoMarket.DrawingClasses;
+using PhotoMarket.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,7 +17,7 @@ namespace PhotoMarket {
 
         public int penWidth;
         public Color penColor;
-        Pen globalPen;
+        public Pen globalPen;
 
         public bool ratioBind = false;
         public float ratio;
@@ -28,9 +29,9 @@ namespace PhotoMarket {
         public int currentLayer = 0;
 
         //the image used for a background
-        ImageDrawing background;
+        public ImageDrawing background;
 
-        bool transparentBackground;
+        public bool transparentBackground;
 
         //a variable that lets the program know that mouse has been held down
         bool mouseClickedDown = false;
@@ -467,7 +468,7 @@ namespace PhotoMarket {
                 e.Graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
             if (background != null)
-                background.Draw(e.Graphics);
+                background.Draw(e.Graphics, canvasSizeX, canvasSizeY);
 
             foreach (Layer l in layers)
                 l.Draw(e);
@@ -645,37 +646,9 @@ namespace PhotoMarket {
         //exports the data as an image
         public void ExportImage() {
 
-            //creates a save file dialog
-            SaveFileDialog saver = new SaveFileDialog();
-
-            //makes it so that the user can only save as png
-            saver.Filter = "PNG(*.PNG)|*.png|JPG(*.JPG)|*.jpg";
-
-            //makes the user choose where to save the file
-            if (saver.ShowDialog() == DialogResult.OK) {
-
-                //creates a bitmap which will be drawn to
-                Bitmap toSave = new Bitmap(canvas.Width, canvas.Height);
-
-                //uses a graphics library to draw to the file
-                using (Graphics g = Graphics.FromImage(toSave)) {
-
-                    //checks to see if the background should be tranparent
-                    if (!transparentBackground)
-
-                        g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
-
-                    if (background != null)
-                        background.Draw(g);
-
-                    //goes through and draws the content from each layer
-                    foreach (Layer l in layers)
-                        l.Export(g);
-                }
-
-                //saves the image
-                toSave.Save(saver.FileName);
-            }
+            //creates and opens the export image options
+            ExportOptions so = new ExportOptions(this, new Point(canvas.Size.Width, canvas.Size.Height));
+            so.Show();
         }
 
         //saves the data as a project file
