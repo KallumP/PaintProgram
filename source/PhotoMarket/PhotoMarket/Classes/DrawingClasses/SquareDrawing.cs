@@ -50,13 +50,48 @@ namespace PhotoMarket.DrawingClasses {
 
                     //if x was bigger then y is set to same distance from the xstart as y is from the ystart
                     endRatio.X = parent.canvasSizeX / _endPoint.X;
-                    endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+
+                    //checks if the end point y is below the start point y
+                    if (_endPoint.Y - startPoint.Y > 0) {
+
+                        //checks if  the end point  x is to the right of the start point x
+                        if (_endPoint.X - startPoint.X > 0)
+
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+                        else
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y - (_endPoint.X - startPoint.X));
+
+                    } else {
+
+                        //checks if  the end point  x is to the right of the start point x
+                        if (_endPoint.X - startPoint.X > 0)
+
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y - (_endPoint.X - startPoint.X));
+                        else
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+                    }
 
                 } else {
 
                     //if y was bigger then x is set to same distance from the xstart as y is from the ystart
                     endRatio.Y = parent.canvasSizeY / _endPoint.Y;
-                    endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+
+                    //checks if the end point x is to the right of the start point x
+                    if (_endPoint.X - startPoint.X > 0) {
+
+                        //checks if  the end point y is to the right of the start point y
+                        if (_endPoint.Y - startPoint.Y > 0)
+                            endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+                        else
+                            endRatio.X = parent.canvasSizeX / (startPoint.X - (_endPoint.Y - startPoint.Y));
+                    } else {
+
+                        //checks if  the end point  y is to the right of the start point y
+                        if (_endPoint.Y - startPoint.Y > 0)
+                            endRatio.X = parent.canvasSizeX / (startPoint.X - (_endPoint.Y - startPoint.Y));
+                        else
+                            endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+                    }
                 }
             }
 
@@ -67,7 +102,7 @@ namespace PhotoMarket.DrawingClasses {
 
         //draws out the rectangle using lines
         public void Draw(Graphics g, int drawWidth, int drawHeight) {
-            
+
             //makes sure that divides by zero doesnt happen
             if (startRatio.X != 0 && startRatio.Y != 0 && endRatio.X != 0 && endRatio.Y != 0)
                 if (temp == true) {

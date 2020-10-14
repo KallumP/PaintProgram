@@ -40,7 +40,6 @@ namespace PhotoMarket.DrawingClasses {
 
                 //sets the new point trying to make the square with equal sides
 
-
                 bool xBigger = false;
 
                 //finds out which coord of the mouse was furthest from the original starting point
@@ -52,19 +51,54 @@ namespace PhotoMarket.DrawingClasses {
 
                     //if x was bigger then y is set to same distance from the xstart as y is from the ystart
                     endRatio.X = parent.canvasSizeX / _endPoint.X;
-                    endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+
+                    //checks if the end point y is below the start point y
+                    if (_endPoint.Y - startPoint.Y > 0) {
+
+                        //checks if  the end point  x is to the right of the start point x
+                        if (_endPoint.X - startPoint.X > 0)
+
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+                        else
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y - (_endPoint.X - startPoint.X));
+
+                    } else {
+
+                        //checks if  the end point  x is to the right of the start point x
+                        if (_endPoint.X - startPoint.X > 0)
+
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y - (_endPoint.X - startPoint.X));
+                        else
+                            endRatio.Y = parent.canvasSizeY / (startPoint.Y + (_endPoint.X - startPoint.X));
+                    }
 
                 } else {
 
                     //if y was bigger then x is set to same distance from the xstart as y is from the ystart
                     endRatio.Y = parent.canvasSizeY / _endPoint.Y;
-                    endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+
+                    //checks if the end point x is to the right of the start point x
+                    if (_endPoint.X - startPoint.X > 0) {
+
+                        //checks if  the end point y is to the right of the start point y
+                        if (_endPoint.Y - startPoint.Y > 0)
+                            endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+                        else
+                            endRatio.X = parent.canvasSizeX / (startPoint.X - (_endPoint.Y - startPoint.Y));
+                    } else {
+
+                        //checks if  the end point  y is to the right of the start point y
+                        if (_endPoint.Y - startPoint.Y > 0)
+                            endRatio.X = parent.canvasSizeX / (startPoint.X - (_endPoint.Y - startPoint.Y));
+                        else
+                            endRatio.X = parent.canvasSizeX / (startPoint.X + (_endPoint.Y - startPoint.Y));
+                    }
                 }
             }
 
+            //lets the program know that the final point has been placed
             if (finalPoint == true)
                 temp = false;
-            //lets the program know that the final point has been placed
         }
 
         //creates the rectangle used to draw the circle
